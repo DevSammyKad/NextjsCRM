@@ -1,30 +1,23 @@
 'use client';
 import Image from 'next/image';
 import next from '../../../../public/next.svg';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { NavLinks } from '../../../constants/index';
 import Link from 'next/link';
-// import next from '../assets/next.svg';
-// import classNames from 'classnames
+import { usePathname } from 'next/navigation';
 
 import { SidebarClose, SidebarOpenIcon } from 'lucide-react';
-import { useKindeBrowserClient } from '@kinde-oss/kinde-auth-nextjs';
+// import { useKindeBrowserClient } from '@kinde-oss/kinde-auth-nextjs';
 
 import { Button } from '@/components/ui/button';
 import PlanModal from '@/components/PlanModal';
 
-const SideNav = () => {
-  const { user } = useKindeBrowserClient();
+const SideNav = ({ closeSidebar }) => {
+  // const { user } = useKindeBrowserClient();
+  const pathname = usePathname();
 
-  const [activeIndex, setActiveIndex] = useState(0); // Initial active index
   const [isExpanded, setIsExpanded] = useState(true);
   const [showModal, setShowModal] = useState(false);
-
-  const isActive = (index) => index === activeIndex;
-  // Handle link click to update active index
-  const handleLinkClick = (index) => {
-    setActiveIndex(index);
-  };
 
   const handleModal = () => {
     setShowModal(!showModal);
@@ -34,16 +27,23 @@ const SideNav = () => {
     setIsExpanded(!isExpanded);
   };
 
+  const handleLinkClick = () => {
+    setIsExpanded(false);
+    if (closeSidebar) {
+      closeSidebar();
+    }
+  };
+
   return (
     <>
       <div
         className={`h-screen shadow-sm ${
           isExpanded ? 'w-72' : 'w-24'
-        } flex flex-col relative `}
+        } flex flex-col relative`}
       >
         <button
           onClick={handleToggleSidebar}
-          className="absolute w-6 h-6 rounded-full flex justify-center items-center top-2 -right-1"
+          className="absolute hidden w-6 h-6 rounded-full justify-center items-center top-2 -right-1"
         >
           {isExpanded ? (
             <SidebarClose color="gray" size={22} />
@@ -58,17 +58,17 @@ const SideNav = () => {
         </div>
         <div className="flex flex-col justify-between">
           <div>
-            <h2 className="px-4 font-medium text-sm max-sm:text-xs">
+            <h2 className="px-4 font-medium text-sm max-lg:text-xs">
               Main menu
             </h2>
             {NavLinks.slice(0, -2).map((item, index) => (
               <div key={index}>
-                <Link href={item.path} onClick={() => handleLinkClick(index)}>
+                <Link href={item.path} onClick={handleLinkClick}>
                   <div
                     className={`flex justify-start my-5 text-start py-3 px-4 rounded-lg mx-5 text-lg font-medium ${
-                      isActive(index)
-                        ? `dark:bg-zinc-900  bg-zinc-200 text-[#4EFFCA] ${
-                            isExpanded ? 'border-l-8  border-[#4EFFCA]' : ''
+                      pathname === item.path
+                        ? `dark:bg-zinc-900 bg-zinc-200 text-[#4EFFCA] ${
+                            isExpanded ? 'border-l-8 border-[#4EFFCA]' : ''
                           }`
                         : ''
                     }`}
@@ -87,19 +87,15 @@ const SideNav = () => {
                 </Link>
               </div>
             ))}
-            {NavLinks.length > 1 && <div className="h-px  mx-5 my-4"></div>}
-            <h2 className="px-4 font-medium text-sm max-sm:text-xs">Setting</h2>
+            {NavLinks.length > 1 && <div className="h-px mx-5 my-4"></div>}
+            <h2 className="px-4 font-medium text-sm max-lg:text-xs">Setting</h2>
             {NavLinks.slice(-2).map((item, index) => (
-              <Link
-                key={index}
-                href={item.path}
-                onClick={() => handleLinkClick(index)}
-              >
+              <Link key={index} href={item.path} onClick={handleLinkClick}>
                 <div
                   className={`flex justify-start my-5 text-start py-3 px-4 rounded-lg mx-5 text-lg font-medium ${
-                    isActive(index + 2)
+                    pathname === item.path
                       ? `dark:bg-zinc-900 text-[#4EFFCA] ${
-                          isExpanded ? 'border-l-8  border-[#4EFFCA]' : ''
+                          isExpanded ? 'border-l-8 border-[#4EFFCA]' : ''
                         }`
                       : ''
                   }`}
@@ -119,33 +115,35 @@ const SideNav = () => {
             ))}
           </div>
           {/* Upgrade*/}
-          <div className="mt-14 rounded-3xl dark:bg-zinc-800 border py-4 mx-4 px-4">
-            <div className="flex gap-2 items-center">
-              <h3 className="scroll-m-20 text-base font-semibold tracking-tight">
-                Get Result So Far{' '}
-              </h3>
-              <Button
-                variant="outline"
-                className="bg-[#4EFFCA] rounded-xl px-4 py-2 font-semibold dark:hover:text-white dark:text-black "
-              >
-                Pro
-              </Button>
-            </div>
+          {isExpanded && (
+            <div className="mt-14 rounded-3xl dark:bg-zinc-800 border py-4 mx-4 px-4">
+              <div className="flex gap-2 items-center">
+                <h3 className="scroll-m-20 text-base font-semibold tracking-tight">
+                  Get Result So Far{' '}
+                </h3>
+                <Button
+                  variant="outline"
+                  className="bg-[#4EFFCA] rounded-xl px-4 py-2 font-semibold dark:hover:text-white dark:text-black"
+                >
+                  Pro
+                </Button>
+              </div>
 
-            <p className="leading-7 text-sm [&:not(:first-child)]:mt-3">
-              Get 1 month free and unlock all pro feature
-            </p>
-            <div className="flex justify-center items-center mt-2">
-              <Button
-                onClick={handleModal}
-                className="text-center px-3"
-                variant="outline"
-              >
-                Upgrade Now
-              </Button>
-              {showModal && <PlanModal />}
+              <p className="leading-7 text-sm [&:not(:first-child)]:mt-3">
+                Get 1 month free and unlock all pro feature
+              </p>
+              <div className="flex justify-center items-center mt-2">
+                <Button
+                  onClick={handleModal}
+                  className="text-center px-3"
+                  variant="outline"
+                >
+                  Upgrade Now
+                </Button>
+                {showModal && <PlanModal />}
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
     </>
