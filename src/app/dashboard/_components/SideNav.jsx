@@ -28,7 +28,6 @@ const SideNav = ({ closeSidebar }) => {
   };
 
   const handleLinkClick = () => {
-    setIsExpanded(false);
     if (closeSidebar) {
       closeSidebar();
     }
@@ -118,7 +117,7 @@ const SideNav = ({ closeSidebar }) => {
           {isExpanded && (
             <div className="mt-14 rounded-3xl dark:bg-zinc-800 border py-4 mx-4 px-4">
               <div className="flex gap-2 items-center">
-                <h3 className="scroll-m-20 text-base font-semibold tracking-tight">
+                <h3 className=" text-base font-semibold tracking-tight">
                   Get Result So Far{' '}
                 </h3>
                 <Button
