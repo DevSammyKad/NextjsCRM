@@ -44,10 +44,7 @@ const Header = () => {
           <Sheet>
             <SheetTrigger asChild>
               <Button variant="outline" size="sm" className="ml-2 border-none">
-                <div
-                  className="flex items-center gap-2 ml-2 relative"
-                  // ref={dropdownRef}
-                >
+                <div className="flex items-center gap-2 ml-2 relative">
                   <div className="relative">
                     <img
                       src={

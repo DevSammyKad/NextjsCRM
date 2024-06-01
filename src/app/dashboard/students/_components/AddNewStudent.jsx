@@ -33,6 +33,7 @@ const AddNewStudent = () => {
 
   const onSubmit = async (data) => {
     console.log('Form data submitted:', data);
+    setOpen(false); // Close dialog on form submit
   };
 
   const [open, setOpen] = useState(false);
@@ -49,7 +50,8 @@ const AddNewStudent = () => {
           <DialogHeader>
             <DialogTitle>Add a new student</DialogTitle>
             <DialogDescription>
-              Make changes to your profile here. Click save when you're done.
+              Make changes to your profile here. Click save when you&apos;re
+              done.
             </DialogDescription>
           </DialogHeader>
           <form onSubmit={handleSubmit(onSubmit)}>
@@ -168,11 +170,7 @@ const AddNewStudent = () => {
             </div>
             <DialogFooter className="mt-10">
               <DialogClose asChild>
-                <Button
-                  variant="outline"
-                  className="w-full"
-                  onClick={() => setOpen(false)}
-                >
+                <Button variant="outline" className="w-full">
                   Cancel
                 </Button>
               </DialogClose>

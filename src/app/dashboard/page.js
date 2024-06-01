@@ -46,14 +46,14 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import Link from 'next/link';
-import DateRangePicker from '@/components/DateRangePicker';
+// import DateRangePicker from '@/components/DateRangePicker';
 
 const Dashboard = () => {
   const { setTheme } = useTheme();
 
   useEffect(() => {
     setTheme('system');
-  }, []);
+  }, [setTheme]);
 
   return (
     <div className="flex min-h-screen w-full flex-col">
