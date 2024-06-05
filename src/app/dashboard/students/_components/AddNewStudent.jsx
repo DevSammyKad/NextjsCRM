@@ -22,18 +22,35 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import toast, { Toaster } from 'react-hot-toast';
 
-const AddNewStudent = () => {
+import PhoneInput from '../../../../components/phoneInput/index';
+
+const AddNewStudent = ({ Toaster }) => {
+  const [phoneNumber, setPhoneNumber] = useState('');
+
+  const handlePhoneChange = (newPhoneNumber) => {
+    setPhoneNumber(newPhoneNumber);
+  };
+
   const {
     register,
     handleSubmit,
     setValue,
     formState: { errors },
+    reset,
   } = useForm();
 
   const onSubmit = async (data) => {
-    console.log('Form data submitted:', data);
-    setOpen(false); // Close dialog on form submit
+    try {
+      alert(JSON.stringify(data));
+      console.log('Form data submitted:', data);
+      setOpen(false);
+      toast.success('Student added successfully');
+      reset();
+    } catch (error) {
+      toast.error('Please try again');
+    }
   };
 
   const [open, setOpen] = useState(false);
@@ -64,6 +81,16 @@ const AddNewStudent = () => {
                     placeholder="Max"
                     {...register('firstName', {
                       required: 'First name is required',
+
+                      maxLength: {
+                        value: 20,
+                        message: 'First name must be less than 20 characters',
+                      },
+                      minLength: {
+                        value: 3,
+                        message: 'First name must be at least 3 characters',
+                      },
+                      validate: (value) => value[0] === value[0].toUpperCase(),
                     })}
                   />
                   {errors.firstName && (
@@ -105,7 +132,10 @@ const AddNewStudent = () => {
                 </div>
                 <div className="grid gap-2">
                   <Label htmlFor="grade">Grade</Label>
-                  <Select onValueChange={(value) => setValue('grade', value)}>
+                  <Select
+                    onValueChange={(value) => setValue('grade', value)}
+                    {...register('grade', { required: 'Grade is required' })}
+                  >
                     <SelectTrigger className="w-[180px]">
                       <SelectValue placeholder="Select Grade" />
                     </SelectTrigger>
@@ -124,13 +154,11 @@ const AddNewStudent = () => {
               </div>
               <div className="grid gap-2">
                 <Label htmlFor="phoneNumber">Phone</Label>
-                <Input
-                  id="phoneNumber"
-                  type="tel"
-                  placeholder="+91 84593281"
-                  {...register('phoneNumber', {
-                    required: 'Phone number is required',
-                  })}
+                <PhoneInput
+                  value={phoneNumber}
+                  onChange={handlePhoneChange}
+                  defaultCountry="US"
+                  className="phone-input-class"
                 />
                 {errors.phoneNumber && (
                   <span className="text-red-500 text-xs">
@@ -138,6 +166,7 @@ const AddNewStudent = () => {
                   </span>
                 )}
               </div>
+
               <div className="grid gap-2">
                 <Label htmlFor="address">Address</Label>
                 <Input

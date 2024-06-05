@@ -18,12 +18,12 @@ export const NavLinks = [
     icon: LayoutDashboard,
   },
   {
-    path: '/leads',
+    path: '/dashboard/leads',
     heading: 'Leads',
     icon: User,
   },
   {
-    path: '/courses',
+    path: '/dashboard/courses',
     heading: 'Courses',
     icon: LeafyGreen,
   },

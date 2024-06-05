@@ -1,29 +1,57 @@
 'use client';
 
 import { useKindeBrowserClient } from '@kinde-oss/kinde-auth-nextjs';
+import { LogoutLink } from '@kinde-oss/kinde-auth-nextjs/components';
 import {
-  Bell,
-  ChevronDown,
-  CommandIcon,
-  Lightbulb,
-  NutOffIcon,
+  Cloud,
+  LifeBuoy,
+  LogOut,
+  Moon,
   Search,
-  SearchCheck,
-  UserPlus,
+  Sun,
+  Users,
 } from 'lucide-react';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { ModeToggle } from './ModeToggle';
 import { Button } from '@/components/ui/button';
-import NotificationPanel from './NotificationPanel';
 import MobileSidebar from './MobileSidebar';
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-//
-// import { getKindeServerSession } from '@kinde-oss/kinde-auth-nextjs/server';
+import { useTheme } from 'next-themes';
+
+import Image from 'next/image';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+import PlanModal from './PlanModal';
+import TeamMembers from './TeamMembers';
 
 const Header = () => {
-  const { user } = useKindeBrowserClient();
+  const { setTheme } = useTheme();
+  const { user, isAuthenticated, isLoading } = useKindeBrowserClient();
 
+  const [showPlanModal, setShowPlanModal] = useState(false);
+
+  const [showTeamMemberDialog, setShowTeamMemberDialog] = useState(false);
+
+  const handleShowTeamMemberDialog = () => {
+    setShowTeamMemberDialog(true);
+  };
+  const handleHideTeamMemberDialog = () => {
+    setShowTeamMemberDialog(false);
+  };
+
+  const handleOpenPlanModal = () => {
+    setShowPlanModal(true);
+  };
+
+  const handleClosePlanModal = () => {
+    setShowPlanModal(false);
+  };
   return (
     <div>
       <nav className="h-24 flex justify-between items-center mx-2 shadow-sm">
@@ -31,63 +59,136 @@ const Header = () => {
         <div className="relative max-sm:hidden">
           <input
             type="text"
-            className="rounded-lg pl-5 border border-border-stroke sm:w-[150px] md:w-[236px] lg:w-[450px] h-12 outline-none text-slate-500 text-base font-normal  lg:placeholder:pl-5 transition-all duration-300 ease-in-out "
+            className="rounded-lg pl-5 border border-border-stroke w-full h-12 outline-none text-slate-500 text-base font-normal  lg:placeholder:pl-5 transition-all duration-300 ease-in-out "
             placeholder="Search..."
           />
           <Search className="absolute right-4 top-3 w-5 h-5 " color="gray" />
         </div>
-        <div className="flex justify-center items-center gap-4">
+        <div className="flex justify-center items-center ">
           <ModeToggle />
 
           {/* <NotificationPanel /> */}
 
-          <Sheet>
-            <SheetTrigger asChild>
-              <Button variant="outline" size="sm" className="ml-2 border-none">
-                <div className="flex items-center gap-2 ml-2 relative">
-                  <div className="relative">
-                    <img
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <div className="flex items-center gap-2 ml-2 relative cursor-pointer">
+                <div className="relative cursor-pointer">
+                  {user?.picture && (
+                    <Image
                       src={
                         user?.picture ||
-                        'https://avatars.githubusercontent.com/u/96883294?s=64&v=4'
+                        'https://img.freepik.com/free-photo/3d-illustration-teenager-with-funny-face-glasses_1142-50955.jpg?size=626&ext=jpg&ga=GA1.1.1308723101.1701734507&semt=ais_user'
                       }
-                      alt=""
-                      className="rounded-full object-cover w-12 h-12"
+                      alt="Profile Picture"
+                      width={50}
+                      height={50}
+                      className="rounded-full w-12 h-12 object-cover"
                     />
-                    <div className="bg-white w-4 h-4 absolute rounded-full flex justify-center items-center bottom-0 right-1">
-                      <div className="bg-green-500 z-10  w-2 h-2 rounded-full"></div>
+                  )}
+                  {user && !user.picture && (
+                    <div className="h-7 w-7 rounded-full mx-auto bg-zinc-900 text-xs flex justify-center items-center">
+                      {' '}
+                      {user?.given_name?.[0]}
                     </div>
-                  </div>
-
-                  <div className="max-sm:hidden text-left">
-                    <h4 className="font-medium text-base">
-                      {user?.given_name || 'Sammykad'}
-                    </h4>
-                    <p> {user?.email || 'sameer.kad@technolize.in'}</p>
+                  )}
+                  <div className="bg-white w-4 h-4 absolute rounded-full flex justify-center items-center bottom-0 right-1">
+                    <div className="bg-green-500 z-10  w-2 h-2 rounded-full"></div>
                   </div>
                 </div>
-                {/* <ChevronDown className="mr-2 h-4 w-4 hidden hover:visible" /> */}
-              </Button>
-            </SheetTrigger>
-            <SheetContent className="bg-white p-4 rounded-lg">
-              <div className="flex flex-col gap-2">
-                <Button variant="outline" size="sm">
-                  <UserPlus className="mr-2 h-4 w-4" />
-                  Add User
-                </Button>
-                <Button variant="outline" size="sm">
-                  <Lightbulb className="mr-2 h-4 w-4" />
-                  Tips
-                </Button>
-                <Button variant="outline" size="sm">
-                  <CommandIcon className="mr-2 h-4 w-4" />
-                  Shortcuts
-                </Button>
+
+                <div className="max-sm:hidden text-left">
+                  <h4 className="font-medium text-base">
+                    {user?.given_name || 'Sammy kad'}
+                  </h4>
+                  <p className="text-sm">
+                    {' '}
+                    {user?.email || 'sameer.kad@technolize.in'}
+                  </p>
+                </div>
               </div>
-            </SheetContent>
-          </Sheet>
+              {/* <ChevronDown className="mr-2 h-4 w-4 hidden hover:visible" /> */}
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="w-72">
+              <DropdownMenu>
+                <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+
+                <DropdownMenuItem
+                  onClick={handleShowTeamMemberDialog}
+                  className="my-2 flex gap-5 mx-3 items-center cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-900"
+                >
+                  <Users className="mr-2 h-4 w-4" />
+                  <span>Create Team</span>
+                </DropdownMenuItem>
+
+                <DropdownMenuItem className="my-2  flex gap-4  items-center cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-900">
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <Button
+                        variant="outline"
+                        className="outline-none p-0 border-0 px-0 m-0 "
+                        size="icon"
+                      >
+                        <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+                        <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+                        <span className="sr-only">Toggle theme</span>
+                      </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="end">
+                      <DropdownMenuItem onClick={() => setTheme('light')}>
+                        Light
+                      </DropdownMenuItem>
+                      <DropdownMenuItem onClick={() => setTheme('dark')}>
+                        Dark
+                      </DropdownMenuItem>
+                      <DropdownMenuItem onClick={() => setTheme('system')}>
+                        System
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                  <span>Theme</span>
+                </DropdownMenuItem>
+
+                <DropdownMenuItem className="my-2 flex gap-5 mx-3  items-center cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-900">
+                  <LifeBuoy className="mr-2 h-4 w-4" />
+                  <span>Support</span>
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem className="my-2 flex gap-5 mx-3  items-center cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-900">
+                  <LogoutLink
+                    postLogoutRedirectURL="./"
+                    className="w-full flex  gap-5 items-center"
+                  >
+                    <LogOut />
+                    <span> Log Out</span>
+                  </LogoutLink>
+                </DropdownMenuItem>
+
+                <DropdownMenuItem
+                  disabled
+                  className="my-2 cursor-pointer flex justify-between items-center hover:bg-gray-100 dark:hover:bg-gray-900"
+                >
+                  <span>API</span>
+                  <Cloud className="mr-2 h-4 w-4" />
+                </DropdownMenuItem>
+              </DropdownMenu>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem
+                onClick={handleOpenPlanModal}
+                className="w-full  flex justify-center "
+              >
+                <Button className="w-full ">Upgrade to Pro</Button>
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
       </nav>
+      <PlanModal isOpen={showPlanModal} onClose={handleClosePlanModal} />
+      <TeamMembers
+        isOpen={showTeamMemberDialog}
+        onClose={handleHideTeamMemberDialog}
+      />
     </div>
   );
 };

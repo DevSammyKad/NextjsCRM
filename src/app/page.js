@@ -1,27 +1,32 @@
-'use client';
-
-import Image from 'next/image';
 import { Button } from '@/components/ui/button';
-import { LoginLink, RegisterLink } from '@kinde-oss/kinde-auth-nextjs';
-import { useEffect } from 'react';
+import {
+  RegisterLink,
+  LoginLink,
+} from '@kinde-oss/kinde-auth-nextjs/components';
+import { getKindeServerSession } from '@kinde-oss/kinde-auth-nextjs/server';
 import { redirect } from 'next/navigation';
+export default async function Home() {
+  const { isAuthenticated } = getKindeServerSession();
+  const isLoggedIn = await isAuthenticated();
 
-export default function Home() {
-  useEffect(() => {
-    redirect('/api/auth/login?post_login_redirect_url=/dashboard');
-  }, []);
-
+  if (!isLoggedIn) {
+    redirect('/api/auth/login');
+  }
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-full sm:before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full sm:after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1]"></div>
-
-      <Button> Subscribe</Button>
-
-      <LoginLink>
-        <Button variant="destructive">Sign in</Button>
-      </LoginLink>
-      <RegisterLink>Sign up</RegisterLink>
-
+    <main className="p-5">
+      <header className="flex justify-between items-center">
+        <div>
+          <h1>Next.js + RSAI CRM</h1>
+        </div>
+        <div className="flex gap-5 items-center ">
+          <LoginLink>
+            <Button>Sign in</Button>
+          </LoginLink>
+          <RegisterLink>
+            <Button variant="ghost">Sign up</Button>
+          </RegisterLink>
+        </div>
+      </header>
       {/* <LoginLink postLoginRedirectURL="/dashboard">Sign in</LoginLink> */}
       {/* <RegisterLink postLoginRedirectURL="/welcome">Sign up</RegisterLink> */}
     </main>

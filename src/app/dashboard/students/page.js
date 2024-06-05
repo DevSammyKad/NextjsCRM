@@ -1,5 +1,6 @@
 import React from 'react';
 import AddNewStudent from './_components/AddNewStudent';
+import { Toaster } from 'react-hot-toast';
 
 const Students = () => {
   return (
@@ -8,6 +9,8 @@ const Students = () => {
         Students
         <AddNewStudent />
       </h2>
+      <div></div>
+      <Toaster />
     </div>
   );
 };

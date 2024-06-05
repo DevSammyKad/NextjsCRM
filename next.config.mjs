@@ -5,10 +5,19 @@ const nextConfig = {
   },
 
   images: {
-    domains: [
-      'avatars.githubusercontent.com',
-      'cdn.dribbble.com',
-      'lh3.googleusercontent.com',
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'avatars.githubusercontent.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'cdn.dribbble.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'lh3.googleusercontent.com',
+      },
     ],
   },
 };

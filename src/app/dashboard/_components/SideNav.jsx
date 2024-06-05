@@ -7,20 +7,22 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 import { SidebarClose, SidebarOpenIcon } from 'lucide-react';
-// import { useKindeBrowserClient } from '@kinde-oss/kinde-auth-nextjs';
+import { useKindeBrowserClient } from '@kinde-oss/kinde-auth-nextjs';
 
 import { Button } from '@/components/ui/button';
-import PlanModal from '@/components/PlanModal';
+import PlanModal from '../_components/PlanModal';
 
 const SideNav = ({ closeSidebar }) => {
-  // const { user } = useKindeBrowserClient();
   const pathname = usePathname();
 
   const [isExpanded, setIsExpanded] = useState(true);
   const [showModal, setShowModal] = useState(false);
 
-  const handleModal = () => {
-    setShowModal(!showModal);
+  const handleOpenModal = () => {
+    setShowModal(true);
+  };
+  const handleCloseModal = () => {
+    setShowModal(false);
   };
 
   const handleToggleSidebar = () => {
@@ -50,12 +52,12 @@ const SideNav = ({ closeSidebar }) => {
             <SidebarOpenIcon color="gray" size={22} />
           )}
         </button>
-        <div className="flex justify-between items-center my-5 px-8">
+        <div className="flex justify-between items-center my-5 px-4">
           <div>
             <Image src={next} width={130} height={120} alt="Logo" />
           </div>
         </div>
-        <div className="flex flex-col justify-between">
+        <div className="flex flex-col justify-between h-full mb-10 mt-3">
           <div>
             <h2 className="px-4 font-medium text-sm max-lg:text-xs">
               Main menu
@@ -115,7 +117,7 @@ const SideNav = ({ closeSidebar }) => {
           </div>
           {/* Upgrade*/}
           {isExpanded && (
-            <div className="mt-14 rounded-3xl dark:bg-zinc-800 border py-4 mx-4 px-4">
+            <div className="rounded-3xl dark:bg-zinc-800 border py-4 mx-4 px-4">
               <div className="flex gap-2 items-center">
                 <h3 className=" text-base font-semibold tracking-tight">
                   Get Result So Far{' '}
@@ -133,13 +135,13 @@ const SideNav = ({ closeSidebar }) => {
               </p>
               <div className="flex justify-center items-center mt-2">
                 <Button
-                  onClick={handleModal}
+                  onClick={handleOpenModal}
                   className="text-center px-3"
                   variant="outline"
                 >
                   Upgrade Now
                 </Button>
-                {showModal && <PlanModal />}
+                <PlanModal isOpen={showModal} onClose={handleCloseModal} />
               </div>
             </div>
           )}

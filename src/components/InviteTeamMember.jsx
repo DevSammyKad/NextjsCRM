@@ -27,7 +27,7 @@ const Member = [
 ];
 console.log(Member);
 
-const InviteTeamMember = () => {
+const InviteTeamMember = ({ handleCloseModal }) => {
   const [copied, setCopied] = useState(false);
   const [linkValue, setLinkValue] = useState('');
   const [email, setEmail] = useState('');
@@ -87,7 +87,7 @@ const InviteTeamMember = () => {
             </h5>
 
             <button
-              //   onClick={closeModal}
+              onClick={handleCloseModal}
               className=" text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded-full p-1"
             >
               <X size={22} className="" />

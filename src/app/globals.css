@@ -33,6 +33,7 @@
     --ring: 0 0% 3.9%;
 
     --radius: 0.5rem;
+    --primary-color: #4effca;
   }
 
   .dark {
@@ -72,5 +73,8 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+  .custom_color {
+    @apply text-[#4effca];
   }
 }
