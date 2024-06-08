@@ -57,7 +57,7 @@ const SideNav = ({ closeSidebar }) => {
             <Image src={next} width={130} height={120} alt="Logo" />
           </div>
         </div>
-        <div className="flex flex-col justify-between h-full mb-10 mt-3">
+        <div className="flex flex-col justify-between h-full mt-3">
           <div>
             <h2 className="px-4 font-medium text-sm max-lg:text-xs">
               Main menu
@@ -117,7 +117,7 @@ const SideNav = ({ closeSidebar }) => {
           </div>
           {/* Upgrade*/}
           {isExpanded && (
-            <div className="rounded-3xl dark:bg-zinc-800 border py-4 mx-4 px-4">
+            <div className="rounded-3xl border dark:bg-gray-300/10 dark:border-gray-600 py-4 mb-5 mx-4 px-4">
               <div className="flex gap-2 items-center">
                 <h3 className=" text-base font-semibold tracking-tight">
                   Get Result So Far{' '}

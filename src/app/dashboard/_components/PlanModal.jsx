@@ -21,6 +21,7 @@ import {
   CardHeader,
 } from '@/components/ui/card';
 import Image from 'next/image';
+import { Check } from 'lucide-react';
 
 const PlanModal = ({ isOpen, onClose }) => {
   return (
@@ -36,7 +37,7 @@ const PlanModal = ({ isOpen, onClose }) => {
           </DialogDescription>
         </DialogHeader>
         <Tabs defaultValue="free" className="w-[400px]">
-          <TabsList className="grid w-full grid-cols-2 bg-gray-200 ">
+          <TabsList className="grid w-full grid-cols-2 bg-gray-100/5 ">
             <TabsTrigger value="free" className="">
               Free
             </TabsTrigger>
@@ -64,7 +65,7 @@ const PlanModal = ({ isOpen, onClose }) => {
           <TabsContent value="premium">
             <Card>
               <CardHeader>
-                $30 /month
+                ₹ 299 /month
                 <CardDescription>
                   For individuals that just want to explore.
                 </CardDescription>
@@ -72,19 +73,33 @@ const PlanModal = ({ isOpen, onClose }) => {
               <CardContent>
                 <ul className="my-6 ml-6 list-none [&>li]:mt-2">
                   <li className="flex gap-2">
-                    <Image src={pointImg} width={20} height={10} /> Unlimited
-                    Leads{' '}
+                    <Check color="#4EFFCA" />
+                    Unlimited Leads{' '}
                   </li>
-                  <li>General Commercial Terms</li>
-                  <li>Optional credits purchase</li>
-                  <li>Vision Generations</li>
-                  <li>Private Generations</li>
+                  <li className="flex gap-2">
+                    <Check color="#4EFFCA" /> General Commercial Terms
+                  </li>
+                  <li className="flex gap-2">
+                    {' '}
+                    <Check color="#4EFFCA" />
+                    Optional credits purchase
+                  </li>
+                  <li className="flex gap-2">
+                    {' '}
+                    <Check color="#4EFFCA" />
+                    Vision Generations
+                  </li>
+                  <li className="flex gap-2">
+                    {' '}
+                    <Check color="#4EFFCA" />
+                    Private Generations
+                  </li>
                 </ul>
               </CardContent>
             </Card>
           </TabsContent>
         </Tabs>
-        <DialogFooter className="flex justify-between items-center ">
+        <DialogFooter className="flex">
           <Button variant="outline" onClick={onClose}>
             Cancel
           </Button>

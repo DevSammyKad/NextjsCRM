@@ -72,7 +72,7 @@ const Header = () => {
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <div className="flex items-center gap-2 ml-2 relative cursor-pointer">
-                <div className="relative cursor-pointer">
+                <div className="relative cursor-pointer w-12 h-12  rounded-full">
                   {user?.picture && (
                     <Image
                       src={
@@ -82,6 +82,7 @@ const Header = () => {
                       alt="Profile Picture"
                       width={50}
                       height={50}
+                      priority
                       className="rounded-full w-12 h-12 object-cover"
                     />
                   )}
