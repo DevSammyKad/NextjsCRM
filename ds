@@ -1,0 +1,53 @@
+[33mcommit 8568fbb24969f11de1f356e30cc7e2c0fb03f8b2[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: DevSammyKad <DevSammyKad@gmail.com>
+Date:   Sat Jun 8 20:55:57 2024 +0530
+
+    Kinde Auth succesFully integrate and supabase and prisma connected , crate user schema using kinde Auth
+
+[33mcommit 36aab1cc6c79cab6aba81cdda3421c0c23699241[m
+Author: DevSammyKad <DevSammyKad@gmail.com>
+Date:   Thu Jun 6 02:14:24 2024 +0530
+
+    sidebar repair minor changes done
+
+[33mcommit 1f80ec151d8bca8f25eddf983fcd110629b202ae[m
+Author: DevSammyKad <DevSammyKad@gmail.com>
+Date:   Sat Jun 1 06:19:18 2024 +0530
+
+    ready deploy
+
+[33mcommit 981c2e53079eb69ccf0fcf650729bf643601a2c7[m
+Author: DevSammyKad <DevSammyKad@gmail.com>
+Date:   Sat Jun 1 06:00:19 2024 +0530
+
+    make changese for Deploy
+
+[33mcommit 56541fc41b4aee71f9ab8bf8c2c33599f78af4d7[m
+Author: DevSammyKad <DevSammyKad@gmail.com>
+Date:   Sat Jun 1 05:43:49 2024 +0530
+
+    nestJs Config added
+
+[33mcommit 826fec61f2f80fff021ff532faf9e37b4d003e79[m
+Author: DevSammyKad <DevSammyKad@gmail.com>
+Date:   Sat Jun 1 02:01:46 2024 +0530
+
+    Sidebar ready for Production
+
+[33mcommit 1df635aac77e64373c6ae4d74709267efb1312cf[m
+Author: DevSammyKad <DevSammyKad@gmail.com>
+Date:   Sat Jun 1 01:32:51 2024 +0530
+
+    first commit
+
+[33mcommit ad7eb762a743da7c2f5a95117846f3233bc92509[m
+Author: DevSammyKad <DevSammyKad@gmail.com>
+Date:   Sat Jun 1 01:12:46 2024 +0530
+
+    Sidebar mobile-sidebar and header added
+
+[33mcommit f39bf7672ee73858c6988071ae528da635927491[m
+Author: DevSammyKad <DevSammyKad@gmail.com>
+Date:   Sun May 12 14:06:24 2024 +0530
+
+    Initial commit from Create Next App

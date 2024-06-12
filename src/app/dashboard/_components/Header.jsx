@@ -2,6 +2,8 @@
 
 import { useKindeBrowserClient } from '@kinde-oss/kinde-auth-nextjs';
 import { LogoutLink } from '@kinde-oss/kinde-auth-nextjs/components';
+import man from '../../../../public/man.png';
+
 import {
   Cloud,
   LifeBuoy,
@@ -52,6 +54,7 @@ const Header = () => {
   const handleClosePlanModal = () => {
     setShowPlanModal(false);
   };
+
   return (
     <div>
       <nav className="h-24 flex justify-between items-center mx-2 shadow-sm">
@@ -73,19 +76,15 @@ const Header = () => {
             <DropdownMenuTrigger asChild>
               <div className="flex items-center gap-2 ml-2 relative cursor-pointer">
                 <div className="relative cursor-pointer w-12 h-12  rounded-full">
-                  {user?.picture && (
-                    <Image
-                      src={
-                        user?.picture ||
-                        'https://img.freepik.com/free-photo/3d-illustration-teenager-with-funny-face-glasses_1142-50955.jpg?size=626&ext=jpg&ga=GA1.1.1308723101.1701734507&semt=ais_user'
-                      }
-                      alt="Profile Picture"
-                      width={50}
-                      height={50}
-                      priority
-                      className="rounded-full w-12 h-12 object-cover"
-                    />
-                  )}
+                  <Image
+                    src={user?.picture || man}
+                    alt="Profile Picture"
+                    width={50}
+                    height={50}
+                    priority
+                    className="rounded-full w-12 h-12 object-cover"
+                  />
+
                   {user && !user.picture && (
                     <div className="h-7 w-7 rounded-full mx-auto bg-zinc-900 text-xs flex justify-center items-center">
                       {' '}

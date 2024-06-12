@@ -25,6 +25,7 @@
     "@radix-ui/react-slot": "^1.0.2",
     "@radix-ui/react-tabs": "^1.0.4",
     "@react-email/components": "0.0.19",
+    "@tanstack/react-table": "^8.17.3",
     "axios": "^1.7.2",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
@@ -40,6 +41,7 @@
     "react-email": "2.1.4",
     "react-hook-form": "^7.51.5",
     "react-hot-toast": "^2.4.1",
+    "react-phone-number-input": "^3.4.3",
     "resend": "^3.2.0",
     "tailwind-merge": "^2.3.0",
     "tailwindcss-animate": "^1.0.7"

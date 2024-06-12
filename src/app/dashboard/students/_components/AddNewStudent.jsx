@@ -24,15 +24,17 @@ import {
 } from '@/components/ui/select';
 import toast, { Toaster } from 'react-hot-toast';
 
-import PhoneInput from '../../../../components/phoneInput/index';
+// import PhoneInput from '../../../../components/phoneInput/index';
+import { PhoneInput } from '@/components/ui/phone-input';
+import axios from 'axios';
 
-const AddNewStudent = ({ Toaster }) => {
+const AddNewStudent = () => {
   const [phoneNumber, setPhoneNumber] = useState('');
 
   const handlePhoneChange = (newPhoneNumber) => {
     setPhoneNumber(newPhoneNumber);
+    setValue('phoneNumber', newPhoneNumber); // Register phone number with react-hook-form
   };
-
   const {
     register,
     handleSubmit,
@@ -43,13 +45,14 @@ const AddNewStudent = ({ Toaster }) => {
 
   const onSubmit = async (data) => {
     try {
-      alert(JSON.stringify(data));
-      console.log('Form data submitted:', data);
+      const response = await axios.post('/api/students', data);
+      console.log('Form data submitted:', response.data);
       setOpen(false);
       toast.success('Student added successfully');
       reset();
     } catch (error) {
-      toast.error('Please try again');
+      console.error('Error during submission:', error);
+      toast.error('An error occurred. Please try again.');
     }
   };
 
@@ -59,7 +62,7 @@ const AddNewStudent = ({ Toaster }) => {
     <>
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
-          <Button className="flex gap-1 items-center">
+          <Button size="sm" className="flex gap-1 items-center">
             <Plus /> Add New Student
           </Button>
         </DialogTrigger>
@@ -81,7 +84,6 @@ const AddNewStudent = ({ Toaster }) => {
                     placeholder="Max"
                     {...register('firstName', {
                       required: 'First name is required',
-
                       maxLength: {
                         value: 20,
                         message: 'First name must be less than 20 characters',
@@ -90,7 +92,9 @@ const AddNewStudent = ({ Toaster }) => {
                         value: 3,
                         message: 'First name must be at least 3 characters',
                       },
-                      validate: (value) => value[0] === value[0].toUpperCase(),
+                      validate: (value) =>
+                        value[0] === value[0].toUpperCase() ||
+                        'First name must start with a capital letter',
                     })}
                   />
                   {errors.firstName && (
@@ -132,10 +136,7 @@ const AddNewStudent = ({ Toaster }) => {
                 </div>
                 <div className="grid gap-2">
                   <Label htmlFor="grade">Grade</Label>
-                  <Select
-                    onValueChange={(value) => setValue('grade', value)}
-                    {...register('grade', { required: 'Grade is required' })}
-                  >
+                  <Select onValueChange={(value) => setValue('grade', value)}>
                     <SelectTrigger className="w-[180px]">
                       <SelectValue placeholder="Select Grade" />
                     </SelectTrigger>
@@ -155,15 +156,14 @@ const AddNewStudent = ({ Toaster }) => {
               <div className="grid gap-2">
                 <Label htmlFor="phoneNumber">Phone</Label>
                 <PhoneInput
+                  id="phoneNumber"
+                  className=" flex gap-2 border-0 focus:outline-none focus:border-none"
                   value={phoneNumber}
+                  defaultCountry="IN"
                   onChange={handlePhoneChange}
-                  defaultCountry="US"
-                  className="phone-input-class"
                 />
-                {errors.phoneNumber && (
-                  <span className="text-red-500 text-xs">
-                    {errors.phoneNumber.message}
-                  </span>
+                {errors.phone && (
+                  <p style={{ color: 'red' }}>{errors.phone.message}</p>
                 )}
               </div>
 
@@ -181,7 +181,7 @@ const AddNewStudent = ({ Toaster }) => {
                   </span>
                 )}
               </div>
-              <div className="grid gap-2">
+              {/* <div className="grid gap-2">
                 <Label htmlFor="password">Password</Label>
                 <Input
                   id="password"
@@ -195,7 +195,7 @@ const AddNewStudent = ({ Toaster }) => {
                     {errors.password.message}
                   </span>
                 )}
-              </div>
+              </div> */}
             </div>
             <DialogFooter className="mt-10">
               <DialogClose asChild>
@@ -210,6 +210,7 @@ const AddNewStudent = ({ Toaster }) => {
           </form>
         </DialogContent>
       </Dialog>
+      {/* <Toaster /> */}
     </>
   );
 };

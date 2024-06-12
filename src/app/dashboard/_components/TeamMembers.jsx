@@ -71,7 +71,7 @@ const TeamMembers = ({ isOpen, onClose }) => {
             </CardHeader>
             <CardContent>
               <p className="text-xs">People with access</p>
-              <div className="flex w-full items-center space-x-2 my-5">
+              <div className="flex w-full max-w-sm items-center space-x-2">
                 <Input
                   type="email"
                   placeholder="Email"

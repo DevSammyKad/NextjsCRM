@@ -2,6 +2,7 @@
 import InviteTeamMember from '@/components/InviteTeamMember';
 import { Button } from '@/components/ui/button';
 import person from '../../../../public/person.jpg';
+import man from '../../../../public/man.png';
 import {
   ChevronDown,
   Columns3,
@@ -14,9 +15,26 @@ import React, { useState } from 'react';
 
 import { Card } from '@/components/ui/card';
 import Image from 'next/image';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from '@/components/ui/pagination';
 
 const Teachers = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedMember, setSelectedMember] = useState(1);
 
   const handleOpen = () => {
     setIsModalOpen(true);
@@ -59,7 +77,8 @@ const Teachers = () => {
       email: 'sameerkad2001@gami.com',
       phone: '+91 8459324821',
       status: 'active',
-      date: '2023-05-01',
+      dateJoined: '2022-05-01',
+      profileImage: person,
       attendanceHistory: [
         { date: '2023-05-01', checkIn: '09:30', checkOut: '16:15' },
         { date: '2023-05-02', checkIn: '00:00', checkOut: '00:00' },
@@ -68,11 +87,36 @@ const Teachers = () => {
         { date: '2023-05-05', checkIn: '09:00', checkOut: '16:45' },
         { date: '2023-05-06', checkIn: '09:15', checkOut: '16:00' },
         { date: '2023-05-07', checkIn: '09:40', checkOut: '16:30' },
-        { date: '2023-05-08', checkIn: '10:00', checkOut: '15:45' },
-        { date: '2023-05-08', checkIn: '08:00', checkOut: '17:00' },
+        { date: '2023-05-08', checkIn: '09:00', checkOut: '18:00' },
+      ],
+    },
+    {
+      id: 2,
+      name: 'Nitish Kumar',
+      role: 'Support Staff',
+      email: 'Neha@gami.com',
+      phone: '+91 9999324821',
+      status: 'active',
+      dateJoined: '2023-05-01',
+      attendanceHistory: [
+        { date: '2023-05-01', checkIn: '13:15', checkOut: '16:00' },
+        { date: '2023-05-02', checkIn: '10:30', checkOut: '15:15' },
+        { date: '2023-05-03', checkIn: '09:15', checkOut: '16:45' },
+        { date: '2023-05-04', checkIn: '11:00', checkOut: '14:45' },
+        { date: '2023-05-05', checkIn: '09:30', checkOut: '16:15' },
+        { date: '2023-05-06', checkIn: '00:00', checkOut: '00:00' },
+        { date: '2023-05-07', checkIn: '10:45', checkOut: '15:30' },
+        { date: '2023-05-08', checkIn: '09:15', checkOut: '16:00' },
       ],
     },
   ];
+  const selectedMemberData = MemberData.find(
+    (member) => member.id === selectedMember
+  );
+
+  const handleSelectMember = (value) => {
+    setSelectedMember(Number(value));
+  };
 
   return (
     <div className="bg-gray-50 dark:bg-transparent">
@@ -86,12 +130,16 @@ const Teachers = () => {
             </h1>
           </div>
           <div className="flex items-center gap-5 max-sm:gap-2">
-            <Button
-              variant="outline"
-              className="bg-transparent border flex items-center gap-2 max-sm:text-xs"
-            >
-              This Year <ChevronDown size={18} />
-            </Button>
+            <Select onValueChange={handleSelectMember}>
+              <SelectTrigger className="w-[180px] bg-transparent">
+                <SelectValue placeholder="Select Member" />
+              </SelectTrigger>
+              <SelectContent className="bg-transparent">
+                <SelectItem value="1">Sammy</SelectItem>
+                <SelectItem value="2">Neh</SelectItem>
+              </SelectContent>
+            </Select>
+
             <Button
               size="sm"
               className="flex gap-3 max-sm:text-xs bg-[#4EFFCA] dark:hover:bg-[#bed3cd] text-black font-semibold"
@@ -104,26 +152,30 @@ const Teachers = () => {
         <div className="flex items-center justify-start space-x-10 p-5">
           <div className="flex justify-center items-center">
             <Image
-              src={person}
+              src={selectedMemberData.profileImage || man}
               alt="Teacher"
               className="rounded-full w-20 h-20 object-cover"
             />
           </div>
           <div>
-            <h1 className="text-xl my-3">Sammy Kad</h1>
+            <h1 className="text-xl my-3">{selectedMemberData.name}</h1>
             <div className="grid grid-cols-3 gap-10">
               <div className="col-span-1">
                 <p className="text-sm text-gray-500">Role</p>
-                <span className="text-sm font-base">Head of UX Design</span>
+                <span className="text-sm font-base">
+                  {selectedMemberData.role}
+                </span>
               </div>
               <div className="col-span-1">
                 <p className="text-sm text-gray-500">Phone Number</p>
-                <span className="text-sm font-base">+91 8459324821</span>
+                <span className="text-sm font-base">
+                  {selectedMemberData.phone}
+                </span>
               </div>
               <div className="col-span-1">
                 <p className="text-sm text-gray-500">Email Address</p>
                 <span className="text-sm font-base">
-                  sameerkad2001@gami.com
+                  {selectedMemberData.email}
                 </span>
               </div>
             </div>
@@ -139,6 +191,12 @@ const Teachers = () => {
             </h1>
           </div>
           <div className="flex items-center gap-2">
+            <Button
+              variant="outline"
+              className="bg-transparent border flex items-center gap-2 max-sm:text-xs"
+            >
+              This Year <ChevronDown size={18} />
+            </Button>
             <Button variant="outline" size="sm">
               <Columns3 />
             </Button>
@@ -151,12 +209,10 @@ const Teachers = () => {
           </div>
         </div>
         <div className="mt-10">
-          {MemberData.map((item, index) => (
-            <div
-              key={index}
-              className="grid md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-5"
-            >
-              {item.attendanceHistory.map((attendance, attendanceIndex) => (
+          <div className="grid md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-5 my-5">
+            {selectedMemberData.attendanceHistory
+              .reverse()
+              .map((attendance, attendanceIndex) => (
                 <Card
                   key={attendanceIndex}
                   className="bg-gray-500/10 col-span-1"
@@ -164,7 +220,7 @@ const Teachers = () => {
                   <div className="flex justify-between p-5">
                     <div className="flex items-center gap-4">
                       <Timer />
-                      {attendance.date}
+                      <p className="text-sm">{attendance.date}</p>
                     </div>
                     <div
                       className={`text-xs bg-[#4EFFCA]/10 rounded-xl py-2 px-4 ${
@@ -221,8 +277,23 @@ const Teachers = () => {
                   </div>
                 </Card>
               ))}
-            </div>
-          ))}
+          </div>
+          <Pagination>
+            <PaginationContent>
+              <PaginationItem>
+                <PaginationPrevious href="#" />
+              </PaginationItem>
+              <PaginationItem>
+                <PaginationLink href="#">1</PaginationLink>
+              </PaginationItem>
+              <PaginationItem>
+                <PaginationEllipsis />
+              </PaginationItem>
+              <PaginationItem>
+                <PaginationNext href="#" />
+              </PaginationItem>
+            </PaginationContent>
+          </Pagination>
         </div>
       </div>
     </div>
