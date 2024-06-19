@@ -9,9 +9,9 @@ import {
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
 import useHelpers from '@/hooks/useHelpers';
-import { toast } from 'sonner';
+import toast, { Toaster } from 'react-hot-toast';
 
-const Remove = ({ user, open, onClose }) => {
+export default function Remove({ user, open, onClose }) {
   const { loading, setLoading } = useHelpers();
 
   const removeMember = async () => {
@@ -25,7 +25,8 @@ const Remove = ({ user, open, onClose }) => {
         },
         body: JSON.stringify({
           id: user.id,
-          status: 'removed',
+          type: 'status',
+          value: 'removed',
         }),
       });
 
@@ -36,17 +37,17 @@ const Remove = ({ user, open, onClose }) => {
       }
 
       toast.success('User successfully removed from team.');
-      onClose(); // Close the dialog after successful removal
     } catch (error) {
       console.error('Error removing user:', error);
       toast.error('Failed to remove user from team.');
     } finally {
       setLoading(false);
+      onClose();
     }
   };
 
   return (
-    <AlertDialog open={open} onOpenChange={onClose}>
+    <AlertDialog open={open}>
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
@@ -57,7 +58,7 @@ const Remove = ({ user, open, onClose }) => {
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel
-            onClick={onClose}
+            onClick={() => onClose()}
             className="bg-red-500 text-white"
           >
             Cancel
@@ -69,8 +70,7 @@ const Remove = ({ user, open, onClose }) => {
           />
         </AlertDialogFooter>
       </AlertDialogContent>
+      <Toaster />
     </AlertDialog>
   );
-};
-
-export default Remove;
+}

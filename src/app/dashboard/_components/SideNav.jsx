@@ -1,6 +1,8 @@
 'use client';
 import Image from 'next/image';
 import next from '../../../../public/next.svg';
+
+import dark_next from '../../../../public/dark_next.svg';
 import React, { useState } from 'react';
 import { NavLinks } from '../../../constants/index';
 import Link from 'next/link';
@@ -52,9 +54,10 @@ const SideNav = ({ closeSidebar }) => {
             <SidebarOpenIcon color="gray" size={22} />
           )}
         </button>
-        <div className="flex justify-between items-center my-5 px-4">
+        <div className="flex justify-between items-center lg:my-5 px-4">
           <div>
-            <Image src={next} width={130} height={120} alt="Logo" />
+            {/* <Image src={next} width={130} height={120} alt="Logo" /> */}
+            <Image src={dark_next} width={130} height={120} alt="Logo" />
           </div>
         </div>
         <div className="flex flex-col justify-between h-full mt-3">

@@ -44,7 +44,7 @@ export const columns = [
         role,
       };
 
-      const onRoleChanged = async (newRole) => {
+      const onRoleChanged = async (v) => {
         try {
           setLoading(true);
           const response = await fetch('/api/team', {
@@ -52,25 +52,28 @@ export const columns = [
             headers: {
               'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ id, role: newRole }),
+            body: JSON.stringify({
+              id,
+              type: 'role',
+              value: v,
+            }),
           });
 
           const data = await response.json();
-          if (response.ok) {
-            toast.success('Role updated successfully');
-          } else {
-            toast.error(`Error: ${data.error}`);
-            console.error('Error response:', data);
+
+          if (!response.ok) {
+            throw new Error(data.error || 'Something went wrong');
           }
+
+          toast.success('Role updated successfully');
         } catch (error) {
-          toast.error(`Error: ${error.message}`);
-          console.error('Fetch error:', error);
+          console.error('Error updating role:', error);
+          toast.error('Failed to update role');
         } finally {
           setOpen(false);
           setLoading(false);
         }
       };
-
       return (
         <div onClick={() => setOpen(!open)} className="w-[120px]">
           {!open && (

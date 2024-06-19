@@ -32,7 +32,7 @@ import {
 import PlanModal from './PlanModal';
 import TeamMembers from './TeamMembers';
 
-const Header = () => {
+const Header = React.memo(() => {
   const { setTheme } = useTheme();
   const { user, isAuthenticated, isLoading } = useKindeBrowserClient();
 
@@ -79,18 +79,18 @@ const Header = () => {
                   <Image
                     src={user?.picture || man}
                     alt="Profile Picture"
-                    width={50}
-                    height={50}
-                    priority
-                    className="rounded-full w-12 h-12 object-cover"
+                    width={48}
+                    height={48}
+                    priority={!!user?.picture}
+                    className="rounded-full object-cover"
                   />
 
-                  {user && !user.picture && (
+                  {/* {user && !user.picture && (
                     <div className="h-7 w-7 rounded-full mx-auto bg-zinc-900 text-xs flex justify-center items-center">
                       {' '}
                       {user?.given_name?.[0]}
                     </div>
-                  )}
+                  )} */}
                   <div className="bg-white w-4 h-4 absolute rounded-full flex justify-center items-center bottom-0 right-1">
                     <div className="bg-green-500 z-10  w-2 h-2 rounded-full"></div>
                   </div>
@@ -98,11 +98,11 @@ const Header = () => {
 
                 <div className="max-sm:hidden text-left">
                   <h4 className="font-medium text-base">
-                    {user?.given_name || 'Sammy kad'}
+                    {user?.given_name || 'User Name'}
                   </h4>
                   <p className="text-sm">
                     {' '}
-                    {user?.email || 'sameer.kad@technolize.in'}
+                    {user?.email || 'UserName@gmail.com'}
                   </p>
                 </div>
               </div>
@@ -191,6 +191,6 @@ const Header = () => {
       />
     </div>
   );
-};
+});
 
 export default Header;

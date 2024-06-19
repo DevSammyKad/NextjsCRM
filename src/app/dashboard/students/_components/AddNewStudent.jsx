@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Plus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -22,7 +22,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import toast, { Toaster } from 'react-hot-toast';
+import { toast } from 'sonner';
 
 // import PhoneInput from '../../../../components/phoneInput/index';
 import { PhoneInput } from '@/components/ui/phone-input';
@@ -30,6 +30,23 @@ import axios from 'axios';
 
 const AddNewStudent = () => {
   const [phoneNumber, setPhoneNumber] = useState('');
+  const [open, setOpen] = useState(false);
+  const [grade, setGrade] = useState([]);
+
+  console.log(grade);
+
+  const getGradesList = async () => {
+    try {
+      const grade = await axios.get('/api/grade');
+      setGrade(grade.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getGradesList();
+  }, []);
 
   const handlePhoneChange = (newPhoneNumber) => {
     setPhoneNumber(newPhoneNumber);
@@ -55,8 +72,6 @@ const AddNewStudent = () => {
       toast.error('An error occurred. Please try again.');
     }
   };
-
-  const [open, setOpen] = useState(false);
 
   return (
     <>
@@ -110,6 +125,9 @@ const AddNewStudent = () => {
                     placeholder="Robinson"
                     {...register('lastName', {
                       required: 'Last name is required',
+                      validate: (value) =>
+                        value[0] === value[0].toUpperCase() ||
+                        'Last name must start with a capital letter',
                     })}
                   />
                   {errors.lastName && (
@@ -137,13 +155,16 @@ const AddNewStudent = () => {
                 <div className="grid gap-2">
                   <Label htmlFor="grade">Grade</Label>
                   <Select onValueChange={(value) => setValue('grade', value)}>
+                    {/* {...register('grade', { required: 'Grade is required' })} */}
                     <SelectTrigger className="w-[180px]">
                       <SelectValue placeholder="Select Grade" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="7th">7th</SelectItem>
-                      <SelectItem value="8th">8th</SelectItem>
-                      <SelectItem value="9th">9th</SelectItem>
+                      {grade.map((item, index) => (
+                        <SelectItem key={index} value={item.grade}>
+                          {item.grade}
+                        </SelectItem>
+                      ))}
                     </SelectContent>
                   </Select>
                   {errors.grade && (
@@ -210,7 +231,6 @@ const AddNewStudent = () => {
           </form>
         </DialogContent>
       </Dialog>
-      {/* <Toaster /> */}
     </>
   );
 };

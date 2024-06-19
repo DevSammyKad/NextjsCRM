@@ -66,21 +66,32 @@ export async function POST(request) {
 export async function PUT(request) {
   try {
     const body = await request.json();
-    const { id, role } = body;
+    const { id, type, value } = body;
 
-    if (!id || !role) {
+    if (!id || !type || !value) {
       return NextResponse.json(
-        { error: 'ID and role are required' },
+        { error: 'ID, type, and value are required' },
         { status: 400 }
       );
     }
 
-    console.log(`Updating team member with ID: ${id} to role: ${role}`);
+    let updatedMember;
 
-    const updatedMember = await prisma.team_members.update({
-      where: { id },
-      data: { role },
-    });
+    if (type === 'role') {
+      console.log(`Updating team member with ID: ${id} to role: ${value}`);
+      updatedMember = await prisma.team_members.update({
+        where: { id },
+        data: { role: value },
+      });
+    } else if (type === 'status') {
+      console.log(`Updating team member with ID: ${id} to status: ${value}`);
+      updatedMember = await prisma.team_members.update({
+        where: { id },
+        data: { status: value },
+      });
+    } else {
+      return NextResponse.json({ error: 'Invalid type' }, { status: 400 });
+    }
 
     return NextResponse.json(updatedMember, { status: 200 });
   } catch (error) {

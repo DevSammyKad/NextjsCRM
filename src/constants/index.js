@@ -28,10 +28,15 @@ export const NavLinks = [
     icon: LeafyGreen,
   },
   {
-    path: '/dashboard/students',
+    path: '/dashboard/studentsAttendance',
     heading: 'Students',
     icon: Users,
   },
+  // {
+  //   path: '/dashboard/studentsAttendance',
+  //   heading: 'Attendance',
+  //   icon: Users,
+  // },
   {
     path: '/dashboard/teachers',
     heading: 'Teachers',

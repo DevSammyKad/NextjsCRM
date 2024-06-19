@@ -1,7 +1,8 @@
 import React from 'react';
 import AddNewStudent from './_components/AddNewStudent';
-import { Toaster } from 'react-hot-toast';
+import { toast } from 'sonner';
 import GetAllStudents from './_components/GetAllStudents';
+import Attendance from './_components/Attendance';
 
 const Students = () => {
   return (
@@ -13,7 +14,7 @@ const Students = () => {
       <div>
         <GetAllStudents />
       </div>
-      <Toaster />
+      <Attendance />
     </div>
   );
 };

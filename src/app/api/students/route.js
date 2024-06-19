@@ -23,14 +23,14 @@ export async function POST(req) {
 
     return new NextResponse(JSON.stringify(student), { status: 200 });
   } catch (error) {
-    console.error('Error during Post:', error);
+    console.error('Error during Add student:', error);
     return new NextResponse('Internal Server Error', { status: 500 });
   }
 }
 
 export async function GET(req) {
   try {
-    const cacheStudents = await prisma.Student.findMany();
+    const cacheStudents = await prisma.student.findMany();
     return NextResponse.json(cacheStudents, { status: 200 });
   } catch (error) {
     console.error('Error during Get All Students');

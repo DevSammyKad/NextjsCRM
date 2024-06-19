@@ -6,6 +6,7 @@ import man from '../../../../public/man.png';
 import {
   ChevronDown,
   Columns3,
+  ComputerIcon,
   Download,
   FilterIcon,
   List,
@@ -123,60 +124,111 @@ const Teachers = () => {
       Teachers <button onClick={handleOpen}>open</button>
       {isModalOpen && <InviteTeamMember onClose={handleCloseModal} />}
       <div className="bg-white dark:bg-slate-400/10 rounded-lg shadow-xl my-5">
-        <div className="flex justify-between items-center py-6 px-8 max-sm:p-4">
-          <div>
-            <h1 className="sm:text-xs md:text-xl border-[#4EFFCA] border-l-8 rounded">
-              Teacher Details
-            </h1>
+        <div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 items-center py-6 px-8 max-sm:p-4">
+            <div className="flex">
+              <h1 className="text-xl max-sm:text-xs border-[#4EFFCA] border-l-8 rounded">
+                Teacher Details
+              </h1>
+            </div>
+            <div className="flex justify-end max-sm:justify-start items-center gap-5 max-sm:gap-2">
+              <Select onValueChange={handleSelectMember}>
+                <SelectTrigger className="w-[180px] bg-transparent">
+                  <SelectValue placeholder="Select Member" />
+                </SelectTrigger>
+                <SelectContent className="bg-transparent">
+                  <SelectItem value="1">Sammy</SelectItem>
+                  <SelectItem value="2">Neh</SelectItem>
+                </SelectContent>
+              </Select>
+              <Button
+                size="sm"
+                className="flex gap-3 max-sm:text-xs bg-[#4EFFCA] dark:hover:bg-[#bed3cd] text-black font-semibold"
+              >
+                <Download size={18} />
+                Download Info
+              </Button>
+            </div>
           </div>
-          <div className="flex items-center gap-5 max-sm:gap-2">
-            <Select onValueChange={handleSelectMember}>
-              <SelectTrigger className="w-[180px] bg-transparent">
-                <SelectValue placeholder="Select Member" />
-              </SelectTrigger>
-              <SelectContent className="bg-transparent">
-                <SelectItem value="1">Sammy</SelectItem>
-                <SelectItem value="2">Neh</SelectItem>
-              </SelectContent>
-            </Select>
-
-            <Button
-              size="sm"
-              className="flex gap-3 max-sm:text-xs bg-[#4EFFCA] dark:hover:bg-[#bed3cd] text-black font-semibold"
-            >
-              <Download size={18} />
-              Download Info
-            </Button>
+          <div className="flex flex-col sm:flex-row justify-start space-y-5 sm:space-y-0 sm:space-x-10 p-5">
+            <div className="flex justify- items-center">
+              <Image
+                src={selectedMemberData.profileImage || man}
+                alt="Teacher"
+                className="rounded-full w-20 h-20 object-cover"
+              />
+            </div>
+            <div>
+              <h1 className="text-xl my-3">{selectedMemberData.name}</h1>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-10">
+                <div className="col-span-1">
+                  <p className="text-sm text-gray-500">Role</p>
+                  <span className="text-sm font-base">
+                    {selectedMemberData.role}
+                  </span>
+                </div>
+                <div className="col-span-1">
+                  <p className="text-sm text-gray-500">Phone Number</p>
+                  <span className="text-sm font-base">
+                    {selectedMemberData.phone}
+                  </span>
+                </div>
+                <div className="col-span-1">
+                  <p className="text-sm text-gray-500">Email Address</p>
+                  <span className="text-sm font-base">
+                    {selectedMemberData.email}
+                  </span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <div className="flex items-center justify-start space-x-10 p-5">
-          <div className="flex justify-center items-center">
-            <Image
-              src={selectedMemberData.profileImage || man}
-              alt="Teacher"
-              className="rounded-full w-20 h-20 object-cover"
-            />
+
+        <div className="grid grid-cols-4 gap-5 max-sm:grid-cols-2 px-5 my-5 pb-5">
+          <div className="bg-white dark:bg-gray-300/5 py-6 px-8 rounded-2xl">
+            <div className="flex items-center gap-3">
+              <div className="rounded-full dark:bg-neutral-600 w-16 h-16 max-md:w-10 max-md:h-10 flex justify-center items-center ">
+                <ComputerIcon
+                  color="white"
+                  className="max-md:w-5 max-md:h-5  "
+                />
+              </div>
+              <div className="flex flex-col">
+                <h1>209</h1>
+                <p className="text-sm text-gray-500 my-1">Total Attendance</p>
+              </div>
+            </div>
           </div>
-          <div>
-            <h1 className="text-xl my-3">{selectedMemberData.name}</h1>
-            <div className="grid grid-cols-3 gap-10">
-              <div className="col-span-1">
-                <p className="text-sm text-gray-500">Role</p>
-                <span className="text-sm font-base">
-                  {selectedMemberData.role}
-                </span>
+          <div className="bg-white dark:bg-gray-300/5 py-6 px-8 rounded-2xl">
+            <div className="flex items-center gap-3">
+              <div className="rounded-full dark:bg-neutral-600 w-16 h-16 flex justify-center items-center ">
+                <ComputerIcon color="white" />
               </div>
-              <div className="col-span-1">
-                <p className="text-sm text-gray-500">Phone Number</p>
-                <span className="text-sm font-base">
-                  {selectedMemberData.phone}
-                </span>
+              <div className="flex flex-col">
+                <h1>209</h1>
+                <p className="text-sm text-gray-500 my-1">Total Attendance</p>
               </div>
-              <div className="col-span-1">
-                <p className="text-sm text-gray-500">Email Address</p>
-                <span className="text-sm font-base">
-                  {selectedMemberData.email}
-                </span>
+            </div>
+          </div>
+          <div className="bg-white dark:bg-gray-300/5 py-6 px-8 rounded-2xl">
+            <div className="flex items-center gap-3">
+              <div className="rounded-full dark:bg-neutral-600 w-16 h-16 flex justify-center items-center ">
+                <ComputerIcon color="white" />
+              </div>
+              <div className="flex flex-col">
+                <h1>209</h1>
+                <p className="text-sm text-gray-500 my-1">Total Attendance</p>
+              </div>
+            </div>
+          </div>
+          <div className="bg-white dark:bg-gray-300/5 py-6 px-8 rounded-2xl">
+            <div className="flex items-center gap-3">
+              <div className="rounded-full dark:bg-neutral-600 w-16 h-16 flex justify-center items-center ">
+                <ComputerIcon color="white" />
+              </div>
+              <div className="flex flex-col">
+                <h1>209</h1>
+                <p className="text-sm text-gray-500 my-1">Total Attendance</p>
               </div>
             </div>
           </div>

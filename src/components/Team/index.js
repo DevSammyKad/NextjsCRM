@@ -14,9 +14,8 @@ const Team = () => {
   const teamId = '1ec4d379-2063-4102-8a2b-6bef5b9c83a4';
 
   const fetchTeam = async () => {
-    setLoading(true);
-
     try {
+      setLoading(true);
       const response = await axios.get(`/api/team?id=${teamId}`);
       const teamData = response.data;
       setTeam(teamData);

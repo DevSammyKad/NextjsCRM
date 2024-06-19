@@ -17,16 +17,37 @@ model User {
   role         Role   @default(STUDENT)
 }
 
-model Student {
-  id          String   @id @default(uuid())
-  firstName   String
-  lastName    String
-  age         Int
-  grade       String
-  address     String
-  phoneNumber String
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+model student {
+  id                 String               @id @default(uuid())
+  firstName          String
+  lastName           String
+  age                Int
+  grade              String
+  address            String
+  phoneNumber        String
+  createdAt          DateTime             @default(now())
+  updatedAt          DateTime             @updatedAt
+  student_attendance student_attendance[]
+}
+
+model student_attendance {
+  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  studentId String
+  present   Boolean  @default(false)
+  day       Int
+  month     Int
+  year      Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime
+  student   student  @relation(fields: [studentId], references: [id])
+
+  @@unique([studentId, day, month, year]) // Ensure unique attendance per day
+}
+
+
+model grade {
+  id    Int    @id @default(autoincrement())
+  grade String
 }
 
 /// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
@@ -49,6 +70,20 @@ model teams {
   owner_id     String?        @db.Uuid
   team_members team_members[]
 }
+
+model organization {
+  id                  String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  organizationName    String
+  organizationPanCard String   @unique
+  organizationMail    String   @unique
+  organizationType    String
+  organizationWebsite String
+  created_at          DateTime @default(now()) @db.Timestamptz(6)
+  updatedAt           DateTime @updatedAt
+  district            String   @default("")
+  state               String   @default("")
+}
+
 
 enum Role {
   STUDENT
