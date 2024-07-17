@@ -5,10 +5,11 @@ import person from '../../../../public/person.jpg';
 import man from '../../../../public/man.png';
 import {
   ChevronDown,
+  CircleArrowOutDownLeftIcon,
   Columns3,
-  ComputerIcon,
   Download,
   FilterIcon,
+  FolderCheck,
   List,
   Timer,
 } from 'lucide-react';
@@ -80,6 +81,20 @@ const Teachers = () => {
       status: 'active',
       dateJoined: '2022-05-01',
       profileImage: person,
+      displayHighlightGridCard: [
+        { icon: <FolderCheck />, highlight: 300, title: 'Total Attendance' },
+        {
+          icon: <CircleArrowOutDownLeftIcon />,
+          highlight: '09.00',
+          title: 'Avg Check In ',
+        },
+        {
+          icon: <CircleArrowOutDownLeftIcon className="rotate-180" />,
+          highlight: '05.00',
+          title: 'Avg Check Out',
+        },
+        { icon: <FolderCheck />, highlight: 300, title: 'Total Attendance' },
+      ],
       attendanceHistory: [
         { date: '2023-05-01', checkIn: '09:30', checkOut: '16:15' },
         { date: '2023-05-02', checkIn: '00:00', checkOut: '00:00' },
@@ -93,12 +108,18 @@ const Teachers = () => {
     },
     {
       id: 2,
-      name: 'Nitish Kumar',
+      name: 'Nitin Kumar',
       role: 'Support Staff',
       email: 'Neha@gami.com',
       phone: '+91 9999324821',
       status: 'active',
       dateJoined: '2023-05-01',
+      displayHighlightGridCard: [
+        { highlight: 300, title: 'Total Attendance' },
+        { highlight: '09.00', title: 'Avg Check In ' },
+        { highlight: '05.00', title: 'Avg Check Out' },
+        { highlight: 300, title: 'Total Attendance' },
+      ],
       attendanceHistory: [
         { date: '2023-05-01', checkIn: '13:15', checkOut: '16:00' },
         { date: '2023-05-02', checkIn: '10:30', checkOut: '15:15' },
@@ -111,6 +132,7 @@ const Teachers = () => {
       ],
     },
   ];
+
   const selectedMemberData = MemberData.find(
     (member) => member.id === selectedMember
   );
@@ -120,10 +142,10 @@ const Teachers = () => {
   };
 
   return (
-    <div className="bg-gray-50 dark:bg-transparent">
+    <div className=" dark:bg-transparent">
       Teachers <button onClick={handleOpen}>open</button>
       {isModalOpen && <InviteTeamMember onClose={handleCloseModal} />}
-      <div className="bg-white dark:bg-slate-400/10 rounded-lg shadow-xl my-5">
+      <Card className="bg-white dark:bg-slate-400/10 rounded-lg  my-5">
         <div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 items-center py-6 px-8 max-sm:p-4">
             <div className="flex">
@@ -184,58 +206,27 @@ const Teachers = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-4 gap-5 max-sm:grid-cols-2 px-5 my-5 pb-5">
-          <div className="bg-white dark:bg-gray-300/5 py-6 px-8 rounded-2xl">
-            <div className="flex items-center gap-3">
-              <div className="rounded-full dark:bg-neutral-600 w-16 h-16 max-md:w-10 max-md:h-10 flex justify-center items-center ">
-                <ComputerIcon
-                  color="white"
-                  className="max-md:w-5 max-md:h-5  "
-                />
+        <div className="grid grid-cols-2 gap-5 lg:grid-cols-4 px-5 my-5 pb-5">
+          {selectedMemberData?.displayHighlightGridCard?.map((item, index) => (
+            <Card
+              key={index}
+              className="bg-white dark:bg-gray-300/5 p-8 max-sm:p-4 rounded-xl shadow-xl flex justify-center flex-col items-center gap-2 py-3"
+            >
+              <div className=" flex items-center space-x-4 rounded-md  p-4">
+                {item.icon}
+                <div className="flex-1 space-y-1">
+                  <p className="text-lg font-medium leading-none">
+                    {item.highlight}
+                  </p>
+                  <p className="text-sm text-muted-foreground">{item.title}</p>
+                </div>
               </div>
-              <div className="flex flex-col">
-                <h1>209</h1>
-                <p className="text-sm text-gray-500 my-1">Total Attendance</p>
-              </div>
-            </div>
-          </div>
-          <div className="bg-white dark:bg-gray-300/5 py-6 px-8 rounded-2xl">
-            <div className="flex items-center gap-3">
-              <div className="rounded-full dark:bg-neutral-600 w-16 h-16 flex justify-center items-center ">
-                <ComputerIcon color="white" />
-              </div>
-              <div className="flex flex-col">
-                <h1>209</h1>
-                <p className="text-sm text-gray-500 my-1">Total Attendance</p>
-              </div>
-            </div>
-          </div>
-          <div className="bg-white dark:bg-gray-300/5 py-6 px-8 rounded-2xl">
-            <div className="flex items-center gap-3">
-              <div className="rounded-full dark:bg-neutral-600 w-16 h-16 flex justify-center items-center ">
-                <ComputerIcon color="white" />
-              </div>
-              <div className="flex flex-col">
-                <h1>209</h1>
-                <p className="text-sm text-gray-500 my-1">Total Attendance</p>
-              </div>
-            </div>
-          </div>
-          <div className="bg-white dark:bg-gray-300/5 py-6 px-8 rounded-2xl">
-            <div className="flex items-center gap-3">
-              <div className="rounded-full dark:bg-neutral-600 w-16 h-16 flex justify-center items-center ">
-                <ComputerIcon color="white" />
-              </div>
-              <div className="flex flex-col">
-                <h1>209</h1>
-                <p className="text-sm text-gray-500 my-1">Total Attendance</p>
-              </div>
-            </div>
-          </div>
+            </Card>
+          ))}
         </div>
-      </div>
+      </Card>
       {/* Attendance History */}
-      <div className="bg-white dark:bg-gray-300/5 p-8 max-sm:p-4 rounded-xl shadow-xl my-5">
+      <Card className="bg-white dark:bg-gray-300/5 p-8 max-sm:p-4 rounded-xl shadow-lg my-5">
         <div className="flex justify-between items-center">
           <div>
             <h1 className="max-sm:text-base text-xl border-[#4EFFCA] border-l-8 rounded">
@@ -282,36 +273,36 @@ const Teachers = () => {
                         ) === 'Absent'
                           ? 'bg-gray-300/10 text-gray-500'
                           : determineStatus(
-                              attendance.checkIn,
-                              attendance.checkOut
-                            ) === 'On Time'
-                          ? ''
-                          : determineStatus(
-                              attendance.checkIn,
-                              attendance.checkOut
-                            ) === 'Late'
-                          ? 'bg-orange-300/10 text-[#FF6B6B]'
-                          : determineStatus(
-                              attendance.checkIn,
-                              attendance.checkOut
-                            ) === 'Very Late'
-                          ? 'bg-red-100/10 text-red-400'
-                          : determineStatus(
-                              attendance.checkIn,
-                              attendance.checkOut
-                            ) === 'Early'
-                          ? 'bg-purple-50 text-purple-500'
-                          : determineStatus(
-                              attendance.checkIn,
-                              attendance.checkOut
-                            ) === 'Early Leave'
-                          ? 'bg-yellow-300/10 text-[#FFFF00]'
-                          : determineStatus(
-                              attendance.checkIn,
-                              attendance.checkOut
-                            ) === 'Extended'
-                          ? 'bg-green-300/10 text-[#00FF00]'
-                          : ''
+                                attendance.checkIn,
+                                attendance.checkOut
+                              ) === 'On Time'
+                            ? ''
+                            : determineStatus(
+                                  attendance.checkIn,
+                                  attendance.checkOut
+                                ) === 'Late'
+                              ? 'bg-orange-300/10 text-[#FF6B6B]'
+                              : determineStatus(
+                                    attendance.checkIn,
+                                    attendance.checkOut
+                                  ) === 'Very Late'
+                                ? 'bg-red-100/10 text-red-400'
+                                : determineStatus(
+                                      attendance.checkIn,
+                                      attendance.checkOut
+                                    ) === 'Early'
+                                  ? 'bg-purple-50 text-purple-500'
+                                  : determineStatus(
+                                        attendance.checkIn,
+                                        attendance.checkOut
+                                      ) === 'Early Leave'
+                                    ? 'bg-yellow-300/10 text-[#FFFF00]'
+                                    : determineStatus(
+                                          attendance.checkIn,
+                                          attendance.checkOut
+                                        ) === 'Extended'
+                                      ? 'bg-green-300/10 text-[#00FF00]'
+                                      : ''
                       } custom_color`}
                     >
                       {determineStatus(attendance.checkIn, attendance.checkOut)}
@@ -347,7 +338,7 @@ const Teachers = () => {
             </PaginationContent>
           </Pagination>
         </div>
-      </div>
+      </Card>
     </div>
   );
 };
