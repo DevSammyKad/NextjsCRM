@@ -9,7 +9,7 @@ import {
 import axios from 'axios';
 
 const GradeSelect = React.memo(({ selectedGrade }) => {
-  const [grades, setGrades] = useState([]);
+  const [grades, setGrades] = useState([1]);
 
   const getGradesList = useCallback(async () => {
     try {

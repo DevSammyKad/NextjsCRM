@@ -1,5 +1,14 @@
-import prisma from '@/lib/db';
+import { prisma, setCurrentOrganization } from '@/lib/db';
 import { NextResponse } from 'next/server';
+
+async function getOrganizationIdFromRequest(req) {
+  return '631f1013-e762-4ff5-82d7-1ad58cc8da6d';
+}
+
+async function getUserRole(req) {
+  // Replace with your logic to get the user role from the session or JWT
+  return 'ADMIN'; // For demonstration purposes, we're using a hardcoded role
+}
 
 export async function POST(req) {
   try {
@@ -10,14 +19,18 @@ export async function POST(req) {
       return new NextResponse('Missing required fields', { status: 400 });
     }
 
+    const organizationId = await getOrganizationIdFromRequest(req);
+    await setCurrentOrganization(organizationId);
+
     const student = await prisma.student.create({
       data: {
         firstName,
         lastName,
         age: parseInt(age),
-        grade,
         address,
         phoneNumber,
+        gradeId: parseInt(grade),
+        organizationId,
       },
     });
 
@@ -30,10 +43,18 @@ export async function POST(req) {
 
 export async function GET(req) {
   try {
-    const cacheStudents = await prisma.student.findMany();
-    return NextResponse.json(cacheStudents, { status: 200 });
+    const organizationId = await getOrganizationIdFromRequest(req);
+    await setCurrentOrganization(organizationId);
+
+    const getALlStudents = await prisma.student.findMany({
+      where: {
+        organizationId,
+      },
+    });
+
+    return new NextResponse(JSON.stringify(getALlStudents), { status: 200 });
   } catch (error) {
-    console.error('Error during Get All Students');
-    return NextResponse('Internal Server error', { status: 500 });
+    console.error('Error during Get All Students:', error);
+    return new NextResponse('Internal Server Error', { status: 500 });
   }
 }

@@ -35,16 +35,7 @@ import {
 } from '@/components/ui/pagination';
 
 const Teachers = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedMember, setSelectedMember] = useState(1);
-
-  const handleOpen = () => {
-    setIsModalOpen(true);
-  };
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-  };
 
   const determineStatus = (checkIn, checkOut) => {
     if (!checkIn || checkIn === '00:00') {
@@ -82,18 +73,26 @@ const Teachers = () => {
       dateJoined: '2022-05-01',
       profileImage: person,
       displayHighlightGridCard: [
-        { icon: <FolderCheck />, highlight: 300, title: 'Total Attendance' },
         {
-          icon: <CircleArrowOutDownLeftIcon />,
+          icon: <FolderCheck size={28} />,
+          highlight: 300,
+          title: 'Total Attendance',
+        },
+        {
+          icon: <CircleArrowOutDownLeftIcon size={28} />,
           highlight: '09.00',
           title: 'Avg Check In ',
         },
         {
-          icon: <CircleArrowOutDownLeftIcon className="rotate-180" />,
+          icon: <CircleArrowOutDownLeftIcon className="rotate-180" size={28} />,
           highlight: '05.00',
           title: 'Avg Check Out',
         },
-        { icon: <FolderCheck />, highlight: 300, title: 'Total Attendance' },
+        {
+          icon: <FolderCheck size={28} />,
+          highlight: 300,
+          title: 'Total Attendance',
+        },
       ],
       attendanceHistory: [
         { date: '2023-05-01', checkIn: '09:30', checkOut: '16:15' },
@@ -115,10 +114,26 @@ const Teachers = () => {
       status: 'active',
       dateJoined: '2023-05-01',
       displayHighlightGridCard: [
-        { highlight: 300, title: 'Total Attendance' },
-        { highlight: '09.00', title: 'Avg Check In ' },
-        { highlight: '05.00', title: 'Avg Check Out' },
-        { highlight: 300, title: 'Total Attendance' },
+        {
+          icon: <FolderCheck size={28} />,
+          highlight: 600,
+          title: 'Total Attendance',
+        },
+        {
+          icon: <CircleArrowOutDownLeftIcon size={28} />,
+          highlight: '09.00',
+          title: 'Avg Check In ',
+        },
+        {
+          icon: <CircleArrowOutDownLeftIcon className="rotate-180" size={28} />,
+          highlight: '05.00',
+          title: 'Avg Check Out',
+        },
+        {
+          icon: <FolderCheck size={28} />,
+          highlight: 300,
+          title: 'Total Attendance',
+        },
       ],
       attendanceHistory: [
         { date: '2023-05-01', checkIn: '13:15', checkOut: '16:00' },
@@ -143,9 +158,7 @@ const Teachers = () => {
 
   return (
     <div className=" dark:bg-transparent">
-      Teachers <button onClick={handleOpen}>open</button>
-      {isModalOpen && <InviteTeamMember onClose={handleCloseModal} />}
-      <Card className="bg-white dark:bg-slate-400/10 rounded-lg  my-5">
+      <Card className="bg-white dark:bg-slate-400/10 rounded-lg  ">
         <div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 items-center py-6 px-8 max-sm:p-4">
             <div className="flex">
@@ -210,9 +223,9 @@ const Teachers = () => {
           {selectedMemberData?.displayHighlightGridCard?.map((item, index) => (
             <Card
               key={index}
-              className="bg-white dark:bg-gray-300/5 p-8 max-sm:p-4 rounded-xl shadow-xl flex justify-center flex-col items-center gap-2 py-3"
+              className="bg-white dark:bg-gray-300/5  max-sm:p-4 rounded-xl flex justify-center flex-col items-center gap-2 py-3"
             >
-              <div className=" flex items-center space-x-4 rounded-md  p-4">
+              <div className=" flex items-center space-x-4 rounded-md p-4 ">
                 {item.icon}
                 <div className="flex-1 space-y-1">
                   <p className="text-lg font-medium leading-none">
@@ -240,7 +253,7 @@ const Teachers = () => {
             >
               This Year <ChevronDown size={18} />
             </Button>
-            <Button variant="outline" size="sm">
+            <Button variant="default" size="sm">
               <Columns3 />
             </Button>
             <Button variant="outline" size="sm">

@@ -28,7 +28,7 @@ export const NavLinks = [
     icon: LeafyGreen,
   },
   {
-    path: '/dashboard/studentsAttendance',
+    path: '/dashboard/students',
     heading: 'Students',
     icon: Users,
   },

@@ -13,6 +13,8 @@ import {
 
 import whatsapp from '../../../../../public/whatsapp.png';
 import facebook from '../../../../../public/facebook.png';
+import googleForms from '../../../../../public/googleForms.png';
+import googleSheets from '../../../../../public/googleSheets.png';
 
 const IntegrationsSection = () => {
   const [generatedAPIKey, setGeneratedAPIKey] = useState(null);
@@ -69,8 +71,8 @@ const IntegrationsSection = () => {
           </CardFooter>
         </Card>
       </div>
-      <div className="gird space-y-5 gap-10">
-        <Card className="">
+      <div className="gird grid-cols-4 space-y-5 gap-10">
+        <Card className="col-span-1">
           <CardHeader>
             <CardTitle className="flex items-center justify-between my-2">
               <div className="flex items-center gap-5">
@@ -98,6 +100,60 @@ const IntegrationsSection = () => {
               <div className="flex items-center gap-5">
                 <Image src={facebook} width={50} height={50} alt="WhatsApp" />
                 <div>FaceBook Lead's</div>
+              </div>
+              <Button variant="outline" type="button">
+                Connect
+              </Button>
+            </CardTitle>
+            <CardDescription>
+              Copy this API_KEY and use in Pabbly Connect
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="flex w-full gap-5"></div>
+          </CardContent>
+          <CardFooter className="border-t px-6 py-4 flex justify-end">
+            <Button>View Integration</Button>
+          </CardFooter>
+        </Card>
+        <Card className="">
+          <CardHeader>
+            <CardTitle className="flex items-center justify-between my-2">
+              <div className="flex items-center gap-5">
+                <Image
+                  src={googleForms}
+                  width={50}
+                  height={50}
+                  alt="WhatsApp"
+                />
+                <div>WhatsApp API</div>
+              </div>
+              <Button variant="outline" type="button">
+                Connect
+              </Button>
+            </CardTitle>
+            <CardDescription>
+              Copy this API_KEY and use in Pabbly Connect
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="flex  gap-5"></div>
+          </CardContent>
+          <CardFooter className="border-t px-6 py-4 flex justify-end">
+            <Button>View Integration</Button>
+          </CardFooter>
+        </Card>
+        <Card className="">
+          <CardHeader>
+            <CardTitle className="flex items-center justify-between my-2">
+              <div className="flex items-center gap-5">
+                <Image
+                  src={googleSheets}
+                  width={50}
+                  height={50}
+                  alt="WhatsApp"
+                />
+                <div>WhatsApp API</div>
               </div>
               <Button variant="outline" type="button">
                 Connect

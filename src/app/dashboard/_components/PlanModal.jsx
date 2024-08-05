@@ -26,7 +26,7 @@ import { Check } from 'lucide-react';
 const PlanModal = ({ isOpen, onClose }) => {
   return (
     <Dialog open={isOpen} onOpenChange={onClose} className="max-w-[300px]">
-      <DialogContent lassName="max-w-[300px]">
+      <DialogContent>
         <DialogHeader>
           <DialogTitle align="center">
             You're currently on a Free plan

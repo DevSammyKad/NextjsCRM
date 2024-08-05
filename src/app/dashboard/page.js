@@ -47,6 +47,7 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import Link from 'next/link';
+import Avvvatars from 'avvvatars-react';
 // import DateRangePicker from '@/components/DateRangePicker';
 
 const Dashboard = () => {
@@ -266,10 +267,7 @@ const Dashboard = () => {
             </CardHeader>
             <CardContent className="grid gap-8">
               <div className="flex items-center gap-4">
-                <Avatar className="hidden h-9 w-9 sm:flex">
-                  <AvatarImage src="/avatars/01.png" alt="Avatar" />
-                  <AvatarFallback>OM</AvatarFallback>
-                </Avatar>
+                <Avvvatars value="JL" displayValue="G" size={36} />
                 <div className="grid gap-1">
                   <p className="text-sm font-medium leading-none">
                     Olivia Martin
@@ -281,10 +279,8 @@ const Dashboard = () => {
                 <div className="ml-auto font-medium">+₹1,999.00</div>
               </div>
               <div className="flex items-center gap-4">
-                <Avatar className="hidden h-9 w-9 sm:flex">
-                  <AvatarImage src="/avatars/02.png" alt="Avatar" />
-                  <AvatarFallback>JL</AvatarFallback>
-                </Avatar>
+                <Avvvatars value="JL" displayValue="v" size={36} />
+
                 <div className="grid gap-1">
                   <p className="text-sm font-medium leading-none">
                     Jackson Lee
@@ -296,10 +292,7 @@ const Dashboard = () => {
                 <div className="ml-auto font-medium">+₹39.00</div>
               </div>
               <div className="flex items-center gap-4">
-                <Avatar className="hidden h-9 w-9 sm:flex">
-                  <AvatarImage src="/avatars/03.png" alt="Avatar" />
-                  <AvatarFallback>IN</AvatarFallback>
-                </Avatar>
+                <Avvvatars value="s" size={36} />
                 <div className="grid gap-1">
                   <p className="text-sm font-medium leading-none">
                     Isabella Nguyen
@@ -311,10 +304,7 @@ const Dashboard = () => {
                 <div className="ml-auto font-medium">+₹299.00</div>
               </div>
               <div className="flex items-center gap-4">
-                <Avatar className="hidden h-9 w-9 sm:flex">
-                  <AvatarImage src="/avatars/04.png" alt="Avatar" />
-                  <AvatarFallback>WK</AvatarFallback>
-                </Avatar>
+                <Avvvatars value="J" size={36} />
                 <div className="grid gap-1">
                   <p className="text-sm font-medium leading-none">
                     William Kim
@@ -326,10 +316,7 @@ const Dashboard = () => {
                 <div className="ml-auto font-medium">+₹99.00</div>
               </div>
               <div className="flex items-center gap-4">
-                <Avatar className="hidden h-9 w-9 sm:flex">
-                  <AvatarImage src="/avatars/05.png" alt="Avatar" />
-                  <AvatarFallback>SD</AvatarFallback>
-                </Avatar>
+                <Avvvatars value="JL" displayValue="G" size={36} />
                 <div className="grid gap-1">
                   <p className="text-sm font-medium leading-none">
                     Sofia Davis

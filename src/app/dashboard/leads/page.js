@@ -1,12 +1,7 @@
-import Team from '@/components/Team';
 import React from 'react';
 
 const Leads = () => {
-  return (
-    <div className="flex justify-center ">
-      <Team />
-    </div>
-  );
+  return <div className="flex justify-center "></div>;
 };
 
 export default Leads;

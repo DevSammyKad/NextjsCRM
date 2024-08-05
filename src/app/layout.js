@@ -2,7 +2,7 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import { ThemeProvider } from './ThemeProvider';
 import { Toaster } from 'sonner';
-
+import WebVitals from '../app/dashboard/_components/web-vitals';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {
@@ -20,6 +20,7 @@ export default function RootLayout({ children }) {
           enableSystem
           disableTransitionOnChange
         >
+          <WebVitals />
           {children}
           <Toaster richColors />
         </ThemeProvider>

@@ -9,28 +9,60 @@ datasource db {
 }
 
 model User {
-  id           String @id @unique
-  email        String
-  firstName    String
-  lastName     String
-  profileImage String
-  role         Role   @default(STUDENT)
+  id             String       @id @unique @default(uuid())
+  email          String       @unique
+  firstName      String
+  lastName       String
+  profileImage   String
+  role           Role         @default(STUDENT)
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id])
+}
+model Organization {
+  id                  String    @id @default(uuid())
+  organizationName    String
+  organizationPanCard String    @unique
+  organizationMail    String    @unique
+  organizationType    String
+  organizationWebsite String
+  createdAt           DateTime  @default(now())
+  updatedAt           DateTime  @updatedAt
+  district            String    @default("")
+  state               String    @default("")
+  students            Student[]
+  teams               Team[]
+  users               User[]
+  grades              Grade[]
 }
 
-model student {
-  id                 String               @id @default(uuid())
+
+model Student {
+  id                 String              @id @default(uuid())
   firstName          String
   lastName           String
   age                Int
-  grade              String
   address            String
   phoneNumber        String
-  createdAt          DateTime             @default(now())
-  updatedAt          DateTime             @updatedAt
-  student_attendance student_attendance[]
+  createdAt          DateTime            @default(now())
+  updatedAt          DateTime            @updatedAt
+  organizationId     String
+  gradeId            Int
+  grade              Grade               @relation(fields: [gradeId], references: [id])
+  organization       Organization        @relation(fields: [organizationId], references: [id])
+  student_attendance StudentAttendance[]
+  
+   @@unique([id, organizationId])
 }
 
-model student_attendance {
+model Grade {
+  id             Int       @id @default(autoincrement())
+  grade          String
+  organizationId String    
+  organization   Organization        @relation(fields: [organizationId], references: [id])
+  students       Student[]
+}
+
+model StudentAttendance {
   id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   studentId String
   present   Boolean  @default(false)
@@ -39,51 +71,37 @@ model student_attendance {
   year      Int
   createdAt DateTime @default(now())
   updatedAt DateTime
-  student   student  @relation(fields: [studentId], references: [id])
+  student   Student  @relation(fields: [studentId], references: [id])
 
-  @@unique([studentId, day, month, year]) // Ensure unique attendance per day
+  @@unique([studentId, day, month, year])
+}
+model Team {
+  id             String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  createdAt      DateTime     @default(now())
+  name           String?
+  ownerId        String?      @db.Uuid
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id])
+  teamMembers    TeamMember[]
+}
+model TeamMember {
+  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name      String?
+  email     String?  @unique
+  role      String?  @default("member")
+  status    String?  @default("active")
+  createdAt DateTime @default(now())
+  teamId    String?  @db.Uuid
+  team      Team?    @relation(fields: [teamId], references: [id])
 }
 
-
-model grade {
-  id    Int    @id @default(autoincrement())
-  grade String
-}
-
-/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
-model team_members {
-  id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+model GoogleForm {
+  id         Int      @id @default(autoincrement()) @db.SmallInt
   created_at DateTime @default(now()) @db.Timestamptz(6)
-  name       String?
-  email      String?  @unique
-  role       String?  @default("member")
-  status     String?  @default("active")
-  team_id    String?  @db.Uuid
-  teams      teams?   @relation(fields: [team_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  data       String
+  email      String?
+  age        Int
 }
-
-/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
-model teams {
-  id           String         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  created_at   DateTime       @default(now()) @db.Timestamptz(6)
-  name         String?
-  owner_id     String?        @db.Uuid
-  team_members team_members[]
-}
-
-model organization {
-  id                  String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  organizationName    String
-  organizationPanCard String   @unique
-  organizationMail    String   @unique
-  organizationType    String
-  organizationWebsite String
-  created_at          DateTime @default(now()) @db.Timestamptz(6)
-  updatedAt           DateTime @updatedAt
-  district            String   @default("")
-  state               String   @default("")
-}
-
 
 enum Role {
   STUDENT

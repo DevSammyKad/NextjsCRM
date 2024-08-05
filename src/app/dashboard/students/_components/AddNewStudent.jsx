@@ -23,24 +23,20 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { toast } from 'sonner';
-
-// import PhoneInput from '../../../../components/phoneInput/index';
 import { PhoneInput } from '@/components/ui/phone-input';
 import axios from 'axios';
 
 const AddNewStudent = () => {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [open, setOpen] = useState(false);
-  const [grade, setGrade] = useState([]);
-
-  console.log(grade);
+  const [grades, setGrades] = useState([]);
 
   const getGradesList = async () => {
     try {
-      const grade = await axios.get('/api/grade');
-      setGrade(grade.data);
+      const response = await axios.get('/api/grade');
+      setGrades(response.data);
     } catch (error) {
-      console.log(error);
+      console.error('Error fetching grades:', error);
     }
   };
 
@@ -52,6 +48,7 @@ const AddNewStudent = () => {
     setPhoneNumber(newPhoneNumber);
     setValue('phoneNumber', newPhoneNumber); // Register phone number with react-hook-form
   };
+
   const {
     register,
     handleSubmit,
@@ -78,7 +75,7 @@ const AddNewStudent = () => {
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
           <Button size="sm" className="flex gap-1 items-center">
-            <Plus /> Add New Student
+            <Plus /> <h1 className="text-xs sm:text-sm">Add New Student</h1>
           </Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">
@@ -155,13 +152,12 @@ const AddNewStudent = () => {
                 <div className="grid gap-2">
                   <Label htmlFor="grade">Grade</Label>
                   <Select onValueChange={(value) => setValue('grade', value)}>
-                    {/* {...register('grade', { required: 'Grade is required' })} */}
                     <SelectTrigger className="w-[180px]">
                       <SelectValue placeholder="Select Grade" />
                     </SelectTrigger>
                     <SelectContent>
-                      {grade.map((item, index) => (
-                        <SelectItem key={index} value={item.grade}>
+                      {grades.map((item, index) => (
+                        <SelectItem key={index} value={item.id}>
                           {item.grade}
                         </SelectItem>
                       ))}
@@ -178,16 +174,17 @@ const AddNewStudent = () => {
                 <Label htmlFor="phoneNumber">Phone</Label>
                 <PhoneInput
                   id="phoneNumber"
-                  className=" flex gap-2 border-0 focus:outline-none focus:border-none"
+                  className="flex gap-2 border-0 focus:outline-none focus:border-none"
                   value={phoneNumber}
                   defaultCountry="IN"
                   onChange={handlePhoneChange}
                 />
-                {errors.phone && (
-                  <p style={{ color: 'red' }}>{errors.phone.message}</p>
+                {errors.phoneNumber && (
+                  <span className="text-red-500 text-xs">
+                    {errors.phoneNumber.message}
+                  </span>
                 )}
               </div>
-
               <div className="grid gap-2">
                 <Label htmlFor="address">Address</Label>
                 <Input
@@ -202,21 +199,6 @@ const AddNewStudent = () => {
                   </span>
                 )}
               </div>
-              {/* <div className="grid gap-2">
-                <Label htmlFor="password">Password</Label>
-                <Input
-                  id="password"
-                  type="password"
-                  {...register('password', {
-                    required: 'Password is required',
-                  })}
-                />
-                {errors.password && (
-                  <span className="text-red-500 text-xs">
-                    {errors.password.message}
-                  </span>
-                )}
-              </div> */}
             </div>
             <DialogFooter className="mt-10">
               <DialogClose asChild>

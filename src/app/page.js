@@ -1,3 +1,4 @@
+import BentoGrid from '@/components/bentoGrid/BentoGrid';
 import { Button } from '@/components/ui/button';
 import {
   RegisterLink,
@@ -9,9 +10,9 @@ import { redirect } from 'next/navigation';
 export default async function Home() {
   const { isAuthenticated } = getKindeServerSession();
 
-  if (!(await isAuthenticated())) {
-    redirect('/api/auth/login');
-  }
+  // if (!(await isAuthenticated())) {
+  //   redirect('/api/auth/login');
+  // }
   return (
     <main className="p-5">
       <header className="flex justify-between items-center">
@@ -29,6 +30,10 @@ export default async function Home() {
       </header>
       {/* <LoginLink postLoginRedirectURL="/dashboard">Sign in</LoginLink> */}
       {/* <RegisterLink postLoginRedirectURL="/welcome">Sign up</RegisterLink> */}
+
+      <div className="my-5 ">
+        <BentoGrid />
+      </div>
     </main>
   );
 }

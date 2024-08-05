@@ -7,11 +7,12 @@ import React, { useEffect, useState } from 'react';
 import moment from 'moment';
 import axios from 'axios';
 import { toast } from 'sonner';
+import StudentDetailsDrawer from './StudentDetailsDrawer';
 
-const AttendanceGrid = ({ attendanceList, selectedMonth }) => {
+const AttendanceGrid = ({ attendanceList, selectedMonth, overRideLock }) => {
   const [rowData, setRowData] = useState([]);
   const [colDefs, setColDefs] = useState([
-    { field: 'id', headerName: 'ID', pinned: 'left' },
+    // { field: 'id', headerName: 'ID', pinned: 'left' },
     {
       field: 'firstName',
       filter: true,
@@ -26,6 +27,9 @@ const AttendanceGrid = ({ attendanceList, selectedMonth }) => {
     },
   ]);
 
+  const [selectedStudent, setSelectedStudent] = useState(null);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
   useEffect(() => {
     const daysInMonth = (year, month) => new Date(year, month, 0).getDate();
     const numberOfDays = daysInMonth(
@@ -38,19 +42,20 @@ const AttendanceGrid = ({ attendanceList, selectedMonth }) => {
 
     const daysArray = Array.from({ length: numberOfDays }, (_, i) => i + 1);
     const newColDefs = [
-      { field: 'id', headerName: 'ID' },
+      // { field: 'id', headerName: 'ID' },
       { field: 'firstName', headerName: 'First Name' },
       { field: 'lastName', headerName: 'Last Name' },
       ...daysArray.map((day) => {
         const date = selectedDate.clone().date(day);
         const isPast = date.isBefore(moment(), 'day');
         const isToday = date.isSame(moment(), 'day');
-
+        const isFuture = date.isAfter(moment(), 'day');
         return {
           field: `day${day}`,
           headerName: `${day}`,
           width: 50,
-          editable: !isPast,
+          editable: overRideLock || (!isPast && !isFuture),
+
           cellStyle: () => {
             if (isToday) {
               return { backgroundColor: '#e6f7ff' };
@@ -65,7 +70,7 @@ const AttendanceGrid = ({ attendanceList, selectedMonth }) => {
               type="checkbox"
               checked={params.value}
               onChange={(e) => params.setValue(e.target.checked)}
-              disabled={isPast}
+              disabled={!overRideLock && (isPast || isFuture)}
             />
           ),
         };
@@ -96,7 +101,7 @@ const AttendanceGrid = ({ attendanceList, selectedMonth }) => {
 
       return uniqueRecord;
     }
-  }, [attendanceList, selectedMonth]);
+  }, [attendanceList, selectedMonth, overRideLock]);
 
   const onMarkAttendance = async (dayField, studentId, presentStatus) => {
     const day = parseInt(dayField.replace('day', ''), 10);
@@ -135,6 +140,12 @@ const AttendanceGrid = ({ attendanceList, selectedMonth }) => {
     onMarkAttendance(dayField, studentId, presentStatus);
   };
 
+  const onRowClicked = (event) => {
+    setSelectedStudent(event.data);
+    setIsDrawerOpen(true);
+    console.log('click Callded', event.data);
+  };
+
   return (
     <div>
       <div className="ag-theme-quartz" style={{ height: 500 }}>
@@ -143,6 +154,14 @@ const AttendanceGrid = ({ attendanceList, selectedMonth }) => {
           columnDefs={colDefs}
           suppressHorizontalScroll={true}
           onCellValueChanged={handleCellValueChanged}
+          onRowClicked={onRowClicked}
+        />
+      </div>
+      <div>
+        <StudentDetailsDrawer
+          student={selectedStudent}
+          isOpen={isDrawerOpen}
+          onClose={() => setIsDrawerOpen(false)}
         />
       </div>
     </div>

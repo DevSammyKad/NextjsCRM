@@ -2,6 +2,7 @@
 
 import { useKindeBrowserClient } from '@kinde-oss/kinde-auth-nextjs';
 import { LogoutLink } from '@kinde-oss/kinde-auth-nextjs/components';
+import Avvvatars from 'avvvatars-react';
 import man from '../../../../public/man.png';
 
 import {
@@ -76,28 +77,29 @@ const Header = React.memo(() => {
             <DropdownMenuTrigger asChild>
               <div className="flex items-center gap-2 ml-2 relative cursor-pointer">
                 <div className="relative cursor-pointer w-12 h-12  rounded-full">
-                  <Image
-                    src={user?.picture || man}
-                    alt="Profile Picture"
-                    width={48}
-                    height={48}
-                    priority={!!user?.picture}
-                    className="rounded-full object-cover"
-                  />
+                  {user?.picture ? (
+                    <Image
+                      src={user?.picture}
+                      alt="Profile Picture"
+                      width={46}
+                      height={46}
+                      className="rounded-full object-cover"
+                    />
+                  ) : (
+                    <Avvvatars
+                      value={user?.given_name?.[0]}
+                      displayValue="G"
+                      size={46}
+                    />
+                  )}
 
-                  {/* {user && !user.picture && (
-                    <div className="h-7 w-7 rounded-full mx-auto bg-zinc-900 text-xs flex justify-center items-center">
-                      {' '}
-                      {user?.given_name?.[0]}
-                    </div>
-                  )} */}
                   <div className="bg-white w-4 h-4 absolute rounded-full flex justify-center items-center bottom-0 right-1">
                     <div className="bg-green-500 z-10  w-2 h-2 rounded-full"></div>
                   </div>
                 </div>
 
                 <div className="max-sm:hidden text-left">
-                  <h4 className="font-medium text-base">
+                  <h4 className="font-medium text-sm">
                     {user?.given_name || 'User Name'}
                   </h4>
                   <p className="text-sm">

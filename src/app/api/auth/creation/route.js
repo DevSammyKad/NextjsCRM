@@ -1,13 +1,15 @@
-import prisma from '@/lib/db';
+// src/app/api/auth/creation/route.js
+
+import { prisma } from '@/lib/db';
 import { getKindeServerSession } from '@kinde-oss/kinde-auth-nextjs/server';
 import { NextResponse } from 'next/server';
 
-export async function GET(req, res) {
+export async function GET(req) {
   try {
     const { getUser } = getKindeServerSession();
     const user = await getUser();
 
-    if (!user || user === null || !user.id) {
+    if (!user || !user.id) {
       console.error('User not found or missing ID');
       return new NextResponse('User not found', { status: 404 });
     }
@@ -15,9 +17,7 @@ export async function GET(req, res) {
     console.log('Retrieved user:', user);
 
     let dbUser = await prisma.user.findUnique({
-      where: {
-        id: user.id,
-      },
+      where: { id: user.id },
     });
 
     console.log('Database user:', dbUser);
@@ -29,15 +29,14 @@ export async function GET(req, res) {
           firstName: user.given_name ?? '',
           lastName: user.family_name ?? '',
           email: user.email ?? '',
-          profileImage:
-            user.picture ?? `https://avatar.vercel.sh/${user.given_name}`,
+          profileImage: user.picture ?? ``,
+          organizationId: organizationId, // Use the organizationId obtained from middleware
         },
       });
 
       console.log('Created new user:', dbUser);
     }
 
-    // return new NextResponse(JSON.stringify(dbUser), { status: 200 });
     return NextResponse.redirect('http://localhost:3000/dashboard');
   } catch (error) {
     console.error('Error during GET:', error);
