@@ -56,8 +56,7 @@ const SideNav = ({ closeSidebar }) => {
         </button>
         <div className="flex justify-between items-center lg:my-5 px-4">
           <div>
-            {/* <Image src={next} width={130} height={120} alt="Logo" /> */}
-            <Image src={dark_next} width={130} height={120} alt="Logo" />
+            <Image src={next} width={130} height={120} alt="Logo" />
           </div>
         </div>
         <div className="flex flex-col justify-between h-full mt-3">

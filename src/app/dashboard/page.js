@@ -261,12 +261,12 @@ const Dashboard = () => {
               </Table>
             </CardContent>
           </Card>
-          <Card x-chunk="dashboard-01-chunk-5">
+          <Card x-chunk="dashboard-01-chunk-5" className="max-sm:hidden ">
             <CardHeader>
               <CardTitle>Recent Sales</CardTitle>
             </CardHeader>
             <CardContent className="grid gap-8">
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-x-4">
                 <Avvvatars value="JL" displayValue="G" size={36} />
                 <div className="grid gap-1">
                   <p className="text-sm font-medium leading-none">
@@ -278,7 +278,7 @@ const Dashboard = () => {
                 </div>
                 <div className="ml-auto font-medium">+₹1,999.00</div>
               </div>
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-x-4">
                 <Avvvatars value="JL" displayValue="v" size={36} />
 
                 <div className="grid gap-1">
@@ -291,7 +291,7 @@ const Dashboard = () => {
                 </div>
                 <div className="ml-auto font-medium">+₹39.00</div>
               </div>
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-x-4">
                 <Avvvatars value="s" size={36} />
                 <div className="grid gap-1">
                   <p className="text-sm font-medium leading-none">
@@ -303,7 +303,7 @@ const Dashboard = () => {
                 </div>
                 <div className="ml-auto font-medium">+₹299.00</div>
               </div>
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-x-4">
                 <Avvvatars value="J" size={36} />
                 <div className="grid gap-1">
                   <p className="text-sm font-medium leading-none">
@@ -315,7 +315,7 @@ const Dashboard = () => {
                 </div>
                 <div className="ml-auto font-medium">+₹99.00</div>
               </div>
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-x-4">
                 <Avvvatars value="JL" displayValue="G" size={36} />
                 <div className="grid gap-1">
                   <p className="text-sm font-medium leading-none">

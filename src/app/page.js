@@ -1,5 +1,7 @@
 import BentoGrid from '@/components/bentoGrid/BentoGrid';
+import DotPattern from '@/components/magicui/dot-pattern';
 import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 import {
   RegisterLink,
   LoginLink,
@@ -28,9 +30,22 @@ export default async function Home() {
           </RegisterLink>
         </div>
       </header>
-      {/* <LoginLink postLoginRedirectURL="/dashboard">Sign in</LoginLink> */}
-      {/* <RegisterLink postLoginRedirectURL="/welcome">Sign up</RegisterLink> */}
-
+      <div className="relative flex h-[500px] w-full flex-col items-center justify-center overflow-hidden rounded-lg bg-background ">
+        <p className="z-10 whitespace-pre-wrap text-center text-5xl font-medium tracking-tighter text-black dark:text-white">
+          School CRM All in One Place
+        </p>
+        <div className="flex justify-between items-center gap-3 my-4">
+          <Button>Get Early Access</Button>
+          <Button variant="outline" className="z-10">
+            Download PDF
+          </Button>
+        </div>
+        <DotPattern
+          className={cn(
+            '[mask-image:radial-gradient(300px_circle_at_center,white,transparent)]'
+          )}
+        />
+      </div>
       <div className="my-5 ">
         <BentoGrid />
       </div>

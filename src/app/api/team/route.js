@@ -1,6 +1,11 @@
-import prisma from '@/lib/db';
+import { prisma } from '@/lib/db';
 import { NextResponse } from 'next/server';
 import { getKindeServerSession } from '@kinde-oss/kinde-auth-nextjs/server';
+
+async function getOrganizationIdFromRequest(req) {
+  // This should contain the logic to extract the organization ID from the request.
+  return '631f1013-e762-4ff5-82d7-1ad58cc8da6d';
+}
 
 export async function GET(request) {
   const { searchParams } = new URL(request.url);
@@ -11,8 +16,11 @@ export async function GET(request) {
   }
 
   try {
+    const organizationId = await getOrganizationIdFromRequest(req);
+    await setCurrentOrganization(organizationId);
+
     const team = await prisma.teams.findUnique({
-      where: { id: teamId },
+      where: { organizationId, id: teamId },
       include: {
         team_members: true, // Include the team members
       },
@@ -34,9 +42,9 @@ export async function GET(request) {
 
 export async function POST(request) {
   const body = await request.json();
-  const { name, email, role, team_id } = body;
+  const { name, email, role, teamId } = body;
 
-  if (!name || !email || !team_id) {
+  if (!name || !email || !teamId) {
     return NextResponse.json(
       { error: 'Name, email, and team ID are required' },
       { status: 400 }
@@ -44,12 +52,27 @@ export async function POST(request) {
   }
 
   try {
-    const newMember = await prisma.team_members.create({
+    const organizationId = await getOrganizationIdFromRequest(request);
+
+    // Ensure the team belongs to the organization
+    const team = await prisma.team.findUnique({
+      where: { id: teamId, organizationId },
+    });
+
+    if (!team) {
+      return NextResponse.json(
+        { error: 'Team not found in the specified organization' },
+        { status: 404 }
+      );
+    }
+
+    const newMember = await prisma.team_member.create({
       data: {
         name,
         email,
         role,
-        team_id,
+        teamId,
+        organizationId,
       },
     });
 

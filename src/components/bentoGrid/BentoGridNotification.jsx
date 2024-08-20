@@ -5,10 +5,9 @@ import { AnimatedList } from '@/components/magicui/animated-list';
 
 let notifications = [
   {
-    name: 'Payment received',
+    name: 'Admission approved',
     description: 'Magic UI',
     time: '15m ago',
-
     icon: '💸',
     color: '#00C9A7',
   },
@@ -87,7 +86,7 @@ export function BentoGridNotification() {
       <p className="leading-7 [&:not(:first-child)]:mt-3">
         Get Instant Update{' '}
       </p>
-      <AnimatedList className="mt-2">
+      <AnimatedList className="mt-2 max-sm:h-72">
         {notifications.map((item, idx) => (
           <Notification {...item} key={idx} />
         ))}

@@ -14,6 +14,7 @@ import AnimatedShinyText from '@/components/magicui/animated-shiny-text';
 import { BentoGridNotification } from './BentoGridNotification';
 import BentoGridAnimatedBeam from './BentoGridAnimatedBeam';
 import Globe from '@/components/magicui/globe';
+import { SpinningTech } from './SpinningTech';
 
 const BentoGrid = () => {
   return (
@@ -32,13 +33,13 @@ const BentoGrid = () => {
       </div>
       <div
         className="flex flex-col md:grid md: grid-cols-3 p-2  gap-10 mx-5 "
-        style={{ gridAutoRows: '136px' }}
+        style={{ gridAutoRows: '142px' }}
       >
-        <div className=" row-start-1 row-end-4 bg-slate-100 rounded-lg  text-black border-gray-100 border">
+        <div className=" row-start-1 row-end-4 bg-slate-100 dark:bg-gray-300/5 rounded-lg  text-black border-gray-100 border">
           <BentoGridNotification />
         </div>
-        <div className="row-start-1 row-end-4 bg-zinc-200/40 animate-pulse bg-gradient-to-tb from-gray-50 via-gray-300 to-red-200  rounded-lg  border-zinc-200 border ">
-          <div className="relative flex h-full w-full max-w-[32rem] items-center justify-center  rounded-lg border bg-background px-40 pb-40 pt-8 md:pb-60 md:shadow-xl">
+        <div className="row-start-1 row-end-4 bg-zinc-200/40  dark:bg-gray-300/5 animate-pulse bg-gradient-to-tb from-gray-50 via-gray-300 to-red-200  rounded-lg  border-zinc-200 border ">
+          <div className="relative flex h-full w-full items-center justify-center  rounded-lg border bg-background px-40 pb-40 pt-8 md:pb-60 md:shadow-xl">
             <Globe className="-top-36" />
 
             <div className="pointer-events-none absolute inset-0 h-full bg-[radial-gradient(circle_at_50%_200%,rgba(0,0,0,0.2),rgba(255,255,255,0))]" />
@@ -47,12 +48,13 @@ const BentoGrid = () => {
             </span>
           </div>
         </div>
-        <div className="row-start-1 row-end-3 flex items-center justify-between bg-zinc-200/40 rounded-lg text-black  border-zinc-200 border ">
+        <div className="row-start-1 row-end-3 flex items-center justify-between bg-zinc-200/40  dark:bg-gray-300/5/20 rounded-lg text-black  border-zinc-200 border ">
           <BentoGridAnimatedBeam />
         </div>
-        <div className="row-start-4 row-end-6 bg-zinc-200/40 rounded-lg text-black  border-zinc-200 border "></div>
+        <div className="row-start-4 row-end-6 bg-zinc-200/40 rounded-lg text-black  border-zinc-200 border">
+          <SpinningTech />
+        </div>
         <div className="row-start-4 row-end-6 col-span-2 bg-zinc-200/40 rounded-lg text-black  border-zinc-200 border ">
-          {/* <BentoGridAnimatedBeam /> */}
           <div className="p-7">
             <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0">
               Real-time Update, What happen in your Organization .

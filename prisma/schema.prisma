@@ -35,6 +35,39 @@ model Organization {
   grades              Grade[]
 }
 
+model Lead {
+  id              Int      @id @default(autoincrement())
+  name            String
+  age             Int   
+  email           String
+  phone           String
+  source          LeadSource @default(FACEBOOK)
+  note            String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  status          LeadStatus @default(NEW)
+}
+
+enum LeadStatus {
+  NEW
+  CONVERTED
+  CONTACTED
+  FOLLOW_UP
+  MISSED
+  CLOSED
+}
+enum LeadSource  {
+  FACEBOOK
+  GOOGLE_ADS
+  LINKEDIN
+  TWITTER
+  INSTAGRAM
+  REFERRAL
+  WEBSITE
+  EMAIL_CAMPAIGN
+  EVENTS
+  COLD_CALL
+}
 
 model Student {
   id                 String              @id @default(uuid())

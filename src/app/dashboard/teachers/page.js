@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import person from '../../../../public/person.jpg';
 import man from '../../../../public/man.png';
 import {
+  ArrowUpDown,
   ChevronDown,
   CircleArrowOutDownLeftIcon,
   Columns3,
@@ -223,7 +224,7 @@ const Teachers = () => {
           {selectedMemberData?.displayHighlightGridCard?.map((item, index) => (
             <Card
               key={index}
-              className="bg-white dark:bg-gray-300/5  max-sm:p-4 rounded-xl flex justify-center flex-col items-center gap-2 py-3"
+              className="bg-gray-50 dark:bg-gray-300/5  max-sm:p-4 rounded-xl flex justify-center flex-col items-center gap-2 py-3"
             >
               <div className=" flex items-center space-x-4 rounded-md p-4 ">
                 {item.icon}
@@ -240,28 +241,33 @@ const Teachers = () => {
       </Card>
       {/* Attendance History */}
       <Card className="bg-white dark:bg-gray-300/5 p-8 max-sm:p-4 rounded-xl shadow-lg my-5">
-        <div className="flex justify-between items-center">
-          <div>
+        <div className="flex justify-between items-center max-sm:flex-col max-sm:justify-start max-sm:items-start max-sm:gap-5">
+          <div className="">
             <h1 className="max-sm:text-base text-xl border-[#4EFFCA] border-l-8 rounded">
               Attendance History
             </h1>
           </div>
-          <div className="flex items-center gap-2">
-            <Button
-              variant="outline"
-              className="bg-transparent border flex items-center gap-2 max-sm:text-xs"
-            >
-              This Year <ChevronDown size={18} />
-            </Button>
-            <Button variant="default" size="sm">
-              <Columns3 />
-            </Button>
-            <Button variant="outline" size="sm">
-              <List />
-            </Button>
-            <Button variant="outline" size="sm">
-              <FilterIcon />
-            </Button>
+          <div className="flex items-center gap-2 max-sm:justify-between max-sm:w-full">
+            <div>
+              <Button
+                variant="outline"
+                className="bg-transparent border flex items-center gap-2 max-sm:text-xs"
+              >
+                This Year <ChevronDown size={18} />
+              </Button>
+            </div>
+            <div className="flex items-center gap-3">
+              <Button variant="default" size="sm">
+                <Columns3 />
+                {/* <List /> */}
+              </Button>
+              <Button variant="outline" size="sm">
+                <ArrowUpDown />
+              </Button>
+              <Button variant="outline" size="sm">
+                <FilterIcon />
+              </Button>
+            </div>
           </div>
         </div>
         <div className="mt-10">

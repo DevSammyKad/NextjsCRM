@@ -6,6 +6,7 @@ import {
   OutdentIcon,
   Settings,
   Settings2,
+  TicketCheck,
   User,
   Users,
   Users2,
@@ -32,15 +33,15 @@ export const NavLinks = [
     heading: 'Students',
     icon: Users,
   },
-  // {
-  //   path: '/dashboard/studentsAttendance',
-  //   heading: 'Attendance',
-  //   icon: Users,
-  // },
+  {
+    path: '/dashboard/studentsAttendance',
+    heading: 'Attendance',
+    icon: Users,
+  },
   {
     path: '/dashboard/teachers',
     heading: 'Teachers',
-    icon: Users2,
+    icon: TicketCheck,
   },
   {
     path: '/dashboard/setting',

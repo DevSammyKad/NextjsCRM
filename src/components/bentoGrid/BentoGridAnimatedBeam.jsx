@@ -22,16 +22,25 @@ const BentoGridAnimatedBeam = () => {
   const div4Ref = useRef(null);
   const div5Ref = useRef(null);
   return (
-    <div ref={containerRef} className="relative rounded-lg text-black w-full">
-      <div className="relative flex justify-between items-center  mx-10">
+    <div
+      ref={containerRef}
+      className="relative rounded-lg text-black w-full p-5"
+    >
+      <h2 className="scroll-m-20 border-b pb-2 text-xl font-semibold tracking-tight first:mt-2">
+        Collect All Platform's Data in Place
+      </h2>
+      <p className="leading-7 [&:not(:first-child)]:mt-1 mb-3">
+        10 Supported Apps
+      </p>
+      <div className="relative flex justify-between items-center  mx-10 max-sm:mx-0">
         <div className="flex flex-col justify-center gap-10  ">
-          <Circle ref={div1Ref} className="w-[60px] h-[60px]">
+          <Circle ref={div1Ref} className="w-[50px] h-[50px]">
             <Icons.openai />
           </Circle>
-          <Circle ref={div2Ref} className="w-[60px] h-[60px]">
+          <Circle ref={div2Ref} className="w-[50px] h-[50px]">
             <Icons.googleDocs />
           </Circle>
-          <Circle ref={div3Ref} className="w-[60px] h-[60px]">
+          <Circle ref={div3Ref} className="w-[50px] h-[50px]">
             <Icons.whatsapp />
           </Circle>
         </div>
