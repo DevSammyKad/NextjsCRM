@@ -1,17 +1,17 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from '@/components/ui/popover';
-import { CalendarDays } from 'lucide-react';
-import { Button } from './ui/button';
-import { addMonths } from 'date-fns';
-import moment from 'moment';
-import { Calendar } from '@/components/ui/calendar';
-import { Value } from '@radix-ui/react-select';
+} from "@/components/ui/popover";
+import { CalendarDays } from "lucide-react";
+import { Button } from "./ui/button";
+import { addMonths } from "date-fns";
+import moment from "moment";
+import { Calendar } from "@/components/ui/calendar";
+import { Value } from "@radix-ui/react-select";
 
 const MonthSelection = ({ selectedMonth }) => {
   const today = new Date();
@@ -27,8 +27,8 @@ const MonthSelection = ({ selectedMonth }) => {
     <div>
       <Popover>
         <PopoverTrigger asChild>
-          <Button variant="outline" className="flex gap-2 items-center">
-            <CalendarDays /> {moment(month).format('MMM YYYY')}
+          <Button variant="outline" className="flex items-center gap-2">
+            <CalendarDays /> {moment(month).format("MMM YYYY")}
           </Button>
         </PopoverTrigger>
         <PopoverContent>

@@ -1,4 +1,4 @@
-import { Button } from '@/components/ui/button';
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -7,40 +7,40 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@/components/ui/dialog';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import useHelpers from '@/hooks/useHelpers';
-import { useState } from 'react';
-import { toast } from 'sonner';
-import CustomButton from '../CustomButton';
-import Roles from './Members/Options/Roles';
-import axios from 'axios';
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import useHelpers from "@/hooks/useHelpers";
+import { useState } from "react";
+import { toast } from "sonner";
+import CustomButton from "../CustomButton";
+import Roles from "./Members/Options/Roles";
+import axios from "axios";
 
 export default function NewMember({ team_id }) {
   const { open, setOpen, loading, setLoading } = useHelpers();
   const [member, setMember] = useState({
-    name: '',
-    email: '',
-    role: 'member',
+    name: "",
+    email: "",
+    role: "member",
   });
 
   const saveMember = async () => {
     setLoading(true);
     try {
-      const response = await axios.post('/api/team', {
+      const response = await axios.post("/api/team", {
         ...member,
         team_id,
       });
 
       if (response.status === 201) {
-        toast.success('Team member successfully added.');
+        toast.success("Team member successfully added.");
       } else {
-        toast.error('Failed to add team member.');
+        toast.error("Failed to add team member.");
       }
     } catch (error) {
-      console.error('Error adding team member:', error);
-      toast.error('Failed to add team member.');
+      console.error("Error adding team member:", error);
+      toast.error("Failed to add team member.");
     } finally {
       setOpen(false);
       setLoading(false);
@@ -54,7 +54,7 @@ export default function NewMember({ team_id }) {
           <span>New member</span>
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px] rounded-lg">
+      <DialogContent className="rounded-lg sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle>Add a new member</DialogTitle>
           <DialogDescription>

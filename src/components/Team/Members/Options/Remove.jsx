@@ -1,4 +1,4 @@
-import CustomButton from '@/components/CustomButton';
+import CustomButton from "@/components/CustomButton";
 import {
   AlertDialog,
   AlertDialogCancel,
@@ -7,9 +7,9 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from '@/components/ui/alert-dialog';
-import useHelpers from '@/hooks/useHelpers';
-import toast, { Toaster } from 'react-hot-toast';
+} from "@/components/ui/alert-dialog";
+import useHelpers from "@/hooks/useHelpers";
+import toast, { Toaster } from "react-hot-toast";
 
 export default function Remove({ user, open, onClose }) {
   const { loading, setLoading } = useHelpers();
@@ -18,28 +18,28 @@ export default function Remove({ user, open, onClose }) {
     try {
       setLoading(true);
 
-      const response = await fetch('/api/team', {
-        method: 'PUT',
+      const response = await fetch("/api/team", {
+        method: "PUT",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           id: user.id,
-          type: 'status',
-          value: 'removed',
+          type: "status",
+          value: "removed",
         }),
       });
 
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.error || 'Something went wrong');
+        throw new Error(data.error || "Something went wrong");
       }
 
-      toast.success('User successfully removed from team.');
+      toast.success("User successfully removed from team.");
     } catch (error) {
-      console.error('Error removing user:', error);
-      toast.error('Failed to remove user from team.');
+      console.error("Error removing user:", error);
+      toast.error("Failed to remove user from team.");
     } finally {
       setLoading(false);
       onClose();
@@ -52,7 +52,7 @@ export default function Remove({ user, open, onClose }) {
         <AlertDialogHeader>
           <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
           <AlertDialogDescription>
-            {user.name || 'Member'} will no longer be part of the team and will
+            {user.name || "Member"} will no longer be part of the team and will
             no longer have access to team-related content.
           </AlertDialogDescription>
         </AlertDialogHeader>

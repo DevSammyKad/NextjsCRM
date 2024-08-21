@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   Dialog,
   DialogContent,
@@ -7,20 +7,20 @@ import {
   DialogTitle,
   DialogClose,
   DialogFooter,
-} from '@/components/ui/dialog';
-import { DialogTrigger } from '@radix-ui/react-dialog';
-import { Button } from '@/components/ui/button';
-import { useForm } from 'react-hook-form';
-import { Label } from '@/components/ui/label';
-import { Input } from '@/components/ui/input';
+} from "@/components/ui/dialog";
+import { DialogTrigger } from "@radix-ui/react-dialog";
+import { Button } from "@/components/ui/button";
+import { useForm } from "react-hook-form";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
 import {
   Select,
   SelectContent,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
-import axios from 'axios';
-import { prisma } from '@/lib/db';
+} from "@/components/ui/select";
+import axios from "axios";
+import { prisma } from "@/lib/db";
 
 async function getLeadStatus() {
   const leadStatus = await prisma.LeadStatus();

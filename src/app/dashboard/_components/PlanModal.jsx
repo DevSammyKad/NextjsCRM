@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { Button } from '@/components/ui/button';
-import pointImg from '../../../../public/point.png';
+import React from "react";
+import { Button } from "@/components/ui/button";
+import pointImg from "../../../../public/point.png";
 import {
   Dialog,
   DialogContent,
@@ -11,17 +11,17 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@/components/ui/dialog';
+} from "@/components/ui/dialog";
 
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
-} from '@/components/ui/card';
-import Image from 'next/image';
-import { Check } from 'lucide-react';
+} from "@/components/ui/card";
+import Image from "next/image";
+import { Check } from "lucide-react";
 
 const PlanModal = ({ isOpen, onClose }) => {
   return (
@@ -37,7 +37,7 @@ const PlanModal = ({ isOpen, onClose }) => {
           </DialogDescription>
         </DialogHeader>
         <Tabs defaultValue="free" className="w-[400px]">
-          <TabsList className="grid w-full grid-cols-2 bg-gray-100/5 ">
+          <TabsList className="grid w-full grid-cols-2 bg-gray-100/5">
             <TabsTrigger value="free" className="">
               Free
             </TabsTrigger>
@@ -74,23 +74,23 @@ const PlanModal = ({ isOpen, onClose }) => {
                 <ul className="my-6 ml-6 list-none [&>li]:mt-2">
                   <li className="flex gap-2">
                     <Check color="#4EFFCA" />
-                    Unlimited Leads{' '}
+                    Unlimited Leads{" "}
                   </li>
                   <li className="flex gap-2">
                     <Check color="#4EFFCA" /> General Commercial Terms
                   </li>
                   <li className="flex gap-2">
-                    {' '}
+                    {" "}
                     <Check color="#4EFFCA" />
                     Optional credits purchase
                   </li>
                   <li className="flex gap-2">
-                    {' '}
+                    {" "}
                     <Check color="#4EFFCA" />
                     Vision Generations
                   </li>
                   <li className="flex gap-2">
-                    {' '}
+                    {" "}
                     <Check color="#4EFFCA" />
                     Private Generations
                   </li>

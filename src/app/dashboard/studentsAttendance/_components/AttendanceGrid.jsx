@@ -1,29 +1,29 @@
 // Frontend Component
-import { AgGridReact } from 'ag-grid-react';
-import 'ag-grid-community/styles/ag-grid.css';
-import 'ag-grid-community/styles/ag-theme-quartz.css';
+import { AgGridReact } from "ag-grid-react";
+import "ag-grid-community/styles/ag-grid.css";
+import "ag-grid-community/styles/ag-theme-quartz.css";
 
-import React, { useEffect, useState } from 'react';
-import moment from 'moment';
-import axios from 'axios';
-import { toast } from 'sonner';
-import StudentDetailsDrawer from './StudentDetailsDrawer';
+import React, { useEffect, useState } from "react";
+import moment from "moment";
+import axios from "axios";
+import { toast } from "sonner";
+import StudentDetailsDrawer from "./StudentDetailsDrawer";
 
 const AttendanceGrid = ({ attendanceList, selectedMonth, overRideLock }) => {
   const [rowData, setRowData] = useState([]);
   const [colDefs, setColDefs] = useState([
     // { field: 'id', headerName: 'ID', pinned: 'left' },
     {
-      field: 'firstName',
+      field: "firstName",
       filter: true,
-      headerName: 'First Name',
-      pinned: 'left',
+      headerName: "First Name",
+      pinned: "left",
     },
     {
-      field: 'lastName',
+      field: "lastName",
       filter: true,
-      headerName: 'Last Name',
-      pinned: 'left',
+      headerName: "Last Name",
+      pinned: "left",
     },
   ]);
 
@@ -34,7 +34,7 @@ const AttendanceGrid = ({ attendanceList, selectedMonth, overRideLock }) => {
     const daysInMonth = (year, month) => new Date(year, month, 0).getDate();
     const numberOfDays = daysInMonth(
       moment(selectedMonth).year(),
-      moment(selectedMonth).month() + 1
+      moment(selectedMonth).month() + 1,
     );
 
     const today = moment();
@@ -43,13 +43,13 @@ const AttendanceGrid = ({ attendanceList, selectedMonth, overRideLock }) => {
     const daysArray = Array.from({ length: numberOfDays }, (_, i) => i + 1);
     const newColDefs = [
       // { field: 'id', headerName: 'ID' },
-      { field: 'firstName', headerName: 'First Name' },
-      { field: 'lastName', headerName: 'Last Name' },
+      { field: "firstName", headerName: "First Name" },
+      { field: "lastName", headerName: "Last Name" },
       ...daysArray.map((day) => {
         const date = selectedDate.clone().date(day);
-        const isPast = date.isBefore(moment(), 'day');
-        const isToday = date.isSame(moment(), 'day');
-        const isFuture = date.isAfter(moment(), 'day');
+        const isPast = date.isBefore(moment(), "day");
+        const isToday = date.isSame(moment(), "day");
+        const isFuture = date.isAfter(moment(), "day");
         return {
           field: `day${day}`,
           headerName: `${day}`,
@@ -58,7 +58,7 @@ const AttendanceGrid = ({ attendanceList, selectedMonth, overRideLock }) => {
 
           cellStyle: () => {
             if (isToday) {
-              return { backgroundColor: '#e6f7ff' };
+              return { backgroundColor: "#e6f7ff" };
             }
             // if (isPast) {
             //   return { backgroundColor: '#fdecec' };
@@ -104,7 +104,7 @@ const AttendanceGrid = ({ attendanceList, selectedMonth, overRideLock }) => {
   }, [attendanceList, selectedMonth, overRideLock]);
 
   const onMarkAttendance = async (dayField, studentId, presentStatus) => {
-    const day = parseInt(dayField.replace('day', ''), 10);
+    const day = parseInt(dayField.replace("day", ""), 10);
     const data = {
       studentId,
       day,
@@ -114,20 +114,20 @@ const AttendanceGrid = ({ attendanceList, selectedMonth, overRideLock }) => {
     };
 
     try {
-      const response = await axios.post('/api/student_attendance', data, {
+      const response = await axios.post("/api/student_attendance", data, {
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       });
 
       if (response.status === 200) {
-        console.log('Attendance marked successfully');
-        toast.success('Attendance marked successfully');
+        console.log("Attendance marked successfully");
+        toast.success("Attendance marked successfully");
       } else {
-        console.error('Failed to mark attendance');
+        console.error("Failed to mark attendance");
       }
     } catch (error) {
-      console.error('Error:', error);
+      console.error("Error:", error);
     }
   };
 
@@ -143,7 +143,7 @@ const AttendanceGrid = ({ attendanceList, selectedMonth, overRideLock }) => {
   const onRowClicked = (event) => {
     setSelectedStudent(event.data);
     setIsDrawerOpen(true);
-    console.log('click Callded', event.data);
+    console.log("click Callded", event.data);
   };
 
   return (

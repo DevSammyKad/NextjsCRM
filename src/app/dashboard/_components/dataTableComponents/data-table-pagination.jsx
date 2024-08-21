@@ -1,12 +1,12 @@
-import { Table } from '@tanstack/react-table';
-import { Button } from '@/components/ui/button';
+import { Table } from "@tanstack/react-table";
+import { Button } from "@/components/ui/button";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
+} from "@/components/ui/select";
 import {
   BedDouble,
   ChevronLeft,
@@ -16,14 +16,14 @@ import {
   FastForwardIcon,
   ForwardIcon,
   LucideBedDouble,
-} from 'lucide-react';
+} from "lucide-react";
 
 export function DataTablePagination({ table }) {
   return (
     <div className="flex flex-col items-center justify-between space-y-4 px-2 lg:flex-row lg:space-y-0">
       <div className="flex flex-col items-center space-y-2 sm:flex-row sm:space-x-6 sm:space-y-0">
         <div className="text-sm text-muted-foreground">
-          {table.getFilteredSelectedRowModel().rows.length} of{' '}
+          {table.getFilteredSelectedRowModel().rows.length} of{" "}
           {table.getFilteredRowModel().rows.length} row(s) selected.
         </div>
         <div className="flex items-center space-x-2">
@@ -49,7 +49,7 @@ export function DataTablePagination({ table }) {
       </div>
       <div className="flex items-center space-x-2">
         <div className="flex items-center justify-center text-sm font-medium">
-          Page {table.getState().pagination.pageIndex + 1} of{' '}
+          Page {table.getState().pagination.pageIndex + 1} of{" "}
           {table.getPageCount()}
         </div>
         <div className="flex items-center space-x-2">

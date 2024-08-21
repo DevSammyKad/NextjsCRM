@@ -10,75 +10,75 @@ import {
   User,
   Users,
   Users2,
-} from 'lucide-react';
+} from "lucide-react";
 
 export const NavLinks = [
   {
-    path: '/dashboard',
-    heading: 'DashBoard',
+    path: "/dashboard",
+    heading: "DashBoard",
     icon: LayoutDashboard,
   },
   {
-    path: '/dashboard/leads',
-    heading: 'Leads',
+    path: "/dashboard/leads",
+    heading: "Leads",
     icon: User,
   },
   {
-    path: '/dashboard/courses',
-    heading: 'Courses',
+    path: "/dashboard/courses",
+    heading: "Courses",
     icon: LeafyGreen,
   },
   {
-    path: '/dashboard/students',
-    heading: 'Students',
+    path: "/dashboard/students",
+    heading: "Students",
     icon: Users,
   },
   {
-    path: '/dashboard/studentsAttendance',
-    heading: 'Attendance',
+    path: "/dashboard/studentsAttendance",
+    heading: "Attendance",
     icon: Users,
   },
   {
-    path: '/dashboard/teachers',
-    heading: 'Teachers',
+    path: "/dashboard/teachers",
+    heading: "Teachers",
     icon: TicketCheck,
   },
   {
-    path: '/dashboard/setting',
-    heading: 'Setting',
+    path: "/dashboard/setting",
+    heading: "Setting",
     icon: Settings,
   },
   {
-    path: '/Help-Center',
-    heading: 'Help Center',
+    path: "/Help-Center",
+    heading: "Help Center",
     icon: HelpCircle,
   },
 ];
 
 export const NavDropDownData = [
   {
-    path: '/setting',
-    heading: 'My Profile',
+    path: "/setting",
+    heading: "My Profile",
     icon: Settings2,
   },
   {
-    path: '/setting/Notification',
-    heading: 'Mute Notification',
+    path: "/setting/Notification",
+    heading: "Mute Notification",
     icon: BellDot,
   },
   {
-    path: '/setting',
-    heading: 'Setting',
+    path: "/setting",
+    heading: "Setting",
     icon: Settings,
   },
   {
-    path: '/Help-Center',
-    heading: 'Help Center',
+    path: "/Help-Center",
+    heading: "Help Center",
     icon: HelpCircle,
   },
   {
-    path: '/Sign Out',
-    heading: 'Sign Out',
+    path: "/Sign Out",
+    heading: "Sign Out",
     icon: OutdentIcon,
   },
 ];

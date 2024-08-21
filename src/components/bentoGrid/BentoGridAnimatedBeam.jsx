@@ -1,14 +1,14 @@
-import React, { forwardRef, useRef } from 'react'; // Ensure useRef is imported
-import { cn } from '@/lib/utils';
-import { AnimatedBeam } from '@/components/magicui/animated-beam';
-import { ArrowRightIcon, Dock } from 'lucide-react';
+import React, { forwardRef, useRef } from "react"; // Ensure useRef is imported
+import { cn } from "@/lib/utils";
+import { AnimatedBeam } from "@/components/magicui/animated-beam";
+import { ArrowRightIcon, Dock } from "lucide-react";
 
 const Circle = forwardRef(({ className, children }, ref) => (
   <div
     ref={ref}
     className={cn(
-      'z-10 flex h-12 w-12 items-center justify-center rounded-full border-2 bg-white p-3 shadow-[0_0_20px_-12px_rgba(0,0,0,0.8)]',
-      className
+      "z-10 flex h-12 w-12 items-center justify-center rounded-full border-2 bg-white p-3 shadow-[0_0_20px_-12px_rgba(0,0,0,0.8)]",
+      className,
     )}
   >
     {children}
@@ -24,23 +24,23 @@ const BentoGridAnimatedBeam = () => {
   return (
     <div
       ref={containerRef}
-      className="relative rounded-lg text-black w-full p-5"
+      className="relative w-full rounded-lg p-5 text-black"
     >
       <h2 className="scroll-m-20 border-b pb-2 text-xl font-semibold tracking-tight first:mt-2">
         Collect All Platform's Data in Place
       </h2>
-      <p className="leading-7 [&:not(:first-child)]:mt-1 mb-3">
+      <p className="mb-3 leading-7 [&:not(:first-child)]:mt-1">
         10 Supported Apps
       </p>
-      <div className="relative flex justify-between items-center  mx-10 max-sm:mx-0">
-        <div className="flex flex-col justify-center gap-10  ">
-          <Circle ref={div1Ref} className="w-[50px] h-[50px]">
+      <div className="relative mx-10 flex items-center justify-between max-sm:mx-0">
+        <div className="flex flex-col justify-center gap-10">
+          <Circle ref={div1Ref} className="h-[50px] w-[50px]">
             <Icons.openai />
           </Circle>
-          <Circle ref={div2Ref} className="w-[50px] h-[50px]">
+          <Circle ref={div2Ref} className="h-[50px] w-[50px]">
             <Icons.googleDocs />
           </Circle>
-          <Circle ref={div3Ref} className="w-[50px] h-[50px]">
+          <Circle ref={div3Ref} className="h-[50px] w-[50px]">
             <Icons.whatsapp />
           </Circle>
         </div>

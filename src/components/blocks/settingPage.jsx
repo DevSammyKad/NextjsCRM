@@ -3,10 +3,10 @@
  * @see https://v0.dev/t/xzlhSKXppX4
  * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
  */
-import Link from 'next/link';
-import { Button } from '@/components/ui/button';
-import { SheetTrigger, SheetContent, Sheet } from '@/components/ui/sheet';
-import { Input } from '@/components/ui/input';
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { SheetTrigger, SheetContent, Sheet } from "@/components/ui/sheet";
+import { Input } from "@/components/ui/input";
 import {
   DropdownMenuTrigger,
   DropdownMenuLabel,
@@ -14,7 +14,7 @@ import {
   DropdownMenuItem,
   DropdownMenuContent,
   DropdownMenu,
-} from '@/components/ui/dropdown-menu';
+} from "@/components/ui/dropdown-menu";
 import {
   CardTitle,
   CardDescription,
@@ -22,8 +22,8 @@ import {
   CardContent,
   CardFooter,
   Card,
-} from '@/components/ui/card';
-import { Checkbox } from '@/components/ui/checkbox';
+} from "@/components/ui/card";
+import { Checkbox } from "@/components/ui/checkbox";
 
 export function settingPage() {
   return (

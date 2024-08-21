@@ -1,9 +1,9 @@
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { toast } from 'sonner';
-import { z } from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { toast } from "sonner";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
 
 // ...
 
@@ -14,11 +14,11 @@ import {
   CardContent,
   CardFooter,
   Card,
-} from '@/components/ui/card';
-import { Label } from '@/components/ui/label';
+} from "@/components/ui/card";
+import { Label } from "@/components/ui/label";
 
-import axios from 'axios';
-import { LoaderIcon } from 'lucide-react';
+import axios from "axios";
+import { LoaderIcon } from "lucide-react";
 
 const OrganizationSetting = () => {
   // Organization
@@ -27,37 +27,37 @@ const OrganizationSetting = () => {
     organizationName: z
       .string()
       .min(2, {
-        message: 'Organization Name must be at least 2 Character',
+        message: "Organization Name must be at least 2 Character",
       })
       .max(20, {
-        message: 'Organization Name must be less than 20 Character',
+        message: "Organization Name must be less than 20 Character",
       }),
     organizationPanCard: z
       .string()
       .max(10, {
-        message: 'Pan Card No must be less than 10 Character',
+        message: "Pan Card No must be less than 10 Character",
       })
-      .regex(/[A-Z]{5}[0-9]{4}[A-Z]{1}/, 'Invalid Pan Card No'),
-    organizationMail: z.string().email('Invalid email address'),
+      .regex(/[A-Z]{5}[0-9]{4}[A-Z]{1}/, "Invalid Pan Card No"),
+    organizationMail: z.string().email("Invalid email address"),
     organizationType: z.string().optional(),
-    organizationWebsite: z.string().url('Invalid Website URL').optional(),
+    organizationWebsite: z.string().url("Invalid Website URL").optional(),
     state: z.string(),
     district: z.string(),
   });
 
   const onSubmit = async (data) => {
     try {
-      const response = await axios.post('/api/organization', data);
+      const response = await axios.post("/api/organization", data);
       if (response.status === 200) {
-        toast.success('Organization Data submitted Successfully');
+        toast.success("Organization Data submitted Successfully");
       }
-      console.log('Organization Form Data:', response.data);
+      console.log("Organization Form Data:", response.data);
     } catch (error) {
       if (error.response && error.response.status === 409) {
-        toast.error('Organization already exists');
+        toast.error("Organization already exists");
       } else {
-        console.log('Organization Form Data:', error);
-        toast.error('Organization Data is not submitted , try again');
+        console.log("Organization Form Data:", error);
+        toast.error("Organization Data is not submitted , try again");
       }
     }
   };
@@ -83,16 +83,16 @@ const OrganizationSetting = () => {
           </CardHeader>
           <CardContent>
             <div className="grid gap-10">
-              <div className="grid grid-cols-2   max-sm:grid-cols-1 max-sm:space-y-5  gap-5">
-                <div className="grid w-full gap-4 relative">
+              <div className="grid grid-cols-2 gap-5 max-sm:grid-cols-1 max-sm:space-y-5">
+                <div className="relative grid w-full gap-4">
                   <Label htmlFor="organizationName">Organization Name</Label>
                   <Input
                     id="organizationName"
                     placeholder="For Ex- RSAI PVT"
-                    {...register('organizationName')}
+                    {...register("organizationName")}
                   />
                   {errors.organizationName && (
-                    <span className="text-red-500 text-xs absolute -bottom-6">
+                    <span className="absolute -bottom-6 text-xs text-red-500">
                       {errors.organizationName.message}
                     </span>
                   )}
@@ -102,12 +102,12 @@ const OrganizationSetting = () => {
                   <Input
                     id="organizationType"
                     placeholder="For Ex - College, Classes, School"
-                    {...register('organizationType')}
+                    {...register("organizationType")}
                   />
                 </div>
               </div>
-              <div className="grid grid-cols-2 max-sm:grid-cols-1 max-sm:space-y-5 gap-5">
-                <div className="grid w-full gap-4 relative">
+              <div className="grid grid-cols-2 gap-5 max-sm:grid-cols-1 max-sm:space-y-5">
+                <div className="relative grid w-full gap-4">
                   <Label htmlFor="organizationMail">
                     Organization Official Mail
                   </Label>
@@ -115,25 +115,25 @@ const OrganizationSetting = () => {
                     id="organizationMail"
                     type="email"
                     placeholder="For ex- rsai@gmail.com"
-                    {...register('organizationMail')}
+                    {...register("organizationMail")}
                   />
                   {errors.organizationMail && (
-                    <span className="text-red-500 text-xs absolute -bottom-6">
+                    <span className="absolute -bottom-6 text-xs text-red-500">
                       {errors.organizationMail.message}
                     </span>
                   )}
                 </div>
-                <div className="grid w-full gap-4 relative">
+                <div className="relative grid w-full gap-4">
                   <Label htmlFor="organizationPanCard">
                     PAN Card No (ADMIN)
                   </Label>
                   <Input
                     id="organizationPanCard"
                     placeholder="JYCPK2000A"
-                    {...register('organizationPanCard')}
+                    {...register("organizationPanCard")}
                   />
                   {errors.organizationPanCard && (
-                    <span className="text-red-500 text-xs absolute -bottom-6">
+                    <span className="absolute -bottom-6 text-xs text-red-500">
                       {errors.organizationPanCard.message}
                     </span>
                   )}
@@ -146,10 +146,10 @@ const OrganizationSetting = () => {
                 <Input
                   id="organizationWebsite"
                   placeholder="https://rsai.co.in"
-                  {...register('organizationWebsite')}
+                  {...register("organizationWebsite")}
                 />
                 {errors.organizationWebsite && (
-                  <span className="text-red-500 text-xs">
+                  <span className="text-xs text-red-500">
                     {errors.organizationWebsite.message}
                   </span>
                 )}
@@ -168,9 +168,9 @@ const OrganizationSetting = () => {
             <div className="grid gap-5">
               <div className="grid w-full gap-4">
                 <Label htmlFor="state">State</Label>
-                <Input id="state" placeholder="Jaipur" {...register('state')} />
+                <Input id="state" placeholder="Jaipur" {...register("state")} />
                 {errors.state && (
-                  <span className="text-red-500 text-xs">
+                  <span className="text-xs text-red-500">
                     {errors.state.message}
                   </span>
                 )}
@@ -180,10 +180,10 @@ const OrganizationSetting = () => {
                 <Input
                   id="district"
                   placeholder="Pune"
-                  {...register('district')}
+                  {...register("district")}
                 />
                 {errors.district && (
-                  <span className="text-red-500 text-xs">
+                  <span className="text-xs text-red-500">
                     {errors.district.message}
                   </span>
                 )}
@@ -194,7 +194,7 @@ const OrganizationSetting = () => {
             <Button
               disabled={isSubmitting}
               type="submit"
-              className="flex gap-3 items-center"
+              className="flex items-center gap-3"
             >
               {isSubmitting ? (
                 <>

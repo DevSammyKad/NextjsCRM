@@ -1,21 +1,21 @@
-'use client';
+"use client";
 
-import { ColumnDef } from '@tanstack/react-table';
+import { ColumnDef } from "@tanstack/react-table";
 // import { Expense } from './schema';
-import { cn } from '@/lib/utils';
-import { DataTableColumnHeader } from './data-table-column-header';
-import { DataTableRowActions } from './data-table-row-actions';
-import { TrendingUp, TrendingDown } from 'lucide-react';
-import { Checkbox } from '@/components/ui/checkbox';
+import { cn } from "@/lib/utils";
+import { DataTableColumnHeader } from "./data-table-column-header";
+import { DataTableRowActions } from "./data-table-row-actions";
+import { TrendingUp, TrendingDown } from "lucide-react";
+import { Checkbox } from "@/components/ui/checkbox";
 
 export const columns = [
   {
-    id: 'select',
+    id: "select",
     header: ({ table }) => (
       <Checkbox
         checked={
           table.getIsAllPageRowsSelected() ||
-          (table.getIsSomePageRowsSelected() && 'indeterminate')
+          (table.getIsSomePageRowsSelected() && "indeterminate")
         }
         onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
         aria-label="Select all"
@@ -34,18 +34,18 @@ export const columns = [
     enableHiding: false,
   },
   {
-    accessorKey: 'name',
+    accessorKey: "name",
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Lead Name" />
     ),
     cell: ({ row }) => (
-      <div className="w-[150px] capitalize">{row.getValue('name')}</div>
+      <div className="w-[150px] capitalize">{row.getValue("name")}</div>
     ),
     enableSorting: false,
     enableHiding: false,
   },
   {
-    accessorKey: 'source',
+    accessorKey: "source",
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Source" />
     ),
@@ -53,21 +53,21 @@ export const columns = [
       return (
         <div className="flex space-x-2">
           <span className="max-w-[500px] truncate font-medium capitalize">
-            {row.getValue('source')}
+            {row.getValue("source")}
           </span>
         </div>
       );
     },
   },
   {
-    accessorKey: 'age',
+    accessorKey: "age",
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Age" />
     ),
     cell: ({ row }) => {
       return (
         <div className="flex w-[100px] items-center">
-          <span className="capitalize"> {row.getValue('age')}</span>
+          <span className="capitalize"> {row.getValue("age")}</span>
         </div>
       );
     },
@@ -76,14 +76,14 @@ export const columns = [
     },
   },
   {
-    accessorKey: 'phone',
+    accessorKey: "phone",
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Phone" />
     ),
     cell: ({ row }) => {
       return (
         <div className="flex w-[100px] items-center">
-          <span className="capitalize"> {row.getValue('phone')}</span>
+          <span className="capitalize"> {row.getValue("phone")}</span>
         </div>
       );
     },
@@ -92,22 +92,16 @@ export const columns = [
     },
   },
   {
-    accessorKey: 'status',
+    accessorKey: "status",
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Status" />
     ),
     cell: ({ row }) => {
-      const status = row.getValue('status');
+      const status = row.getValue("status");
       return (
         <div className="flex w-[100px] items-center">
           <span
-            className={`${status === 'NEW' ? 'px-4 py-2 rounded-lg text-green-500 bg-green-50 dark:text-green-200  dark:bg-green-100/25' : ''}
-            ${status === 'CONTACTED' ? 'px-4 py-2 rounded-lg text-blue-500  bg-blue-50 dark:text-blue-200  dark:bg-blue-100/25' : ''}
-            ${status === 'FOLLOW_UP' ? 'px-4 py-2 rounded-lg text-yellow-500 bg-yellow-50 dark:text-yellow-200  dark:bg-yellow-100/25' : ''}
-            ${status === 'CONVERTED' ? 'px-4 py-2 rounded-lg text-green-500 bg-green-50 dark:text-green-200  dark:bg-green-100/25' : ''}
-            ${status === 'CLOSED' ? 'px-4 py-2 rounded-lg text-indigo-500 bg-indigo-50 dark:text-indigo-200  dark:bg-indigo-100/25' : ''}
-            ${status === 'MISSED' ? 'px-4 py-2 rounded-lg text-red-500 bg-red-50 dark:text-red-200  dark:bg-red-100/25' : ''}
-      `}
+            className={`${status === "NEW" ? "rounded-lg bg-green-50 px-4 py-2 text-green-500 dark:bg-green-100/25 dark:text-green-200" : ""} ${status === "CONTACTED" ? "rounded-lg bg-blue-50 px-4 py-2 text-blue-500 dark:bg-blue-100/25 dark:text-blue-200" : ""} ${status === "FOLLOW_UP" ? "rounded-lg bg-yellow-50 px-4 py-2 text-yellow-500 dark:bg-yellow-100/25 dark:text-yellow-200" : ""} ${status === "CONVERTED" ? "rounded-lg bg-green-50 px-4 py-2 text-green-500 dark:bg-green-100/25 dark:text-green-200" : ""} ${status === "CLOSED" ? "rounded-lg bg-indigo-50 px-4 py-2 text-indigo-500 dark:bg-indigo-100/25 dark:text-indigo-200" : ""} ${status === "MISSED" ? "rounded-lg bg-red-50 px-4 py-2 text-red-500 dark:bg-red-100/25 dark:text-red-200" : ""} `}
           >
             {status}
           </span>
@@ -121,14 +115,14 @@ export const columns = [
     },
   },
   {
-    accessorKey: 'note',
+    accessorKey: "note",
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Note" />
     ),
     cell: ({ row }) => {
       return (
         <div className="flex w-[100px] items-center">
-          <span className="truncate tr">{row.getValue('note')}</span>
+          <span className="tr truncate">{row.getValue("note")}</span>
         </div>
       );
     },
@@ -137,7 +131,7 @@ export const columns = [
     },
   },
   {
-    accessorKey: 'date',
+    accessorKey: "date",
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Date" />
     ),
@@ -150,7 +144,7 @@ export const columns = [
       // });
       return (
         <div className="flex w-[100px] items-center">
-          <span className="capitalize">{row.getValue('date')}</span>
+          <span className="capitalize">{row.getValue("date")}</span>
         </div>
       );
     },
@@ -161,7 +155,7 @@ export const columns = [
     },
   },
   {
-    id: 'actions',
+    id: "actions",
     cell: ({ row }) => <DataTableRowActions row={row} />,
   },
 ];

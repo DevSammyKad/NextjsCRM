@@ -1,19 +1,19 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
+import { useState } from "react";
 import {
   FileUploader,
   FileUploaderContent,
   FileUploaderItem,
   FileInput,
-} from '@/components/extension/file-upload';
-import { Paperclip } from 'lucide-react';
+} from "@/components/extension/file-upload";
+import { Paperclip } from "lucide-react";
 
 const FileSvgDraw = () => {
   return (
     <>
       <svg
-        className="w-8 h-8 mb-3 text-gray-500 dark:text-gray-400"
+        className="mb-3 h-8 w-8 text-gray-500 dark:text-gray-400"
         aria-hidden="true"
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
@@ -52,10 +52,10 @@ const FileUploaderTest = () => {
       value={files}
       onValueChange={setFiles}
       dropzoneOptions={dropZoneConfig}
-      className="relative bg-background rounded-lg p-2"
+      className="relative rounded-lg bg-background p-2"
     >
       <FileInput className="outline-dashed outline-1 outline-black dark:outline-white">
-        <div className="flex items-center justify-center flex-col pt-3 pb-4 w-full ">
+        <div className="flex w-full flex-col items-center justify-center pb-4 pt-3">
           <FileSvgDraw />
         </div>
       </FileInput>

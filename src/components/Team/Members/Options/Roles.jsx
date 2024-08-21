@@ -6,10 +6,10 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
+} from "@/components/ui/select";
 
-export default function Roles({ selected = 'member', setSelected }) {
-  const roles = ['admin', 'manager', 'member'];
+export default function Roles({ selected = "member", setSelected }) {
+  const roles = ["admin", "manager", "member"];
   return (
     <Select defaultValue={selected} onValueChange={setSelected}>
       <SelectTrigger className="w-full capitalize">

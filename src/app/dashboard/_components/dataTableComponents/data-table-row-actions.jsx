@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { Row } from '@tanstack/react-table';
+import { Row } from "@tanstack/react-table";
 
-import { Button } from '@/components/ui/button';
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -15,8 +15,8 @@ import {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { MoreHorizontalIcon } from 'lucide-react';
+} from "@/components/ui/dropdown-menu";
+import { MoreHorizontalIcon } from "lucide-react";
 
 export function DataTableRowActions({ row }) {
   // const task = taskSchema.parse(row.original);

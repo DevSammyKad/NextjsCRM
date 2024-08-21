@@ -1,5 +1,5 @@
-import { prisma } from '@/lib/db';
-import { NextResponse } from 'next/server';
+import { prisma } from "@/lib/db";
+import { NextResponse } from "next/server";
 
 export async function POST(req) {
   try {
@@ -21,10 +21,10 @@ export async function POST(req) {
     if (existingOrganization) {
       const conflictField =
         existingOrganization.organizationMail === organizationMail
-          ? 'Email'
-          : 'PAN Card';
+          ? "Email"
+          : "PAN Card";
       return new NextResponse(
-        JSON.stringify({ error: `${conflictField} Already Exists` })
+        JSON.stringify({ error: `${conflictField} Already Exists` }),
       );
     }
 
@@ -40,8 +40,8 @@ export async function POST(req) {
 
     return new NextResponse(JSON.stringify(organization), { status: 200 });
   } catch (error) {
-    console.error('Error during Create Organization:', error);
-    return new NextResponse('Internal Server Error', { status: 500 });
+    console.error("Error during Create Organization:", error);
+    return new NextResponse("Internal Server Error", { status: 500 });
   }
 }
 
@@ -50,8 +50,8 @@ export async function GET() {
     const organizations = await prisma.organization.findMany();
     return new NextResponse(JSON.stringify(organizations), { status: 200 });
   } catch (error) {
-    console.error('Error during Get Organizations:', error);
-    return new NextResponse('Internal Server Error', { status: 500 });
+    console.error("Error during Get Organizations:", error);
+    return new NextResponse("Internal Server Error", { status: 500 });
   }
 }
 // export async function GET(req, { params }) {

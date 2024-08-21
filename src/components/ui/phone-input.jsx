@@ -1,12 +1,12 @@
-import { CheckIcon, ChevronsUpDown } from 'lucide-react';
+import { CheckIcon, ChevronsUpDown } from "lucide-react";
 
-import * as React from 'react';
+import * as React from "react";
 
-import * as RPNInput from 'react-phone-number-input';
+import * as RPNInput from "react-phone-number-input";
 
-import flags from 'react-phone-number-input/flags';
+import flags from "react-phone-number-input/flags";
 
-import { Button } from '@/components/ui/button';
+import { Button } from "@/components/ui/button";
 import {
   Command,
   CommandEmpty,
@@ -14,23 +14,23 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from '@/components/ui/command';
-import { Input } from '@/components/ui/input';
+} from "@/components/ui/command";
+import { Input } from "@/components/ui/input";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from '@/components/ui/popover';
+} from "@/components/ui/popover";
 
-import { cn } from '@/lib/utils';
-import { ScrollArea } from './scroll-area';
+import { cn } from "@/lib/utils";
+import { ScrollArea } from "./scroll-area";
 
 const PhoneInput = React.forwardRef(
   ({ className, onChange, ...props }, ref) => {
     return (
       <RPNInput.default
         ref={ref}
-        className={cn('flex', className)}
+        className={cn("flex", className)}
         flagComponent={FlagComponent}
         countrySelectComponent={CountrySelect}
         inputComponent={InputComponent}
@@ -43,29 +43,29 @@ const PhoneInput = React.forwardRef(
          *
          * @param {E164Number | undefined} value - The entered value
          */
-        onChange={(value) => onChange?.(value || '')}
+        onChange={(value) => onChange?.(value || "")}
         {...props}
       />
     );
-  }
+  },
 );
-PhoneInput.displayName = 'PhoneInput';
+PhoneInput.displayName = "PhoneInput";
 
 const InputComponent = React.forwardRef(({ className, ...props }, ref) => (
   <Input
-    className={cn('rounded-e-lg rounded-s-none', className)}
+    className={cn("rounded-e-lg rounded-s-none", className)}
     {...props}
     ref={ref}
   />
 ));
-InputComponent.displayName = 'InputComponent';
+InputComponent.displayName = "InputComponent";
 
 const CountrySelect = ({ disabled, value, onChange, options }) => {
   const handleSelect = React.useCallback(
     (country) => {
       onChange(country);
     },
-    [onChange]
+    [onChange],
   );
 
   return (
@@ -73,15 +73,15 @@ const CountrySelect = ({ disabled, value, onChange, options }) => {
       <PopoverTrigger asChild>
         <Button
           type="button"
-          variant={'outline'}
-          className={cn('flex gap-1 rounded-e-none rounded-s-lg px-3')}
+          variant={"outline"}
+          className={cn("flex gap-1 rounded-e-none rounded-s-lg px-3")}
           disabled={disabled}
         >
           <FlagComponent country={value} countryName={value} />
           <ChevronsUpDown
             className={cn(
-              '-mr-2 h-4 w-4 opacity-50',
-              disabled ? 'hidden' : 'opacity-100'
+              "-mr-2 h-4 w-4 opacity-50",
+              disabled ? "hidden" : "opacity-100",
             )}
           />
         </Button>
@@ -107,14 +107,14 @@ const CountrySelect = ({ disabled, value, onChange, options }) => {
                       />
                       <span className="flex-1 text-sm">{option.label}</span>
                       {option.value && (
-                        <span className="text-foreground/50 text-sm">
+                        <span className="text-sm text-foreground/50">
                           {`+${RPNInput.getCountryCallingCode(option.value)}`}
                         </span>
                       )}
                       <CheckIcon
                         className={cn(
-                          'ml-auto h-4 w-4',
-                          option.value === value ? 'opacity-100' : 'opacity-0'
+                          "ml-auto h-4 w-4",
+                          option.value === value ? "opacity-100" : "opacity-0",
                         )}
                       />
                     </CommandItem>
@@ -132,11 +132,11 @@ const FlagComponent = ({ country, countryName }) => {
   const Flag = flags[country];
 
   return (
-    <span className="bg-foreground/20 flex h-4 w-6 overflow-hidden rounded-sm">
+    <span className="flex h-4 w-6 overflow-hidden rounded-sm bg-foreground/20">
       {Flag && <Flag title={countryName} />}
     </span>
   );
 };
-FlagComponent.displayName = 'FlagComponent';
+FlagComponent.displayName = "FlagComponent";
 
 export { PhoneInput };

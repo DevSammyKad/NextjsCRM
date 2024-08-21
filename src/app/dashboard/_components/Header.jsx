@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { useKindeBrowserClient } from '@kinde-oss/kinde-auth-nextjs';
-import { LogoutLink } from '@kinde-oss/kinde-auth-nextjs/components';
-import Avvvatars from 'avvvatars-react';
-import man from '../../../../public/man.png';
+import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
+import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
+import Avvvatars from "avvvatars-react";
+import man from "../../../../public/man.png";
 
 import {
   Cloud,
@@ -13,15 +13,15 @@ import {
   Search,
   Sun,
   Users,
-} from 'lucide-react';
+} from "lucide-react";
 
-import React, { useState } from 'react';
-import { ModeToggle } from './ModeToggle';
-import { Button } from '@/components/ui/button';
-import MobileSidebar from './MobileSidebar';
-import { useTheme } from 'next-themes';
+import React, { useState } from "react";
+import { ModeToggle } from "./ModeToggle";
+import { Button } from "@/components/ui/button";
+import MobileSidebar from "./MobileSidebar";
+import { useTheme } from "next-themes";
 
-import Image from 'next/image';
+import Image from "next/image";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -29,9 +29,9 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import PlanModal from './PlanModal';
-import TeamMembers from './TeamMembers';
+} from "@/components/ui/dropdown-menu";
+import PlanModal from "./PlanModal";
+import TeamMembers from "./TeamMembers";
 
 const Header = React.memo(() => {
   const { setTheme } = useTheme();
@@ -58,25 +58,25 @@ const Header = React.memo(() => {
 
   return (
     <div>
-      <nav className="h-24 flex justify-between items-center mx-2 shadow-sm">
+      <nav className="mx-2 flex h-24 items-center justify-between shadow-sm">
         <MobileSidebar />
         <div className="relative max-sm:hidden">
           <input
             type="text"
-            className="rounded-lg pl-5 border border-border-stroke w-full h-12 outline-none text-slate-500 text-base font-normal  lg:placeholder:pl-5 transition-all duration-300 ease-in-out "
+            className="border-border-stroke h-12 w-full rounded-lg border pl-5 text-base font-normal text-slate-500 outline-none transition-all duration-300 ease-in-out lg:placeholder:pl-5"
             placeholder="Search..."
           />
-          <Search className="absolute right-4 top-3 w-5 h-5 " color="gray" />
+          <Search className="absolute right-4 top-3 h-5 w-5" color="gray" />
         </div>
-        <div className="flex justify-center items-center ">
+        <div className="flex items-center justify-center">
           <ModeToggle />
 
           {/* <NotificationPanel /> */}
 
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <div className="flex items-center gap-2 ml-2 relative cursor-pointer">
-                <div className="relative cursor-pointer w-12 h-12  rounded-full">
+              <div className="relative ml-2 flex cursor-pointer items-center gap-2">
+                <div className="relative h-12 w-12 cursor-pointer rounded-full">
                   {user?.picture ? (
                     <Image
                       src={user?.picture}
@@ -93,18 +93,18 @@ const Header = React.memo(() => {
                     />
                   )}
 
-                  <div className="bg-white w-4 h-4 absolute rounded-full flex justify-center items-center bottom-0 right-1">
-                    <div className="bg-green-500 z-10  w-2 h-2 rounded-full"></div>
+                  <div className="absolute bottom-0 right-1 flex h-4 w-4 items-center justify-center rounded-full bg-white">
+                    <div className="z-10 h-2 w-2 rounded-full bg-green-500"></div>
                   </div>
                 </div>
 
-                <div className="max-sm:hidden text-left">
-                  <h4 className="font-medium text-sm">
-                    {user?.given_name || 'User Name'}
+                <div className="text-left max-sm:hidden">
+                  <h4 className="text-sm font-medium">
+                    {user?.given_name || "User Name"}
                   </h4>
                   <p className="text-sm">
-                    {' '}
-                    {user?.email || 'UserName@gmail.com'}
+                    {" "}
+                    {user?.email || "UserName@gmail.com"}
                   </p>
                 </div>
               </div>
@@ -117,18 +117,18 @@ const Header = React.memo(() => {
 
                 <DropdownMenuItem
                   onClick={handleShowTeamMemberDialog}
-                  className="my-2 flex gap-5 mx-3 items-center cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-900"
+                  className="mx-3 my-2 flex cursor-pointer items-center gap-5 hover:bg-gray-100 dark:hover:bg-gray-900"
                 >
                   <Users className="mr-2 h-4 w-4" />
                   <span>Create Team</span>
                 </DropdownMenuItem>
 
-                <DropdownMenuItem className="my-2  flex gap-4  items-center cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-900">
+                <DropdownMenuItem className="my-2 flex cursor-pointer items-center gap-4 hover:bg-gray-100 dark:hover:bg-gray-900">
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                       <Button
                         variant="outline"
-                        className="outline-none p-0 border-0 px-0 m-0 "
+                        className="m-0 border-0 p-0 px-0 outline-none"
                         size="icon"
                       >
                         <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
@@ -137,13 +137,13 @@ const Header = React.memo(() => {
                       </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
-                      <DropdownMenuItem onClick={() => setTheme('light')}>
+                      <DropdownMenuItem onClick={() => setTheme("light")}>
                         Light
                       </DropdownMenuItem>
-                      <DropdownMenuItem onClick={() => setTheme('dark')}>
+                      <DropdownMenuItem onClick={() => setTheme("dark")}>
                         Dark
                       </DropdownMenuItem>
-                      <DropdownMenuItem onClick={() => setTheme('system')}>
+                      <DropdownMenuItem onClick={() => setTheme("system")}>
                         System
                       </DropdownMenuItem>
                     </DropdownMenuContent>
@@ -151,15 +151,15 @@ const Header = React.memo(() => {
                   <span>Theme</span>
                 </DropdownMenuItem>
 
-                <DropdownMenuItem className="my-2 flex gap-5 mx-3  items-center cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-900">
+                <DropdownMenuItem className="mx-3 my-2 flex cursor-pointer items-center gap-5 hover:bg-gray-100 dark:hover:bg-gray-900">
                   <LifeBuoy className="mr-2 h-4 w-4" />
                   <span>Support</span>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem className="my-2 flex gap-5 mx-3  items-center cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-900">
+                <DropdownMenuItem className="mx-3 my-2 flex cursor-pointer items-center gap-5 hover:bg-gray-100 dark:hover:bg-gray-900">
                   <LogoutLink
                     postLogoutRedirectURL="./"
-                    className="w-full flex  gap-5 items-center"
+                    className="flex w-full items-center gap-5"
                   >
                     <LogOut />
                     <span> Log Out</span>
@@ -168,7 +168,7 @@ const Header = React.memo(() => {
 
                 <DropdownMenuItem
                   disabled
-                  className="my-2 cursor-pointer flex justify-between items-center hover:bg-gray-100 dark:hover:bg-gray-900"
+                  className="my-2 flex cursor-pointer items-center justify-between hover:bg-gray-100 dark:hover:bg-gray-900"
                 >
                   <span>API</span>
                   <Cloud className="mr-2 h-4 w-4" />
@@ -177,9 +177,9 @@ const Header = React.memo(() => {
               <DropdownMenuSeparator />
               <DropdownMenuItem
                 onClick={handleOpenPlanModal}
-                className="w-full  flex justify-center "
+                className="flex w-full justify-center"
               >
-                <Button className="w-full ">Upgrade to Pro</Button>
+                <Button className="w-full">Upgrade to Pro</Button>
               </DropdownMenuItem>
               <DropdownMenuSeparator />
             </DropdownMenuContent>

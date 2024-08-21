@@ -1,8 +1,8 @@
-'use client';
-import moment from 'moment';
-import { useState, useEffect } from 'react';
-import { PhoneCall, TrendingUp } from 'lucide-react';
-import { Bar, BarChart, CartesianGrid, XAxis } from 'recharts';
+"use client";
+import moment from "moment";
+import { useState, useEffect } from "react";
+import { PhoneCall, TrendingUp } from "lucide-react";
+import { Bar, BarChart, CartesianGrid, XAxis } from "recharts";
 import {
   Card,
   CardContent,
@@ -10,30 +10,30 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card';
+} from "@/components/ui/card";
 import {
   ChartConfig,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
-} from '@/components/ui/chart';
+} from "@/components/ui/chart";
 const chartData = [
-  { month: 'January', attendance: 16 },
-  { month: 'February', attendance: 30 },
-  { month: 'March', attendance: 23 },
-  { month: 'April', attendance: 7 },
-  { month: 'May', attendance: 29 },
-  { month: 'June', attendance: 14 },
+  { month: "January", attendance: 16 },
+  { month: "February", attendance: 30 },
+  { month: "March", attendance: 23 },
+  { month: "April", attendance: 7 },
+  { month: "May", attendance: 29 },
+  { month: "June", attendance: 14 },
 ];
 const chartConfig = {
   attendance: {
-    label: 'Attendance',
-    color: 'hsl(var(--chart-1))',
+    label: "Attendance",
+    color: "hsl(var(--chart-1))",
   },
 };
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import {
   Sheet,
   SheetClose,
@@ -43,8 +43,8 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from '@/components/ui/sheet';
-import axios from 'axios';
+} from "@/components/ui/sheet";
+import axios from "axios";
 
 const StudentDetailsDrawer = ({ student, isOpen, onClose }) => {
   // const [chartData, setChartData] = useState([]);
@@ -86,7 +86,7 @@ const StudentDetailsDrawer = ({ student, isOpen, onClose }) => {
     <Sheet open={isOpen} onOpenChange={onClose}>
       <SheetContent>
         <SheetHeader>
-          <SheetTitle className="flex items-center justify-between mt-5">
+          <SheetTitle className="mt-5 flex items-center justify-between">
             <p>
               {student.firstName} {student.lastName}
             </p>
@@ -96,7 +96,7 @@ const StudentDetailsDrawer = ({ student, isOpen, onClose }) => {
                 variant="outline"
                 className="flex items-center gap-2"
                 // href={`tel:${student.phoneNumber}`}
-                onClick={() => console.log('Call Now', student.phoneNumber)}
+                onClick={() => console.log("Call Now", student.phoneNumber)}
               >
                 <PhoneCall className="h-5 w-5" /> Call link
               </Button>
@@ -110,7 +110,7 @@ const StudentDetailsDrawer = ({ student, isOpen, onClose }) => {
           <CardHeader>
             <CardTitle>Attendance Chart</CardTitle>
             <CardDescription className="text-sm">
-              January - June{' '}
+              January - June{" "}
             </CardDescription>
             {/* <CardDescription>
               {chartData.length > 0

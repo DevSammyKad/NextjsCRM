@@ -1,11 +1,11 @@
-const { PrismaClient } = require('@prisma/client');
+const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
 async function main() {
   const grades = [
-    { grade: '1st Grade' },
-    { grade: '2nd Grade' },
-    { grade: '3rd Grade' },
+    { grade: "1st Grade" },
+    { grade: "2nd Grade" },
+    { grade: "3rd Grade" },
   ];
 
   for (const grade of grades) {
@@ -22,7 +22,7 @@ async function main() {
     }
   }
 
-  console.log('Grades seeded successfully');
+  console.log("Grades seeded successfully");
 }
 
 main()

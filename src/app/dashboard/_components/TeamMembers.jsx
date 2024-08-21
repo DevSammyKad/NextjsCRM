@@ -1,7 +1,7 @@
-'use client';
-import React, { useState } from 'react';
-import toast, { Toaster } from 'react-hot-toast';
-import axios from 'axios';
+"use client";
+import React, { useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
+import axios from "axios";
 
 import {
   Card,
@@ -10,7 +10,7 @@ import {
   CardTitle,
   CardDescription,
   CardContent,
-} from '@/components/ui/card';
+} from "@/components/ui/card";
 
 import {
   Dialog,
@@ -23,12 +23,12 @@ import {
   DialogFooter,
   DialogTitle,
   DialogDescription,
-} from '@/components/ui/dialog';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
 const TeamMembers = ({ isOpen, onClose }) => {
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState("");
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value); // Update link value state on input change
@@ -37,24 +37,24 @@ const TeamMembers = ({ isOpen, onClose }) => {
   const handleInvite = async () => {
     try {
       if (!email) {
-        toast.error('Email is required');
+        toast.error("Email is required");
         return;
       }
-      const response = await axios.get('/api/email', {
+      const response = await axios.get("/api/email", {
         params: {
           to: email,
         },
       });
 
       if (response.data.success) {
-        toast.success('Invitation sent!');
+        toast.success("Invitation sent!");
         console.log(response.data);
       } else {
-        toast.error('Failed to send invitation');
+        toast.error("Failed to send invitation");
       }
     } catch (error) {
-      console.error('Error sending invitation:', error);
-      toast.error('Error sending invitation');
+      console.error("Error sending invitation:", error);
+      toast.error("Error sending invitation");
     }
   };
 
@@ -82,7 +82,7 @@ const TeamMembers = ({ isOpen, onClose }) => {
                 <Button
                   disabled={!email}
                   onClick={handleInvite}
-                  className="bg-blue-500 dark:text-white "
+                  className="bg-blue-500 dark:text-white"
                   type="submit"
                 >
                   Send Invite

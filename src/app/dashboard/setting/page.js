@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
-import Link from 'next/link';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Checkbox } from '@/components/ui/checkbox';
-import { Toaster, toast } from 'sonner';
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Toaster, toast } from "sonner";
 
 // ...
 
@@ -17,21 +17,21 @@ import {
   CardContent,
   CardFooter,
   Card,
-} from '@/components/ui/card';
-import { Label } from '@/components/ui/label';
-import FileUploaderTest from '@/components/FileUploader';
-import { Textarea } from '@/components/ui/textarea';
-import GeneralSection from './_components/GeneralSection';
-import SecuritySection from './_components/SecuritySection';
-import IntegrationsSection from './_components/IntegrationsSection';
-import SupportSection from './_components/SupportSection';
-import OrganizationSetting from './_components/OrganizationSetting';
+} from "@/components/ui/card";
+import { Label } from "@/components/ui/label";
+import FileUploaderTest from "@/components/FileUploader";
+import { Textarea } from "@/components/ui/textarea";
+import GeneralSection from "./_components/GeneralSection";
+import SecuritySection from "./_components/SecuritySection";
+import IntegrationsSection from "./_components/IntegrationsSection";
+import SupportSection from "./_components/SupportSection";
+import OrganizationSetting from "./_components/OrganizationSetting";
 
 const Settings = () => {
-  const [activeSection, setActiveSection] = useState('organization');
+  const [activeSection, setActiveSection] = useState("organization");
 
   useEffect(() => {
-    const hash = window.location.hash.replace('#');
+    const hash = window.location.hash.replace("#");
     if (hash) {
       setActiveSection(hash);
     }
@@ -39,17 +39,17 @@ const Settings = () => {
 
   const renderSection = () => {
     switch (activeSection) {
-      case 'general':
+      case "general":
         return <GeneralSection />;
-      case 'security':
+      case "security":
         return <SecuritySection />;
-      case 'integrations':
+      case "integrations":
         return <IntegrationsSection />;
-      case 'support':
+      case "support":
         return <SupportSection />;
-      case 'organization':
+      case "organization":
         return <OrganizationSetting />;
-      case 'advanced':
+      case "advanced":
         return <AdvancedSection />;
       default:
         return <GeneralSection />;
@@ -62,42 +62,42 @@ const Settings = () => {
         <div className="mx-auto grid w-full max-w-6xl gap-2">
           <h1 className="text-3xl font-semibold">Settings</h1>
         </div>
-        <div className="mx-auto flex flex-col w-full max-w-6xl items-start gap-6">
-          <nav className="flex gap-4 text-sm my-5 text-muted-foreground">
+        <div className="mx-auto flex w-full max-w-6xl flex-col items-start gap-6">
+          <nav className="my-5 flex gap-4 text-sm text-muted-foreground">
             <a
               href="#"
               className={`font-semibold ${
-                activeSection === 'general' ? 'text-primary' : ''
+                activeSection === "general" ? "text-primary" : ""
               }`}
-              onClick={() => setActiveSection('general')}
+              onClick={() => setActiveSection("general")}
             >
               General
             </a>
             <a
               href="#"
-              className={activeSection === 'security' ? 'text-primary' : ''}
-              onClick={() => setActiveSection('security')}
+              className={activeSection === "security" ? "text-primary" : ""}
+              onClick={() => setActiveSection("security")}
             >
               Security
             </a>
             <a
               href="#"
-              className={activeSection === 'integrations' ? 'text-primary' : ''}
-              onClick={() => setActiveSection('integrations')}
+              className={activeSection === "integrations" ? "text-primary" : ""}
+              onClick={() => setActiveSection("integrations")}
             >
               Integrations
             </a>
             <a
               href="#"
-              className={activeSection === 'support' ? 'text-primary' : ''}
-              onClick={() => setActiveSection('support')}
+              className={activeSection === "support" ? "text-primary" : ""}
+              onClick={() => setActiveSection("support")}
             >
               Support
             </a>
             <a
               href="#"
-              className={activeSection === 'organization' ? 'text-primary' : ''}
-              onClick={() => setActiveSection('organization')}
+              className={activeSection === "organization" ? "text-primary" : ""}
+              onClick={() => setActiveSection("organization")}
             >
               Organization
             </a>
@@ -109,7 +109,7 @@ const Settings = () => {
               Advanced
             </a> */}
           </nav>
-          <div className="grid gap-6 w-full">{renderSection()}</div>
+          <div className="grid w-full gap-6">{renderSection()}</div>
         </div>
       </main>
     </div>

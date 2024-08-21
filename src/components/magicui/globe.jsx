@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import { useCallback, useEffect, useRef } from 'react';
-import createGlobe from 'cobe';
-import { useSpring } from 'react-spring';
+import { useCallback, useEffect, useRef } from "react";
+import createGlobe from "cobe";
+import { useSpring } from "react-spring";
 
-import { cn } from '@/lib/utils';
+import { cn } from "@/lib/utils";
 
 const GLOBE_CONFIG = {
   width: 800,
@@ -53,7 +53,7 @@ export default function Globe({ className, config = GLOBE_CONFIG }) {
 
   const updatePointerInteraction = (value) => {
     pointerInteracting.current = value;
-    canvasRef.current.style.cursor = value ? 'grabbing' : 'grab';
+    canvasRef.current.style.cursor = value ? "grabbing" : "grab";
   };
 
   const updateMovement = (clientX) => {
@@ -71,7 +71,7 @@ export default function Globe({ className, config = GLOBE_CONFIG }) {
       state.width = width * 2;
       state.height = width * 2;
     },
-    [pointerInteracting, phi, r]
+    [pointerInteracting, phi, r],
   );
 
   const onResize = () => {
@@ -81,7 +81,7 @@ export default function Globe({ className, config = GLOBE_CONFIG }) {
   };
 
   useEffect(() => {
-    window.addEventListener('resize', onResize);
+    window.addEventListener("resize", onResize);
     onResize();
 
     const globe = createGlobe(canvasRef.current, {
@@ -91,25 +91,25 @@ export default function Globe({ className, config = GLOBE_CONFIG }) {
       onRender,
     });
 
-    setTimeout(() => (canvasRef.current.style.opacity = '1'));
+    setTimeout(() => (canvasRef.current.style.opacity = "1"));
     return () => globe.destroy();
   }, []);
 
   return (
     <div
       className={cn(
-        'absolute inset-0 mx-auto aspect-[1/1] w-full max-w-[600px]',
-        className
+        "absolute inset-0 mx-auto aspect-[1/1] w-full max-w-[600px]",
+        className,
       )}
     >
       <canvas
         className={cn(
-          'h-full w-full opacity-0 transition-opacity duration-500 [contain:layout_paint_size]'
+          "h-full w-full opacity-0 transition-opacity duration-500 [contain:layout_paint_size]",
         )}
         ref={canvasRef}
         onPointerDown={(e) =>
           updatePointerInteraction(
-            e.clientX - pointerInteractionMovement.current
+            e.clientX - pointerInteractionMovement.current,
           )
         }
         onPointerUp={() => updatePointerInteraction(null)}

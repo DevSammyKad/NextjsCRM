@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { toast } from 'sonner';
-import Image from 'next/image';
+import React, { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
+import Image from "next/image";
 import {
   CardTitle,
   CardDescription,
@@ -9,19 +9,19 @@ import {
   CardContent,
   CardFooter,
   Card,
-} from '@/components/ui/card';
+} from "@/components/ui/card";
 
-import whatsapp from '../../../../../public/whatsapp.png';
-import facebook from '../../../../../public/facebook.png';
-import googleForms from '../../../../../public/googleForms.png';
-import googleSheets from '../../../../../public/googleSheets.png';
+import whatsapp from "../../../../../public/whatsapp.png";
+import facebook from "../../../../../public/facebook.png";
+import googleForms from "../../../../../public/googleForms.png";
+import googleSheets from "../../../../../public/googleSheets.png";
 
 const IntegrationsSection = () => {
   const [generatedAPIKey, setGeneratedAPIKey] = useState(null);
 
   const generateAPI = () => {
-    const crypto = require('crypto');
-    const newAPIKey = crypto.randomBytes(18).toString('hex');
+    const crypto = require("crypto");
+    const newAPIKey = crypto.randomBytes(18).toString("hex");
     setGeneratedAPIKey(newAPIKey);
     toast.success(`API key: ${newAPIKey}`);
     console.log(`API key ${newAPIKey} generated successfully`);
@@ -31,11 +31,11 @@ const IntegrationsSection = () => {
     if (generatedAPIKey) {
       navigator.clipboard.writeText(generatedAPIKey).then(
         () => {
-          toast.success('API key copied to clipboard!');
+          toast.success("API key copied to clipboard!");
         },
         () => {
-          toast.error('Failed to copy API key!');
-        }
+          toast.error("Failed to copy API key!");
+        },
       );
     }
   };
@@ -52,13 +52,13 @@ const IntegrationsSection = () => {
           </CardHeader>
           <CardContent>
             <div className="flex w-full gap-5">
-              <div className="w-[40%] border-dashed border flex justify-start items-center px-5 dark:border-white rounded-lg">
+              <div className="flex w-[40%] items-center justify-start rounded-lg border border-dashed px-5 dark:border-white">
                 <input
                   type="text"
-                  value={generatedAPIKey || ''}
+                  value={generatedAPIKey || ""}
                   readOnly
                   placeholder="Click on generate"
-                  className="w-full text-white bg-transparent focus:border-none focus:outline-none"
+                  className="w-full bg-transparent text-white focus:border-none focus:outline-none"
                 />
               </div>
               <Button disabled={!generatedAPIKey} onClick={copyToClipboard}>
@@ -66,15 +66,15 @@ const IntegrationsSection = () => {
               </Button>
             </div>
           </CardContent>
-          <CardFooter className="border-t px-6 py-4 flex">
+          <CardFooter className="flex border-t px-6 py-4">
             <Button onClick={generateAPI}>Generate API_KEY</Button>
           </CardFooter>
         </Card>
       </div>
-      <div className="gird grid-cols-4 space-y-5 gap-10">
+      <div className="gird grid-cols-4 gap-10 space-y-5">
         <Card className="col-span-1">
           <CardHeader>
-            <CardTitle className="flex items-center justify-between my-2">
+            <CardTitle className="my-2 flex items-center justify-between">
               <div className="flex items-center gap-5">
                 <Image src={whatsapp} width={50} height={50} alt="WhatsApp" />
                 <div>WhatsApp API</div>
@@ -90,13 +90,13 @@ const IntegrationsSection = () => {
           <CardContent>
             <div className="flex w-full gap-5"></div>
           </CardContent>
-          <CardFooter className="border-t px-6 py-4 flex justify-end">
+          <CardFooter className="flex justify-end border-t px-6 py-4">
             <Button>View Integration</Button>
           </CardFooter>
         </Card>
         <Card className="">
           <CardHeader>
-            <CardTitle className="flex items-center justify-between my-2">
+            <CardTitle className="my-2 flex items-center justify-between">
               <div className="flex items-center gap-5">
                 <Image src={facebook} width={50} height={50} alt="WhatsApp" />
                 <div>FaceBook Lead's</div>
@@ -112,13 +112,13 @@ const IntegrationsSection = () => {
           <CardContent>
             <div className="flex w-full gap-5"></div>
           </CardContent>
-          <CardFooter className="border-t px-6 py-4 flex justify-end">
+          <CardFooter className="flex justify-end border-t px-6 py-4">
             <Button>View Integration</Button>
           </CardFooter>
         </Card>
         <Card className="">
           <CardHeader>
-            <CardTitle className="flex items-center justify-between my-2">
+            <CardTitle className="my-2 flex items-center justify-between">
               <div className="flex items-center gap-5">
                 <Image
                   src={googleForms}
@@ -137,15 +137,15 @@ const IntegrationsSection = () => {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="flex  gap-5"></div>
+            <div className="flex gap-5"></div>
           </CardContent>
-          <CardFooter className="border-t px-6 py-4 flex justify-end">
+          <CardFooter className="flex justify-end border-t px-6 py-4">
             <Button>View Integration</Button>
           </CardFooter>
         </Card>
         <Card className="">
           <CardHeader>
-            <CardTitle className="flex items-center justify-between my-2">
+            <CardTitle className="my-2 flex items-center justify-between">
               <div className="flex items-center gap-5">
                 <Image
                   src={googleSheets}
@@ -166,7 +166,7 @@ const IntegrationsSection = () => {
           <CardContent>
             <div className="flex w-full gap-5"></div>
           </CardContent>
-          <CardFooter className="border-t px-6 py-4 flex justify-end">
+          <CardFooter className="flex justify-end border-t px-6 py-4">
             <Button>View Integration</Button>
           </CardFooter>
         </Card>

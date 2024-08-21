@@ -1,22 +1,22 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useCallback } from "react";
 import {
   SelectTrigger,
   Select,
   SelectContent,
   SelectValue,
   SelectItem,
-} from './ui/select';
-import axios from 'axios';
+} from "./ui/select";
+import axios from "axios";
 
 const GradeSelect = React.memo(({ selectedGrade }) => {
   const [grades, setGrades] = useState([1]);
 
   const getGradesList = useCallback(async () => {
     try {
-      const response = await axios.get('/api/grade');
+      const response = await axios.get("/api/grade");
       setGrades(response.data);
     } catch (error) {
-      console.error('Failed to fetch grades:', error);
+      console.error("Failed to fetch grades:", error);
     }
   }, []);
 

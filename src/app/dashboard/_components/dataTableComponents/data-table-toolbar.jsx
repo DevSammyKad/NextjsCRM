@@ -1,16 +1,16 @@
-'use client';
+"use client";
 
-import { Table } from '@tanstack/react-table';
+import { Table } from "@tanstack/react-table";
 
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 // import { incomeType, categories } from './data';
-import { sourceOptions, statusOptions } from './data';
-import { useState } from 'react';
-import { DataTableViewOptions } from './data-table-view-options';
-import { RotateCcw, TrashIcon } from 'lucide-react';
-import { DataTableFacetedFilter } from './data-table-faceted-filter';
-import AddLead from './AddLead';
+import { sourceOptions, statusOptions } from "./data";
+import { useState } from "react";
+import { DataTableViewOptions } from "./data-table-view-options";
+import { RotateCcw, TrashIcon } from "lucide-react";
+import { DataTableFacetedFilter } from "./data-table-faceted-filter";
+import AddLead from "./AddLead";
 
 export function DataTableToolbar({ table }) {
   const isFiltered = table.getState().columnFilters.length > 0;
@@ -23,7 +23,7 @@ export function DataTableToolbar({ table }) {
   const handleDateSelect = ({ from, to }) => {
     setDateRange({ from, to });
     // Filter table data based on selected date range
-    table.getColumn('date')?.setFilterValue([from, to]);
+    table.getColumn("date")?.setFilterValue([from, to]);
   };
 
   return (
@@ -31,22 +31,22 @@ export function DataTableToolbar({ table }) {
       <div className="flex flex-1 flex-wrap items-center gap-2">
         <Input
           placeholder="Filter labels..."
-          value={table.getColumn('name')?.getFilterValue() ?? ''}
+          value={table.getColumn("name")?.getFilterValue() ?? ""}
           onChange={(event) => {
-            table.getColumn('name')?.setFilterValue(event.target.value);
+            table.getColumn("name")?.setFilterValue(event.target.value);
           }}
           className="h-8 w-[150px] lg:w-[250px]"
         />
-        {table.getColumn('source') && (
+        {table.getColumn("source") && (
           <DataTableFacetedFilter
-            column={table.getColumn('source')}
+            column={table.getColumn("source")}
             title="source"
             options={sourceOptions}
           />
         )}
-        {table.getColumn('status') && (
+        {table.getColumn("status") && (
           <DataTableFacetedFilter
-            column={table.getColumn('status')}
+            column={table.getColumn("status")}
             title="status"
             options={statusOptions}
           />

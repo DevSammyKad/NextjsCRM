@@ -1,8 +1,8 @@
-'use client';
-import React, { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { Plus } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+"use client";
+import React, { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { Plus } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -12,31 +12,31 @@ import {
   DialogTitle,
   DialogTrigger,
   DialogClose,
-} from '@/components/ui/dialog';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
-import { toast } from 'sonner';
-import { PhoneInput } from '@/components/ui/phone-input';
-import axios from 'axios';
+} from "@/components/ui/select";
+import { toast } from "sonner";
+import { PhoneInput } from "@/components/ui/phone-input";
+import axios from "axios";
 
 const AddNewStudent = () => {
-  const [phoneNumber, setPhoneNumber] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState("");
   const [open, setOpen] = useState(false);
   const [grades, setGrades] = useState([]);
 
   const getGradesList = async () => {
     try {
-      const response = await axios.get('/api/grade');
+      const response = await axios.get("/api/grade");
       setGrades(response.data);
     } catch (error) {
-      console.error('Error fetching grades:', error);
+      console.error("Error fetching grades:", error);
     }
   };
 
@@ -46,7 +46,7 @@ const AddNewStudent = () => {
 
   const handlePhoneChange = (newPhoneNumber) => {
     setPhoneNumber(newPhoneNumber);
-    setValue('phoneNumber', newPhoneNumber); // Register phone number with react-hook-form
+    setValue("phoneNumber", newPhoneNumber); // Register phone number with react-hook-form
   };
 
   const {
@@ -59,14 +59,14 @@ const AddNewStudent = () => {
 
   const onSubmit = async (data) => {
     try {
-      const response = await axios.post('/api/students', data);
-      console.log('Form data submitted:', response.data);
+      const response = await axios.post("/api/students", data);
+      console.log("Form data submitted:", response.data);
       setOpen(false);
-      toast.success('Student added successfully');
+      toast.success("Student added successfully");
       reset();
     } catch (error) {
-      console.error('Error during submission:', error);
-      toast.error('An error occurred. Please try again.');
+      console.error("Error during submission:", error);
+      toast.error("An error occurred. Please try again.");
     }
   };
 
@@ -74,7 +74,7 @@ const AddNewStudent = () => {
     <>
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
-          <Button size="sm" className="flex gap-1 items-center">
+          <Button size="sm" className="flex items-center gap-1">
             <Plus /> <h1 className="text-xs sm:text-sm">Add New Student</h1>
           </Button>
         </DialogTrigger>
@@ -87,30 +87,30 @@ const AddNewStudent = () => {
             </DialogDescription>
           </DialogHeader>
           <form onSubmit={handleSubmit(onSubmit)}>
-            <div className="grid gap-4 mt-10">
+            <div className="mt-10 grid gap-4">
               <div className="grid grid-cols-2 gap-4">
                 <div className="grid gap-2">
                   <Label htmlFor="first-name">First name</Label>
                   <Input
                     id="first-name"
                     placeholder="Max"
-                    {...register('firstName', {
-                      required: 'First name is required',
+                    {...register("firstName", {
+                      required: "First name is required",
                       maxLength: {
                         value: 20,
-                        message: 'First name must be less than 20 characters',
+                        message: "First name must be less than 20 characters",
                       },
                       minLength: {
                         value: 3,
-                        message: 'First name must be at least 3 characters',
+                        message: "First name must be at least 3 characters",
                       },
                       validate: (value) =>
                         value[0] === value[0].toUpperCase() ||
-                        'First name must start with a capital letter',
+                        "First name must start with a capital letter",
                     })}
                   />
                   {errors.firstName && (
-                    <span className="text-red-500 text-xs">
+                    <span className="text-xs text-red-500">
                       {errors.firstName.message}
                     </span>
                   )}
@@ -120,15 +120,15 @@ const AddNewStudent = () => {
                   <Input
                     id="last-name"
                     placeholder="Robinson"
-                    {...register('lastName', {
-                      required: 'Last name is required',
+                    {...register("lastName", {
+                      required: "Last name is required",
                       validate: (value) =>
                         value[0] === value[0].toUpperCase() ||
-                        'Last name must start with a capital letter',
+                        "Last name must start with a capital letter",
                     })}
                   />
                   {errors.lastName && (
-                    <span className="text-red-500 text-xs">
+                    <span className="text-xs text-red-500">
                       {errors.lastName.message}
                     </span>
                   )}
@@ -141,17 +141,17 @@ const AddNewStudent = () => {
                     id="age"
                     type="number"
                     placeholder="22"
-                    {...register('age', { required: 'Age is required' })}
+                    {...register("age", { required: "Age is required" })}
                   />
                   {errors.age && (
-                    <span className="text-red-500 text-xs">
+                    <span className="text-xs text-red-500">
                       {errors.age.message}
                     </span>
                   )}
                 </div>
                 <div className="grid gap-2">
                   <Label htmlFor="grade">Grade</Label>
-                  <Select onValueChange={(value) => setValue('grade', value)}>
+                  <Select onValueChange={(value) => setValue("grade", value)}>
                     <SelectTrigger className="w-[180px]">
                       <SelectValue placeholder="Select Grade" />
                     </SelectTrigger>
@@ -164,7 +164,7 @@ const AddNewStudent = () => {
                     </SelectContent>
                   </Select>
                   {errors.grade && (
-                    <span className="text-red-500 text-xs">
+                    <span className="text-xs text-red-500">
                       {errors.grade.message}
                     </span>
                   )}
@@ -174,13 +174,13 @@ const AddNewStudent = () => {
                 <Label htmlFor="phoneNumber">Phone</Label>
                 <PhoneInput
                   id="phoneNumber"
-                  className="flex gap-2 border-0 focus:outline-none focus:border-none"
+                  className="flex gap-2 border-0 focus:border-none focus:outline-none"
                   value={phoneNumber}
                   defaultCountry="IN"
                   onChange={handlePhoneChange}
                 />
                 {errors.phoneNumber && (
-                  <span className="text-red-500 text-xs">
+                  <span className="text-xs text-red-500">
                     {errors.phoneNumber.message}
                   </span>
                 )}
@@ -191,10 +191,10 @@ const AddNewStudent = () => {
                   id="address"
                   type="text"
                   placeholder="New Pune, Pune"
-                  {...register('address', { required: 'Address is required' })}
+                  {...register("address", { required: "Address is required" })}
                 />
                 {errors.address && (
-                  <span className="text-red-500 text-xs">
+                  <span className="text-xs text-red-500">
                     {errors.address.message}
                   </span>
                 )}

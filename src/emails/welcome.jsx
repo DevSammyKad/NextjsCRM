@@ -1,5 +1,5 @@
-import { Button, Html } from '@react-email/components';
-import * as react from 'react';
+import { Button, Html } from "@react-email/components";
+import * as react from "react";
 
 export default function () {
   return (

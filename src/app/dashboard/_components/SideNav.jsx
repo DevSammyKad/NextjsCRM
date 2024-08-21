@@ -1,18 +1,18 @@
-'use client';
-import Image from 'next/image';
-import next from '../../../../public/next.svg';
+"use client";
+import Image from "next/image";
+import next from "../../../../public/next.svg";
 
-import dark_next from '../../../../public/dark_next.svg';
-import React, { useState } from 'react';
-import { NavLinks } from '../../../constants/index';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import dark_next from "../../../../public/dark_next.svg";
+import React, { useState } from "react";
+import { NavLinks } from "../../../constants/index";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
-import { SidebarClose, SidebarOpenIcon } from 'lucide-react';
-import { useKindeBrowserClient } from '@kinde-oss/kinde-auth-nextjs';
+import { SidebarClose, SidebarOpenIcon } from "lucide-react";
+import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 
-import { Button } from '@/components/ui/button';
-import PlanModal from '../_components/PlanModal';
+import { Button } from "@/components/ui/button";
+import PlanModal from "../_components/PlanModal";
 
 const SideNav = ({ closeSidebar }) => {
   const pathname = usePathname();
@@ -41,12 +41,12 @@ const SideNav = ({ closeSidebar }) => {
     <>
       <div
         className={`h-screen shadow-sm ${
-          isExpanded ? 'w-72' : 'w-24'
-        } flex flex-col relative`}
+          isExpanded ? "w-72" : "w-24"
+        } relative flex flex-col`}
       >
         <button
           onClick={handleToggleSidebar}
-          className="absolute hidden w-6 h-6 rounded-full justify-center items-center top-2 -right-1"
+          className="absolute -right-1 top-2 hidden h-6 w-6 items-center justify-center rounded-full"
         >
           {isExpanded ? (
             <SidebarClose color="gray" size={22} />
@@ -54,35 +54,35 @@ const SideNav = ({ closeSidebar }) => {
             <SidebarOpenIcon color="gray" size={22} />
           )}
         </button>
-        <div className="flex justify-between items-center lg:my-5 px-4">
+        <div className="flex items-center justify-between px-4 lg:my-5">
           <div>
             <Image src={next} width={130} height={120} alt="Logo" />
           </div>
         </div>
-        <div className="flex flex-col justify-between h-full mt-3">
+        <div className="mt-3 flex h-full flex-col justify-between">
           <div>
-            <h2 className="px-4 font-medium text-sm max-lg:text-xs">
+            <h2 className="px-4 text-sm font-medium max-lg:text-xs">
               Main menu
             </h2>
             {NavLinks.slice(0, -2).map((item, index) => (
               <div key={index}>
                 <Link href={item.path} onClick={handleLinkClick}>
                   <div
-                    className={`flex justify-start my-5 text-start py-3 px-4 rounded-lg mx-5 text-lg font-medium ${
+                    className={`mx-5 my-5 flex justify-start rounded-lg px-4 py-3 text-start text-lg font-medium ${
                       pathname === item.path
-                        ? `dark:bg-zinc-900 bg-zinc-200 text-[#4EFFCA] ${
-                            isExpanded ? 'border-l-8 border-[#4EFFCA]' : ''
+                        ? `bg-zinc-200 text-[#4EFFCA] dark:bg-zinc-900 ${
+                            isExpanded ? "border-l-8 border-[#4EFFCA]" : ""
                           }`
-                        : ''
+                        : ""
                     }`}
                   >
-                    <div className="flex justify-center items-center space-x-5">
-                      <div className="flex justify-center items-center">
+                    <div className="flex items-center justify-center space-x-5">
+                      <div className="flex items-center justify-center">
                         {item.icon && (
-                          <item.icon className="w-6 h-6 flex justify-center items-center" />
+                          <item.icon className="flex h-6 w-6 items-center justify-center" />
                         )}
                       </div>
-                      <div className={`${isExpanded ? '' : 'hidden'} text-sm`}>
+                      <div className={`${isExpanded ? "" : "hidden"} text-sm`}>
                         {item.heading}
                       </div>
                     </div>
@@ -90,26 +90,26 @@ const SideNav = ({ closeSidebar }) => {
                 </Link>
               </div>
             ))}
-            {NavLinks.length > 1 && <div className="h-px mx-5 my-4"></div>}
-            <h2 className="px-4 font-medium text-sm max-lg:text-xs">Setting</h2>
+            {NavLinks.length > 1 && <div className="mx-5 my-4 h-px"></div>}
+            <h2 className="px-4 text-sm font-medium max-lg:text-xs">Setting</h2>
             {NavLinks.slice(-2).map((item, index) => (
               <Link key={index} href={item.path} onClick={handleLinkClick}>
                 <div
-                  className={`flex justify-start my-5 text-start py-3 px-4 rounded-lg mx-5 text-lg font-medium ${
+                  className={`mx-5 my-5 flex justify-start rounded-lg px-4 py-3 text-start text-lg font-medium ${
                     pathname === item.path
-                      ? `dark:bg-zinc-900 text-[#4EFFCA] ${
-                          isExpanded ? 'border-l-8 border-[#4EFFCA]' : ''
+                      ? `text-[#4EFFCA] dark:bg-zinc-900 ${
+                          isExpanded ? "border-l-8 border-[#4EFFCA]" : ""
                         }`
-                      : ''
+                      : ""
                   }`}
                 >
-                  <div className="flex justify-center items-center space-x-5">
-                    <div className="flex justify-center items-center">
+                  <div className="flex items-center justify-center space-x-5">
+                    <div className="flex items-center justify-center">
                       {item.icon && (
-                        <item.icon className="w-6 h-6 flex justify-center items-center" />
+                        <item.icon className="flex h-6 w-6 items-center justify-center" />
                       )}
                     </div>
-                    <div className={`${isExpanded ? '' : 'hidden'} text-sm`}>
+                    <div className={`${isExpanded ? "" : "hidden"} text-sm`}>
                       {item.heading}
                     </div>
                   </div>
@@ -119,26 +119,26 @@ const SideNav = ({ closeSidebar }) => {
           </div>
           {/* Upgrade*/}
           {isExpanded && (
-            <div className="rounded-3xl border dark:bg-gray-300/10 dark:border-gray-600 py-4 mb-5 mx-4 px-4">
-              <div className="flex gap-2 items-center">
-                <h3 className=" text-base font-semibold tracking-tight">
-                  Get Result So Far{' '}
+            <div className="mx-4 mb-5 rounded-3xl border px-4 py-4 dark:border-gray-600 dark:bg-gray-300/10">
+              <div className="flex items-center gap-2">
+                <h3 className="text-base font-semibold tracking-tight">
+                  Get Result So Far{" "}
                 </h3>
                 <Button
                   variant="outline"
-                  className="bg-[#4EFFCA] rounded-xl px-4 py-2 font-semibold dark:hover:text-white dark:text-black"
+                  className="rounded-xl bg-[#4EFFCA] px-4 py-2 font-semibold dark:text-black dark:hover:text-white"
                 >
                   Pro
                 </Button>
               </div>
 
-              <p className="leading-7 text-sm [&:not(:first-child)]:mt-3">
+              <p className="text-sm leading-7 [&:not(:first-child)]:mt-3">
                 Get 1 month free and unlock all pro feature
               </p>
-              <div className="flex justify-center items-center mt-2">
+              <div className="mt-2 flex items-center justify-center">
                 <Button
                   onClick={handleOpenModal}
-                  className="text-center px-3"
+                  className="px-3 text-center"
                   variant="outline"
                 >
                   Upgrade Now

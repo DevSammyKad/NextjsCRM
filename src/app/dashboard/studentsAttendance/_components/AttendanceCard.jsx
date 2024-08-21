@@ -1,6 +1,6 @@
-import { Card, CardContent } from '@/components/ui/card';
-import React, { useEffect } from 'react';
-import moment from 'moment';
+import { Card, CardContent } from "@/components/ui/card";
+import React, { useEffect } from "react";
+import moment from "moment";
 
 const AttendanceCard = ({ attendanceList, selectedMonth }) => {
   const daysInMonth = moment(selectedMonth).daysInMonth();
@@ -27,32 +27,32 @@ const AttendanceCard = ({ attendanceList, selectedMonth }) => {
   const mostAbsentThreshold = 20;
   const mostAbsentStudents = attendanceList.filter((record) => {
     const studentAbsentDays = record.student_attendance.filter(
-      (att) => !att.present
+      (att) => !att.present,
     ).length;
     const studentAbsentRate = ((studentAbsentDays / daysInMonth) * 100).toFixed(
-      2
+      2,
     );
     return studentAbsentRate > mostAbsentThreshold; // Threshold of 50% absence for being considered "most absent"
   });
 
   const data = [
     {
-      name: 'Overall Attendance',
+      name: "Overall Attendance",
       stat: `${overallAttendanceRate}%`,
-      change: '+12.1%',
-      changeType: 'positive',
+      change: "+12.1%",
+      changeType: "positive",
     },
     {
-      name: 'Present %',
+      name: "Present %",
       stat: `${presentPercentage}%`,
-      change: '-9.8%',
-      changeType: 'negative',
+      change: "-9.8%",
+      changeType: "negative",
     },
     {
-      name: 'Absent %',
+      name: "Absent %",
       stat: `${absentPercentage}%`,
-      change: '+7.7%',
-      changeType: 'positive',
+      change: "+7.7%",
+      changeType: "positive",
     },
   ];
 
@@ -63,16 +63,16 @@ const AttendanceCard = ({ attendanceList, selectedMonth }) => {
           <Card key={item.name}>
             <CardContent>
               <div className="flex items-center justify-between p-5">
-                <p className="text-tremor-default font-medium text-tremor-content dark:text-dark-tremor-content">
+                <p className="text-tremor-default text-tremor-content dark:text-dark-tremor-content font-medium">
                   {item.name}
                 </p>
                 <span
-                  className={`${item.changeType === 'positive' ? 'bg-emerald-100 text-emerald-800 ring-emerald-600/10 dark:bg-emerald-400/10 dark:text-emerald-500 dark:ring-emerald-400/20' : 'bg-red-100 text-red-800 ring-red-600/10 dark:bg-red-400/10 dark:text-red-500 dark:ring-red-400/20'} inline-flex items-center rounded-tremor-small px-2 py-1 text-tremor-label font-medium ring-1 ring-inset`}
+                  className={`${item.changeType === "positive" ? "bg-emerald-100 text-emerald-800 ring-emerald-600/10 dark:bg-emerald-400/10 dark:text-emerald-500 dark:ring-emerald-400/20" : "bg-red-100 text-red-800 ring-red-600/10 dark:bg-red-400/10 dark:text-red-500 dark:ring-red-400/20"} rounded-tremor-small text-tremor-label inline-flex items-center px-2 py-1 font-medium ring-1 ring-inset`}
                 >
                   {item.change}
                 </span>
               </div>
-              <p className="text-tremor-metric p-5 font-semibold text-tremor-content-strong dark:text-dark-tremor-content-strong">
+              <p className="text-tremor-metric text-tremor-content-strong dark:text-dark-tremor-content-strong p-5 font-semibold">
                 {item.stat}
               </p>
             </CardContent>
@@ -81,10 +81,10 @@ const AttendanceCard = ({ attendanceList, selectedMonth }) => {
         <Card>
           <CardContent>
             <div className="flex items-center justify-between p-5">
-              <p className="text-tremor-default font-medium text-tremor-content dark:text-dark-tremor-content">
+              <p className="text-tremor-default text-tremor-content dark:text-dark-tremor-content font-medium">
                 Most Absent Students List
               </p>
-              <span className="bg-emerald-100 text-emerald-800 ring-emerald-600/10 dark:bg-emerald-400/10 dark:text-emerald-500 dark:ring-emerald-400/20 inline-flex items-center rounded-tremor-small px-2 py-1 text-tremor-label font-medium ring-1 ring-inset">
+              <span className="rounded-tremor-small text-tremor-label inline-flex items-center bg-emerald-100 px-2 py-1 font-medium text-emerald-800 ring-1 ring-inset ring-emerald-600/10 dark:bg-emerald-400/10 dark:text-emerald-500 dark:ring-emerald-400/20">
                 List
               </span>
             </div>
@@ -93,11 +93,11 @@ const AttendanceCard = ({ attendanceList, selectedMonth }) => {
                 <ul>
                   {mostAbsentStudents.map((student) => (
                     <li key={student.id} className="my-2">
-                      {student.firstName} {student.lastName} - Absent for{' '}
+                      {student.firstName} {student.lastName} - Absent for{" "}
                       {
                         student.student_attendance.filter((att) => !att.present)
                           .length
-                      }{' '}
+                      }{" "}
                       days
                     </li>
                   ))}

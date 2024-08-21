@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { Button } from '@/components/ui/button';
-import { useTheme } from 'next-themes';
-import React, { useEffect } from 'react';
+import { Button } from "@/components/ui/button";
+import { useTheme } from "next-themes";
+import React, { useEffect } from "react";
 import {
   Activity,
   ArrowUpRight,
@@ -16,10 +16,10 @@ import {
   Package2,
   Search,
   Users,
-} from 'lucide-react';
+} from "lucide-react";
 
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Badge } from '@/components/ui/badge';
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
 
 import {
   Card,
@@ -27,7 +27,7 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card';
+} from "@/components/ui/card";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -35,9 +35,9 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { Input } from '@/components/ui/input';
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+} from "@/components/ui/dropdown-menu";
+import { Input } from "@/components/ui/input";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import {
   Table,
   TableBody,
@@ -45,9 +45,9 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '@/components/ui/table';
-import Link from 'next/link';
-import Avvvatars from 'avvvatars-react';
+} from "@/components/ui/table";
+import Link from "next/link";
+import Avvvatars from "avvvatars-react";
 // import DateRangePicker from '@/components/DateRangePicker';
 
 const Dashboard = () => {
@@ -62,7 +62,7 @@ const Dashboard = () => {
             <div>
               {/* <DateRangePicker />{' '} */}
               <Button>
-                {' '}
+                {" "}
                 <DownloadCloudIcon className="mr-2" />
                 Export
               </Button>
@@ -75,7 +75,7 @@ const Dashboard = () => {
               <CardTitle className="text-sm font-medium">
                 Total Revenue
               </CardTitle>
-              <IndianRupee className="h-4 w-4 custom_color " />
+              <IndianRupee className="custom_color h-4 w-4" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">₹ 45,231.89</div>
@@ -261,7 +261,7 @@ const Dashboard = () => {
               </Table>
             </CardContent>
           </Card>
-          <Card x-chunk="dashboard-01-chunk-5" className="max-sm:hidden ">
+          <Card x-chunk="dashboard-01-chunk-5" className="max-sm:hidden">
             <CardHeader>
               <CardTitle>Recent Sales</CardTitle>
             </CardHeader>

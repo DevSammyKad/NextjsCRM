@@ -1,28 +1,28 @@
-import { EllipsisVertical, UserX } from 'lucide-react';
+import { EllipsisVertical, UserX } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import useHelpers from '@/hooks/useHelpers';
-import Remove from './Remove';
+} from "@/components/ui/dropdown-menu";
+import useHelpers from "@/hooks/useHelpers";
+import Remove from "./Remove";
 
 export default function Options({ user }) {
   const { open, setOpen, selected, setSelected } = useHelpers(); // Removed default value assignment
 
   const menu = [
     {
-      title: 'Remove member',
-      key: 'remove',
+      title: "Remove member",
+      key: "remove",
       icon: <UserX className="w-[20px]" />,
     },
   ];
 
   const handleClose = () => {
     setOpen(false);
-    setSelected('');
+    setSelected("");
   };
 
   return (
@@ -30,7 +30,7 @@ export default function Options({ user }) {
       <Remove
         {...{
           user,
-          open: selected === 'remove' && open, // Ensure the dialog opens only if selected is 'remove' and open is true
+          open: selected === "remove" && open, // Ensure the dialog opens only if selected is 'remove' and open is true
           onClose: handleClose, // Improved onClose handler
         }}
       />
@@ -43,7 +43,7 @@ export default function Options({ user }) {
             {menu.map((item, i) => (
               <DropdownMenuItem
                 key={item.key}
-                className="flex gap-2 cursor-pointer"
+                className="flex cursor-pointer gap-2"
                 onClick={() => {
                   setSelected(item.key);
                   setOpen(true);
