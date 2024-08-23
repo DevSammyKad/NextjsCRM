@@ -1,8 +1,8 @@
-import { prisma } from "@/lib/db";
+import prisma from "@/lib/db";
 import { NextResponse } from "next/server";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 
-async function getOrganizationIdFromRequest(req) {
+async function getOrganizationIdFromRequest(request) {
   // This should contain the logic to extract the organization ID from the request.
   return "631f1013-e762-4ff5-82d7-1ad58cc8da6d";
 }
@@ -16,13 +16,13 @@ export async function GET(request) {
   }
 
   try {
-    const organizationId = await getOrganizationIdFromRequest(req);
-    await setCurrentOrganization(organizationId);
+    // Pass the request object to getOrganizationIdFromRequest
+    const organizationId = await getOrganizationIdFromRequest(request);
 
-    const team = await prisma.teams.findUnique({
-      where: { organizationId, id: teamId },
+    const team = await prisma.team.findUnique({
+      where: { id: teamId }, // Query with both teamId and organizationId
       include: {
-        team_members: true, // Include the team members
+        teamMembers: true, // Include the team members
       },
     });
 
@@ -56,7 +56,7 @@ export async function POST(request) {
 
     // Ensure the team belongs to the organization
     const team = await prisma.team.findUnique({
-      where: { id: teamId, organizationId },
+      where: { id: teamId },
     });
 
     if (!team) {

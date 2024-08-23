@@ -7,36 +7,48 @@ import {
   DialogTitle,
   DialogClose,
   DialogFooter,
+  DialogTrigger,
 } from "@/components/ui/dialog";
-import { DialogTrigger } from "@radix-ui/react-dialog";
 import { Button } from "@/components/ui/button";
-import { useForm } from "react-hook-form";
+// import { useForm } from "react-hook-form";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import {
   Select,
   SelectContent,
+  SelectItem,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import axios from "axios";
-import { prisma } from "@/lib/db";
+import { Textarea } from "@/components/ui/textarea";
 
-async function getLeadStatus() {
-  const leadStatus = await prisma.LeadStatus();
-  return leadStatus;
-}
+import { LeadStatus, LeadSource } from "@prisma/client";
+import { createLead } from "@/actions";
+import { leadSchema } from "@/lib/zodSchemas";
+import { useForm } from "@conform-to/react";
+import { parseWithZod } from "@conform-to/zod";
+import { useFormState } from "react-dom";
+import SubmitButton from "../SubmitButton";
+
+// import SubmitButton from "../SubmitButton";
+
 const AddLead = () => {
-  const status = getLeadStatus();
+  const status = Object.keys(LeadStatus);
+  const source = Object.keys(LeadSource);
 
-  console.log(status);
-  const {
-    reset,
-    register,
-    setValue,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+  const [lastResult, action] = useFormState(createLead, undefined);
+
+  const [form, fields] = useForm({
+    lastResult,
+
+    onValidate({ formData }) {
+      return parseWithZod(formData, { schema: leadSchema });
+    },
+
+    shouldValidate: "onBlur",
+    shouldRevalidate: "onInput",
+  });
+
   return (
     <>
       <Dialog>
@@ -46,128 +58,127 @@ const AddLead = () => {
         <DialogHeader>
           <DialogContent>
             <DialogTitle>Create Lead</DialogTitle>
-            <DialogDescription>Xyz</DialogDescription>
-            {/* <form onSubmit={handleSubmit()}>
-              <div className="grid gap-4 mt-10">
+            <DialogDescription>
+              Create Manual Lead using this form
+            </DialogDescription>
+            <form
+              id={form.id}
+              onSubmit={(e) => {
+                e.preventDefault();
+                console.log("Form submitted");
+                form.onSubmit(e); // Continue with form submission
+              }}
+              action={action}
+            >
+              <div className="mt-5 grid gap-4">
                 <div className="grid grid-cols-2 gap-4">
                   <div className="grid gap-2">
                     <Label htmlFor="name">Name</Label>
                     <Input
                       id="name"
-                      placeholder="Max"
-                      {...register('name', {
-                        required: 'Name is required',
-                        maxLength: {
-                          value: 20,
-                          message: ' Name must be less than 20 characters',
-                        },
-                        minLength: {
-                          value: 3,
-                          message: ' Name must be at least 3 characters',
-                        },
-                        validate: (value) =>
-                          value[0] === value[0].toUpperCase() ||
-                          ' Name must start with a capital letter',
-                      })}
+                      placeholder="Full Name"
+                      key={fields.name.key}
+                      name={fields.name.name}
+                      defaultValue={fields.name.initialValue}
                     />
-                    {errors.name && (
-                      <span className="text-red-500 text-xs">
-                        {errors.name.message}
-                      </span>
-                    )}
+                    <span className="text-xs text-red-500">
+                      {fields.name.errors}
+                    </span>
                   </div>
                   <div className="grid gap-2">
-                    <Label htmlFor="last-name">Last name</Label>
-                    <Input
-                      id="last-name"
-                      placeholder="Robinson"
-                      {...register('lastName', {
-                        required: 'Last name is required',
-                        validate: (value) =>
-                          value[0] === value[0].toUpperCase() ||
-                          'Last name must start with a capital letter',
-                      })}
-                    />
-                    {errors.lastName && (
-                      <span className="text-red-500 text-xs">
-                        {errors.lastName.message}
+                    <div className="grid gap-2">
+                      <Label htmlFor="age">Age</Label>
+                      <Input
+                        id="age"
+                        type="number"
+                        key={fields.age.key}
+                        name={fields.age.name}
+                        defaultValue={fields.age.initialValue}
+                        placeholder="age : 22"
+                      />
+                      <span className="text-xs text-red-500">
+                        {fields.age.errors}
                       </span>
-                    )}
+                    </div>
                   </div>
                 </div>
                 <div className="grid grid-cols-2 gap-4">
                   <div className="grid gap-2">
-                    <Label htmlFor="age">Age</Label>
-                    <Input
-                      id="age"
-                      type="number"
-                      placeholder="22"
-                      {...register('age', { required: 'Age is required' })}
-                    />
-                    {errors.age && (
-                      <span className="text-red-500 text-xs">
-                        {errors.age.message}
-                      </span>
-                    )}
-                  </div>
-                  <div className="grid gap-2">
-                    <Label htmlFor="grade">Grade</Label>
-                    <Select>
+                    <Label htmlFor="source">Source</Label>
+                    <Select
+                      key={fields.source.key}
+                      name={fields.source.name}
+                      defaultValue={fields.source.initialValue}
+                    >
                       <SelectTrigger className="w-[180px]">
-                        <SelectValue placeholder="Select Grade" />
+                        <SelectValue placeholder="Select Source" />
                       </SelectTrigger>
                       <SelectContent>
-                        {status?.map((item, index) => (
-                          <SelectItem key={index} value={item.id}>
-                            {item.id}
+                        {source?.map((item, index) => (
+                          <SelectItem key={index} value={item}>
+                            {item}
                           </SelectItem>
                         ))}
                       </SelectContent>
                     </Select>
-                    {errors.grade && (
-                      <span className="text-red-500 text-xs">
-                        {errors.grade.message}
-                      </span>
-                    )}
+                    <span className="text-xs text-red-500">
+                      {fields.source.errors}
+                    </span>
+                  </div>
+                  <div className="grid gap-2">
+                    <Label htmlFor="grade">Status</Label>
+                    <Select
+                      key={fields.status.key}
+                      name={fields.status.name}
+                      defaultValue={fields.status.initialValue}
+                    >
+                      <SelectTrigger className="w-[180px]">
+                        <SelectValue placeholder="Select Status" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {status?.map((item, index) => (
+                          <SelectItem key={index} value={item}>
+                            {item}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                    <span className="text-xs text-red-500">
+                      {fields.status.errors}
+                    </span>
                   </div>
                 </div>
                 <div className="grid gap-2">
                   <Label htmlFor="phoneNumber">Phone</Label>
-
-                  {errors.phoneNumber && (
-                    <span className="text-red-500 text-xs">
-                      {errors.phoneNumber.message}
-                    </span>
-                  )}
+                  <input
+                    type="text"
+                    key={fields.phone.key}
+                    name={fields.phone.name}
+                    defaultValue={fields.phone.initialValue}
+                  />
+                  <span className="text-xs text-red-500">
+                    {fields.phone.errors}
+                  </span>
                 </div>
                 <div className="grid gap-2">
-                  <Label htmlFor="address">Address</Label>
-                  <Input
-                    id="address"
+                  <Label htmlFor="note">Note</Label>
+                  <Textarea
+                    id="note"
                     type="text"
-                    placeholder="New Pune, Pune"
-                    {...register('address', {
-                      required: 'Address is required',
-                    })}
+                    key={fields.note.key}
+                    name={fields.note.name}
+                    defaultValue={fields.note.initialValue}
+                    className="min-h-32"
+                    placeholder="Write your Note here"
                   />
-                  {errors.address && (
-                    <span className="text-red-500 text-xs">
-                      {errors.address.message}
-                    </span>
-                  )}
+                  <p className="text-sm text-red-500">{fields.note.errors}</p>
                 </div>
               </div>
-              <DialogFooter className="mt-10">
-                <DialogClose asChild>
-                  <Button variant="outline" className="w-full">
-                    Cancel
-                  </Button>
-                </DialogClose>
-                <Button type="submit" className="w-full">
-                  Create
-                </Button>
+
+              <DialogFooter>
+                <SubmitButton text={"Lead"} />
               </DialogFooter>
-            </form> */}
+            </form>
           </DialogContent>
         </DialogHeader>
       </Dialog>

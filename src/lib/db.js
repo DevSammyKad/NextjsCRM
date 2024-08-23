@@ -11,14 +11,14 @@ if (process.env.NODE_ENV === "production") {
   prisma = global.prisma;
 }
 
-// Function to set the current organization context
-async function setCurrentOrganization(organizationId) {
-  if (!organizationId) {
-    throw new Error("Organization ID must be provided");
-  }
-  await prisma.$executeRawUnsafe(
-    `SET local nextcrm.current_organization = '${organizationId}';`,
-  );
-}
+// // Function to set the current organization context
+// async function setCurrentOrganization(organizationId) {
+//   if (!organizationId) {
+//     throw new Error("Organization ID must be provided");
+//   }
+//   await prisma.$executeRawUnsafe(
+//     `SET local nextcrm.current_organization = '${organizationId}';`,
+//   );
+// }
 
-export { prisma, setCurrentOrganization };
+export default prisma;

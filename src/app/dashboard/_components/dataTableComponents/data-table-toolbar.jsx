@@ -4,15 +4,33 @@ import { Table } from "@tanstack/react-table";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-// import { incomeType, categories } from './data';
-import { sourceOptions, statusOptions } from "./data";
+
+// import { sourceOptions, statusOptions } from "./data";
+import { LeadSource, LeadStatus } from "@prisma/client";
 import { useState } from "react";
 import { DataTableViewOptions } from "./data-table-view-options";
 import { RotateCcw, TrashIcon } from "lucide-react";
 import { DataTableFacetedFilter } from "./data-table-faceted-filter";
 import AddLead from "./AddLead";
 
+export const sourceOptions = Object.keys(LeadSource).map((key) => ({
+  value: LeadSource[key],
+  label: key
+    .replace("_", " ")
+    .toLowerCase()
+    .replace(/\b\w/g, (l) => l.toUpperCase()),
+}));
+
+export const statusOptions = Object.keys(LeadStatus).map((key) => ({
+  value: LeadStatus[key],
+  label: key
+    .replace("_", " ")
+    .toLowerCase()
+    .replace(/\b\w/g, (l) => l.toUpperCase()),
+}));
+
 export function DataTableToolbar({ table }) {
+  // console.log(status, source);
   const isFiltered = table.getState().columnFilters.length > 0;
 
   const [dateRange, setDateRange] = useState({

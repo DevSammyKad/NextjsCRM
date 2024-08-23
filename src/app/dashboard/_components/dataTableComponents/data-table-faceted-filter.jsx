@@ -25,6 +25,8 @@ export function DataTableFacetedFilter({ column, title, options }) {
   const facets = column?.getFacetedUniqueValues();
   const selectedValues = new Set(column?.getFilterValue());
 
+  // console.log(options);
+
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -50,14 +52,14 @@ export function DataTableFacetedFilter({ column, title, options }) {
                   </Badge>
                 ) : (
                   options
-                    .filter((option) => selectedValues.has(option.value))
+                    .filter((option) => selectedValues.has(option))
                     .map((option) => (
                       <Badge
                         variant="secondary"
-                        key={option.value}
+                        key={option}
                         className="rounded-sm px-1 font-normal"
                       >
-                        {option.label}
+                        {option}
                       </Badge>
                     ))
                 )}

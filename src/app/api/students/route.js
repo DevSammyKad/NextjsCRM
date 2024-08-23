@@ -1,4 +1,4 @@
-import { prisma, setCurrentOrganization } from "@/lib/db";
+import prisma from "@/lib/db";
 import { NextResponse } from "next/server";
 
 async function getOrganizationIdFromRequest(req) {
@@ -20,7 +20,6 @@ export async function POST(req) {
     }
 
     const organizationId = await getOrganizationIdFromRequest(req);
-    await setCurrentOrganization(organizationId);
 
     const student = await prisma.student.create({
       data: {
@@ -44,7 +43,6 @@ export async function POST(req) {
 export async function GET(req) {
   try {
     const organizationId = await getOrganizationIdFromRequest(req);
-    await setCurrentOrganization(organizationId);
 
     const getALlStudents = await prisma.student.findMany({
       where: {

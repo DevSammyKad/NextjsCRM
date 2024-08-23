@@ -11,7 +11,7 @@ const Team = () => {
   const [team, setTeam] = useState(null);
   const [members, setMembers] = useState([]);
   const { loading, setLoading } = useHelpers();
-  const teamId = "1ec4d379-2063-4102-8a2b-6bef5b9c83a4";
+  const teamId = "ea6014cd-81bb-4c7c-aabb-08efea8bb7c2";
 
   const fetchTeam = async () => {
     try {

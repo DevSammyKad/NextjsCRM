@@ -21,6 +21,9 @@ export function DataTable({ columns, data }) {
     getCoreRowModel: getCoreRowModel(),
   });
 
+  //   const rowModel = table.getRowModel();
+  // const rows = rowModel?.rows || []; //
+  console.log("Table object:", table);
   return (
     <div className="rounded-md border">
       <Table>
@@ -43,7 +46,7 @@ export function DataTable({ columns, data }) {
           ))}
         </TableHeader>
         <TableBody>
-          {table.getRowModel().rows?.length ? (
+          {/* {table.getRowModel().rows.length > 0 ? (
             table.getRowModel().rows.map((row) => (
               <TableRow
                 key={row.id}
@@ -56,13 +59,13 @@ export function DataTable({ columns, data }) {
                 ))}
               </TableRow>
             ))
-          ) : (
-            <TableRow>
-              <TableCell colSpan={columns.length} className="h-24 text-center">
-                No results.
-              </TableCell>
-            </TableRow>
-          )}
+          ) : ( */}
+          <TableRow>
+            <TableCell colSpan={columns.length} className="h-24 text-center">
+              No results.
+            </TableCell>
+          </TableRow>
+          {/* // )} */}
         </TableBody>
       </Table>
     </div>

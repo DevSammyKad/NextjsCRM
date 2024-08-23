@@ -10,6 +10,8 @@
     "email": "email dev --dir src/emails"
   },
   "dependencies": {
+    "@conform-to/react": "^1.1.5",
+    "@conform-to/zod": "^1.1.5",
     "@hookform/resolvers": "^3.6.0",
     "@kinde-oss/kinde-auth-nextjs": "^2.3.6",
     "@million/lint": "^1.0.0-rc.26",

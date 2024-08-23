@@ -1,31 +1,11 @@
-"use client";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { DataTable } from "../_components/dataTableComponents/data-table";
 import { columns } from "../_components/dataTableComponents/column";
-import data from "../_components/dataTableComponents/data";
-import { prisma } from "@/lib/db";
-import axios from "axios";
+import { getLeads } from "@/actions"; // Assuming the action is in the same directory
 
-const Leads = () => {
-  const [loading, setLoading] = useState(false);
-  const [leadData, setLeadData] = useState(true);
-  const [error, setError] = useState(null);
+const Leads = async () => {
+  const { data: leadData, error } = await getLeads();
 
-  useEffect(() => {
-    async function fetchLeads() {
-      try {
-        const response = await axios.get("/api/lead");
-        setLeadData(response.data);
-      } catch (error) {
-        setError("Failed to load leads");
-      } finally {
-        setLoading(false);
-      }
-    }
-    fetchLeads();
-  }, []);
-
-  if (loading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
 
   return (
